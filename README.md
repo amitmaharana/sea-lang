@@ -10,12 +10,12 @@
 
 ### Instructions to Build and Run
 
-### Build the Compiler
+#### 1. Build the Compiler
 ```java
 placeholder
 ```
 
-### Run the Runtime
+#### 2. Run the Runtime
 ```java
 placeholder
 ```
