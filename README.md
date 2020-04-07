@@ -1,10 +1,12 @@
-# Project Name Placeholder
+# SEA Programming Language
 
 ### Build System
 * Compiler - 
 * Runtime -
 
 ### Tools Used
+* ANTLR 4.8
+* Java 8
 
 ### Instructions to Install
 
