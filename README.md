@@ -14,7 +14,7 @@
 
 #### 1. Build the Compiler
 ```java
-java -cp "src\lib\antlr-4.8-complete.jar" org.antlr.v4.Tool "src\SEALang.g4"
+mvn clean install
 ```
 
 #### 2. Run the Runtime
