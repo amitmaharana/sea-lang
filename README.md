@@ -1,8 +1,8 @@
 # SEA Programming Language
 
 ### Build System
-* Compiler - 
-* Runtime -
+* Compiler - Windows
+* Runtime - Windows
 
 ### Tools Used
 * ANTLR 4.8
