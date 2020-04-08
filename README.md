@@ -1,10 +1,12 @@
-# Project Name Placeholder
+# SEA Programming Language
 
 ### Build System
 * Compiler - 
 * Runtime -
 
 ### Tools Used
+* ANTLR 4.8
+* Java 8
 
 ### Instructions to Install
 
@@ -12,7 +14,7 @@
 
 #### 1. Build the Compiler
 ```java
-java -cp "src\library\antlr-4.7.1-complete.jar" org.antlr.v4.Tool "src\SEALang.g4"
+java -cp "src\lib\antlr-4.8-complete.jar" org.antlr.v4.Tool "src\SEALang.g4"
 ```
 
 #### 2. Run the Runtime
