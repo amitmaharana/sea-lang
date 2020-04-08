@@ -28,3 +28,9 @@ placeholder
 ```
 
 ### Demo Video
+
+### Contributors
+* Amit Maharana
+* Eric Wegener
+* Shubham Bhardwaj
+* Shwetank Bhardwaj
