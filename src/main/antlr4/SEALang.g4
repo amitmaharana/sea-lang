@@ -5,8 +5,8 @@ program : block;
 block : (declaration | command)+ ;
 
 declaration : let SEMICOLON ;
-let : TYPE VAR (ASSIGN INT | ASSIGN BOOLEAN | ASSIGN STRING | ASSIGN expression)? ;
-command : (expression SEMICOLON | statement SEMICOLON| if_block | while_block | for_block | range_block | VAR ASSIGN expression SEMICOLON)+;
+let : TYPE VAR (ASSIGN INT | ASSIGN BOOLEAN | ASSIGN STRING | ASSIGN expression | ASSIGN ternary_block)? ;
+command : (statement SEMICOLON| if_block | while_block | for_block | range_block | VAR ASSIGN (expression | ternary_block) SEMICOLON)+;
 
 if_block :
     IF OPB condition CPB
@@ -40,24 +40,23 @@ range_block :
         block
     CCB  ;
 
-ternary_block :
-    (TYPE VAR | VAR) ASSIGN condition QUESTION expression COLON expression SEMICOLON ;
+ternary_block : condition QUESTION expression COLON expression ;
 
-
-condition : ( (NOT)? (((expression | VAR) (EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL) (expression | VAR) ) | BOOLEAN)) | condition (AND | OR) condition;
-
+condition :  (NOT)? OPB condition CPB | BOOLEAN | expression comparator expression | condition multi_condition condition;
+comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
+multi_condition : AND | OR ;
 
 expression : term expression_com;
 expression_com : (MINUS | PLUS) term expression_com | ;
 term : util term_com ;
 term_com : (MULTIPLY | DIVIDE) util term_com | ;
-util : (INT | OPB expression CPB) ;
+util : (VAR | INT | OPB expression CPB | BOOLEAN) ;
 
 statement : show ;
 
-show : 'show' (VAR | INT | BOOLEAN | STRING | CHAR) ;
+show : 'show' (VAR | INT | BOOLEAN | STRING) ;
 
-TYPE : 'Int' | 'Boolean' | 'String' | 'Float' | 'Char';
+TYPE : 'Int' | 'Boolean' | 'String' ;
 
 PLUS : '+' ;
 MINUS : '-' ;
@@ -86,9 +85,6 @@ COLON : ':' ;
 COMMA : ',' ;
 QUESTION : '?' ;
 
-TRUE : 'true' ;
-FALSE : 'false' ;
-
 IF : 'if' ;
 ELSE : 'else' ;
 
@@ -98,11 +94,11 @@ FOR : 'for' ;
 RANGE: 'range' ;
 IN : 'in' ;
 
-VAR : [a-zA-Z]+ ;
+VAR : [a-z]+ ;
 INT : [0-9]+ ;
 STRING : '"' (~["\r\n] | '""')* '"' ;
-BOOLEAN : 'True' | 'False' ;
-CHAR : '[a-zA-Z]' ;
-FLOAT : [0-9]+ '.' [0-9]+ | '.' [0-9]+ ;
+BOOLEAN : TRUE | FALSE ;
+TRUE : 'True' ;
+FALSE : 'False' ;
 
 WS : [ \n\t\r]+ -> skip;

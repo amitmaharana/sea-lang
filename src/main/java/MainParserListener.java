@@ -6,7 +6,7 @@ public class MainParserListener extends SEALangBaseListener {
 
 	@Override
 	public void exitLet(SEALangParser.LetContext ctx) {
-		if (ctx.TYPE() == null) {
+		/*if (ctx.TYPE() == null) {
 			return;
 		}
 		switch (ctx.TYPE().getText()) {
@@ -26,6 +26,18 @@ public class MainParserListener extends SEALangBaseListener {
 		case "Float":
 			this.variableMap.put(ctx.VAR().getText(), ctx.VAR().getText());
 			break;
+		}*/
+		switch (ctx.TYPE().getText()){
+			case "Int":
+
+				break;
+			case "Boolean":
+				break;
+			case "String":
+				break;
+			default:
+				System.out.println("Type not recognised");
+				break;
 		}
 	}
 
