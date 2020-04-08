@@ -1,0 +1,4 @@
+Int a = 10;
+Int b = 20;
+show a;
+show b;
