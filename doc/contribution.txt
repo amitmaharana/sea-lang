@@ -1,0 +1,42 @@
+SER 502: Contribution - Team 1
+
+Team Members:
+1. Shwetank Bhardwaj
+2. Shubham Bhardwaj
+3. Eric Wegener
+4. Amit Maharana
+
+Week 1 (Mar 26 - Apr 2)
+1. Shwetank Bhardwaj
+      - Understanding requirements for compiler design
+3. Shubham Bhardwaj
+      - Understanding requirements for compiler design
+3. Eric Wegener
+      - Exploring tools for project
+      - Understanding requirements for compiler design
+4. Amit Maharana
+      - Exploring tools for project
+      - Understanding requirements for compiler design
+      
+Week 2 (Apr 2 - Apr 9)
+1. Shwetank Bhardwaj
+    - Discussed and implemented grammar
+    - Wrote test cases
+    - Studied and explored about compiler implementation process and provided design
+2. Shubham Bhardwaj
+    - Discussed and implemented grammar
+    - Wrote test cases
+    - Studied and explored about compiler implementation process and provided design
+3. Eric Wegener
+    - Discussed and implemented grammar
+    - Setting up development evironment
+4. Amit Maharana
+    - Discussed and implemented grammar
+    - Wrote test cases
+    - Setting up development evironment
+    
+Contribution plan for final milestone - 
+1. Shwetank Bhardwaj - Execution Enviroment
+2. Shubham Bhardwaj - Execution Enviroment
+3. Eric Wegener - Execution Environment
+4. Amit Maharana - Execution Enviroment
