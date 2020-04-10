@@ -1,13 +1,32 @@
 grammar SEALang;
 
+/** Starting of our program.*/
 program : block;
 
+/** List of either declaration or commands.*/
 block : (declaration | command)+ ;
 
-declaration : let SEMICOLON ;
-let : TYPE VAR (ASSIGN INT | ASSIGN BOOLEAN | ASSIGN STRING | ASSIGN expression)? ;
-command : (expression SEMICOLON | statement SEMICOLON| if_block | while_block | for_block | range_block | VAR ASSIGN expression SEMICOLON)+;
+/** declaration: User can declare Int, Boolean, String, and expressions.*/
+declaration : TYPE VAR (ASSIGN INT |
+                        ASSIGN BOOLEAN |
+                        ASSIGN STRING |
+                        ASSIGN expression)? SEMICOLON ;
 
+/** condition: User can use NOT, nested conditions, comparators, and chaining of multiple conditions.*/
+condition : (NOT)? ((OPB condition CPB | BOOLEAN | expression comparator expression | VAR) condition_chain);
+condition_chain: multi_condition condition condition_chain | ;
+comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
+multi_condition : AND | OR ;
+
+/** command: User can use multiple and nested If-else, loops, assignment operator, and display data types*/
+command : (if_block |
+          while_block |
+          for_block |
+          range_block |
+          assign_block |
+          show)+;
+
+/** if_block: User can use either only if, if-else, if-elseif-else, or nested if-else*/
 if_block :
     IF OPB condition CPB
     OCB
@@ -22,48 +41,51 @@ if_block :
         block
     CCB)? ;
 
+/** while_block: User can use nested while loops with conditions and execute a block.*/
 while_block :
     WHILE OPB condition CPB
     OCB
         block
     CCB ;
 
+/** for_block: User can use nested for loops and execute a block.*/
 for_block :
     FOR OPB ((TYPE VAR ASSIGN INT)| (VAR ASSIGN INT) | ) SEMICOLON condition SEMICOLON ((VAR (INC | DEC | ASSIGN expression)) | ) CPB
     OCB
         block
     CCB ;
 
+/** range_block: User can use nested for range loops and execute a block.*/
 range_block :
     FOR VAR IN RANGE OPB (INT | VAR | expression) COMMA (INT | VAR | expression) CPB
     OCB
         block
     CCB  ;
 
-ternary_block :
-    (TYPE VAR | VAR) ASSIGN condition QUESTION expression COLON expression SEMICOLON ;
+/** assign_block: User can use this to assign expressions or boolean or strings to a variable.*/
+assign_block : VAR ASSIGN (expression | BOOLEAN | STRING) SEMICOLON ;
 
+/** show: User can use this to display a variable.*/
+show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
 
-condition : ( (NOT)? (((expression | VAR) (EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL) (expression | VAR) ) | BOOLEAN)) | condition (AND | OR) condition;
+/** ternary_block: User can use ternary operator and evaluate expressions.*/
+ternary_block : condition QUESTION expression COLON expression ;
 
-
+/** expression: This will perform airthmatic operations on numbers or variables.
+*This will also evaluate ternary_block, and nested expressions.
+*/
 expression : term expression_com;
 expression_com : (MINUS | PLUS) term expression_com | ;
 term : util term_com ;
 term_com : (MULTIPLY | DIVIDE) util term_com | ;
-util : (INT | OPB expression CPB) ;
+util : (VAR | INT | OPB  ternary_block  CPB | OPB expression CPB) ;
 
-statement : show ;
 
-show : 'show' (VAR | INT | BOOLEAN | STRING | CHAR) ;
-
-TYPE : 'Int' | 'Boolean' | 'String' | 'Float' | 'Char';
-
+TYPE : 'Int' | 'Boolean' | 'String' ;
 PLUS : '+' ;
 MINUS : '-' ;
 MULTIPLY : '*' ;
 DIVIDE : '/' ;
-
 ASSIGN : '=' ;
 EQUAL : '==' ;
 NOT : '!' ;
@@ -76,7 +98,6 @@ INC : '++' ;
 DEC : '--' ;
 AND : '&&' ;
 OR : '||' ;
-
 OPB : '(' ;
 CPB : ')' ;
 OCB : '{' ;
@@ -85,24 +106,18 @@ SEMICOLON : ';' ;
 COLON : ':' ;
 COMMA : ',' ;
 QUESTION : '?' ;
-
-TRUE : 'true' ;
-FALSE : 'false' ;
-
 IF : 'if' ;
 ELSE : 'else' ;
-
 WHILE : 'while' ;
 FOR : 'for' ;
-
 RANGE: 'range' ;
 IN : 'in' ;
-
-VAR : [a-zA-Z]+ ;
+VAR : [a-z]+ ;
 INT : [0-9]+ ;
 STRING : '"' (~["\r\n] | '""')* '"' ;
-BOOLEAN : 'True' | 'False' ;
-CHAR : '[a-zA-Z]' ;
-FLOAT : [0-9]+ '.' [0-9]+ | '.' [0-9]+ ;
-
-WS : [ \n\t\r]+ -> skip;
+BOOLEAN : TRUE | FALSE ;
+TRUE : 'True' ;
+FALSE : 'False' ;
+COMMENT : DOUBLE_SLASH ~[\r\n]* -> skip ;
+DOUBLE_SLASH : '//' ;
+WS : [ \n\t\r]+ -> skip ;

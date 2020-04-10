@@ -5,31 +5,6 @@ public class MainParserListener extends SEALangBaseListener {
 	HashMap<String, Object> variableMap = new HashMap<>();
 
 	@Override
-	public void exitLet(SEALangParser.LetContext ctx) {
-		if (ctx.TYPE() == null) {
-			return;
-		}
-		switch (ctx.TYPE().getText()) {
-		case "Int":
-			if (ctx.INT() == null) {
-				this.variableMap.put(ctx.VAR().getText(), 0);
-			} else {
-				this.variableMap.put(ctx.VAR().getText(), Integer.parseInt(ctx.INT().getText()));
-			}
-			break;
-		case "Boolean":
-			this.variableMap.put(ctx.VAR().getText(), Boolean.parseBoolean(ctx.BOOLEAN().getText()));
-			break;
-		case "String":
-			this.variableMap.put(ctx.VAR().getText(), ctx.STRING().getText());
-			break;
-		case "Float":
-			this.variableMap.put(ctx.VAR().getText(), ctx.VAR().getText());
-			break;
-		}
-	}
-
-	@Override
 	public void exitCommand(SEALangParser.CommandContext ctx) {
 		/*
 		 * if(ctx.VAR().size() == 2){ this.variableMap.put(ctx.VAR(0).getText(),

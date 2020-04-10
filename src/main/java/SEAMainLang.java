@@ -1,4 +1,3 @@
-
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -8,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SEAMainLang {
-
     public static void main(String[] args) {
         try {
             CharStream input = (CharStream) new ANTLRFileStream("./data/test.sea");
