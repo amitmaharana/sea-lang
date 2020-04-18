@@ -1,39 +1,10 @@
-// my name is shwetank
-if(1 == 2){
-x = False;
-}
-
-
-if(1 != 2){
-x = False;
-}
-if(1 > 2){
-x = False;
-}
-if(1 < 2){
-x = False;
-}
-
-if(1 >= 2){
-x = False;
-}
-if(1 <= 2){
-x = False;
-}
-if((1 == 2) && (1 == 2)){
-x = False;
-}
-if((1 == 2) || (1 == 2)){
-x = False;
-}
-
-if((1 == 2 && True) || (1 == 2)){
-x = False;
-}
-
-
-
-
-
-
-
+Int a;
+a = 10;
+String s;
+s = "Shwetank";
+b = "abc";
+show a;
+show s;
+show 1;
+show False;
+show "Bhardwaj";
