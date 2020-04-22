@@ -1,0 +1,60 @@
+Int a;
+Int b;
+Int c;
+a = 20;
+b = 15;
+c = b + a;
+show c
+show "pass if 35"
+
+b = 2;
+c = b - a;
+show c
+show "pass if -18"
+
+b = 4;
+c = a / b;
+show c;
+show "pass if 5";
+
+a = 250
+b = a * b;
+show c;
+show "pass if 1000";
+
+Int d;
+d = (c / 5) * 4;
+show d;
+show "pass if 800";
+a = 2 * (4 - b);
+show a;
+show "pass if 0";
+
+c = 40;
+a = 23;
+b = (5 * 2)-(c*a);
+show b;
+show "pass if -910";
+
+d = 2;
+c = ((5*c) - (b));
+show c;
+show "pass if 1110";
+
+c = c / 10;
+show c;
+show "pass if 111";
+
+a = 5;
+b = 7;
+(a < b) ? show "pass" : show "fail";
+c = 10;
+(c > b + a) ? show "fail" : show "pass";
+
+d = 20;
+((a + c) < (d / a)) ? show "pass" : show "fail";
+(a * ( a * a ) < ( c + 100)) ? show "fail" : show "pass";
+
+
+
+
