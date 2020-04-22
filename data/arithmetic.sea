@@ -17,8 +17,8 @@ c = a / b;
 show c;
 show "pass if 5";
 
-a = 250
-b = a * b;
+a = 250;
+c = a * b;
 show c;
 show "pass if 1000";
 
@@ -26,6 +26,7 @@ Int d;
 d = (c / 5) * 4;
 show d;
 show "pass if 800";
+
 a = 2 * (4 - b);
 show a;
 show "pass if 0";
