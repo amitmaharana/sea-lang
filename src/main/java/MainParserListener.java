@@ -19,6 +19,8 @@ public class MainParserListener extends SEALangBaseListener {
             intermediateArray.add(Constants.ASSIGN + Constants.SEPARATOR + ctx.VAR().getText());
         }else if(ctx.STRING() != null){
             intermediateArray.add(Constants.ASSIGN + Constants.SEPARATOR + ctx.VAR().getText() + Constants.SEPARATOR + ctx.STRING().getText());
+        } else if (ctx.condition() != null){
+            intermediateArray.add(Constants.ASSIGN + Constants.SEPARATOR + ctx.VAR().getText());
         }
     }
 
@@ -68,11 +70,16 @@ public class MainParserListener extends SEALangBaseListener {
     }
 
     @Override
+    public void exitCondition(SEALangParser.ConditionContext ctx) {
+        intermediateArray.add(Constants.SET_BOOL_VAL + Constants.SEPARATOR + ctx.BOOLEAN().getText());
+    }
+
+    @Override
     public void exitUtil(SEALangParser.UtilContext ctx) {
         if (ctx.VAR() != null) {
             intermediateArray.add(Constants.SET_VAR + Constants.SEPARATOR + ctx.VAR().getText());
         } else if (ctx.INT() != null) {
-            intermediateArray.add(Constants.SET_VAL + Constants.SEPARATOR + ctx.INT().getText());
+            intermediateArray.add(Constants.SET_INT_VAL + Constants.SEPARATOR + ctx.INT().getText());
         }
     }
 

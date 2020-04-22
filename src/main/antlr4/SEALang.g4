@@ -10,7 +10,7 @@ block : (declaration | command)+ ;
 declaration : TYPE VAR SEMICOLON ;
 
 /** condition: User can use NOT, nested conditions, comparators, and chaining of multiple conditions.*/
-condition : (NOT)? ((OPB condition CPB | expression comparator expression | BOOLEAN) condition_chain);
+condition : (NOT)? (VAR |(OPB condition CPB | expression comparator expression | BOOLEAN) condition_chain);
 condition_chain: multi_condition condition condition_chain | ;
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
 multi_condition : AND | OR ;
@@ -60,7 +60,7 @@ range_block :
     CCB  ;
 
 /** assign_block: User can use this to assign expressions or strings to a variable.*/
-assign_block : VAR ASSIGN (STRING | expression) SEMICOLON ;
+assign_block : VAR ASSIGN (condition | STRING | expression) SEMICOLON ;
 
 /** show: User can use this to display a variable.*/
 show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
@@ -78,7 +78,7 @@ term_com : (MULTIPLY | DIVIDE) util term_com | ;
 util : (VAR | INT | OPB  ternary_block  CPB | OPB expression CPB) ;
 
 
-TYPE : 'Int' | 'String' ;
+TYPE : 'Int' | 'Boolean' |'String';
 PLUS : '+' ;
 MINUS : '-' ;
 MULTIPLY : '*' ;

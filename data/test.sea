@@ -1,10 +1,7 @@
 Int a;
-a = 10;
-String s;
-s = "Shwetank";
-b = "abc";
+a=20;
+Boolean b;
+b = False;
+b= True;
 show a;
-show s;
-show 1;
-show False;
-show "Bhardwaj";
+show b;
