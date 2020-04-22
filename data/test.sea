@@ -1,7 +1,3 @@
-Int a;
-a=20;
 Boolean b;
-b = False;
-b= True;
-show a;
+b = (True && True) || (4<2) && True;
 show b;

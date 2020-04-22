@@ -15,11 +15,11 @@ public class MainParserListener extends SEALangBaseListener {
 
     @Override
     public void exitAssign_block(SEALangParser.Assign_blockContext ctx) {
-        if(ctx.expression() != null){
+        if (ctx.expression() != null) {
             intermediateArray.add(Constants.ASSIGN + Constants.SEPARATOR + ctx.VAR().getText());
-        }else if(ctx.STRING() != null){
+        } else if (ctx.STRING() != null) {
             intermediateArray.add(Constants.ASSIGN + Constants.SEPARATOR + ctx.VAR().getText() + Constants.SEPARATOR + ctx.STRING().getText());
-        } else if (ctx.condition() != null){
+        } else if (ctx.condition() != null) {
             intermediateArray.add(Constants.ASSIGN + Constants.SEPARATOR + ctx.VAR().getText());
         }
     }
@@ -71,7 +71,33 @@ public class MainParserListener extends SEALangBaseListener {
 
     @Override
     public void exitCondition(SEALangParser.ConditionContext ctx) {
-        intermediateArray.add(Constants.SET_BOOL_VAL + Constants.SEPARATOR + ctx.BOOLEAN().getText());
+        if (ctx.BOOLEAN() != null) {
+            intermediateArray.add(Constants.SET_BOOL_VAL + Constants.SEPARATOR + ctx.BOOLEAN().getText());
+        } else {
+            String conditionOperator = null;
+            if (ctx.getText().contains("&&")) {
+                conditionOperator = Constants.AND;
+            } else if (ctx.getText().contains("||")) {
+                conditionOperator = Constants.OR;
+            } else if (ctx.getText().contains("==")) {
+                conditionOperator = Constants.EQUAL;
+            } else if (ctx.getText().contains("<=")) {
+                conditionOperator = Constants.LESS_THAN_EQUAL;
+            } else if (ctx.getText().contains(">=")) {
+                conditionOperator = Constants.GREAT_THAN_EQUAL;
+            } else if (ctx.getText().contains("!=")) {
+                conditionOperator = Constants.NOT_EQUAL;
+            } else if (ctx.getText().contains("<")) {
+                conditionOperator = Constants.LESS_THAN;
+            } else if (ctx.getText().contains(">")) {
+                conditionOperator = Constants.GREATER_THAN;
+            } else if (ctx.getText().contains("(") && ctx.getText().contains(")")) {
+                conditionOperator = Constants.BRACKETS;
+            }
+            if(conditionOperator !=null){
+                intermediateArray.add(conditionOperator);
+            }
+        }
     }
 
     @Override
