@@ -4,13 +4,13 @@ Int c;
 a = 20;
 b = 15;
 c = b + a;
-show c
-show "pass if 35"
+show c;
+show "pass if 35";
 
 b = 2;
 c = b - a;
-show c
-show "pass if -18"
+show c;
+show "pass if -18";
 
 b = 4;
 c = a / b;
@@ -54,7 +54,3 @@ c = 10;
 d = 20;
 ((a + c) < (d / a)) ? show "pass" : show "fail";
 (a * ( a * a ) < ( c + 100)) ? show "fail" : show "pass";
-
-
-
-
