@@ -77,13 +77,13 @@ range_block :
     CCB  ;
 
 /** assign_block: User can use this to assign expressions or strings to a variable.*/
-assign_block : VAR ASSIGN (condition | STRING | expression) SEMICOLON ;
+assign_block : VAR ASSIGN (condition | STRING | expression | ternary_block) SEMICOLON ;
 
 /** show: User can use this to display a variable.*/
 show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
 
 /** ternary_block: User can use ternary operator and evaluate expressions.*/
-ternary_block : condition QUESTION expression COLON expression ;
+ternary_block : condition QUESTION (expression | BOOLEAN) COLON (expression | BOOLEAN) ;
 
 TYPE : 'Int' | 'Boolean' |'String';
 PLUS : '+' ;
