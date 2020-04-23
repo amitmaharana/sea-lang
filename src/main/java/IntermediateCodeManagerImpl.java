@@ -1,12 +1,14 @@
+import constants.IntermediateConstants;
+
 import java.util.ArrayList;
 
-public class MainParserListener extends SEALangBaseListener {
+public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 
     private ArrayList<String> intermediateArray = new ArrayList<>();
 
     @Override
     public void enterDeclaration(SEALangParser.DeclarationContext ctx) {
-        intermediateArray.add(Constants.DECLARATION + Constants.SEPARATOR + ctx.TYPE().getText() + Constants.SEPARATOR
+        intermediateArray.add(IntermediateConstants.DECLARATION + IntermediateConstants.SEPARATOR + ctx.TYPE().getText() + IntermediateConstants.SEPARATOR
                 + ctx.VAR().getText());
     }
 
@@ -17,12 +19,12 @@ public class MainParserListener extends SEALangBaseListener {
     @Override
     public void exitAssign_block(SEALangParser.Assign_blockContext ctx) {
         if (ctx.expression() != null) {
-            intermediateArray.add(Constants.ASSIGN + Constants.SEPARATOR + ctx.VAR().getText());
+            intermediateArray.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
         } else if (ctx.STRING() != null) {
-            intermediateArray.add(Constants.ASSIGN + Constants.SEPARATOR + ctx.VAR().getText() + Constants.SEPARATOR
+            intermediateArray.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText() + IntermediateConstants.SEPARATOR
                     + ctx.STRING().getText());
         } else if (ctx.condition() != null) {
-            intermediateArray.add(Constants.ASSIGN + Constants.SEPARATOR + ctx.VAR().getText());
+            intermediateArray.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
         }
     }
 
@@ -60,54 +62,54 @@ public class MainParserListener extends SEALangBaseListener {
 
     @Override
     public void exitPlusExpression(SEALangParser.PlusExpressionContext ctx) {
-        intermediateArray.add(Constants.PLUS);
+        intermediateArray.add(IntermediateConstants.PLUS);
     }
 
     @Override
     public void exitMinusExpression(SEALangParser.MinusExpressionContext ctx) {
-        intermediateArray.add(Constants.MINUS);
+        intermediateArray.add(IntermediateConstants.MINUS);
     }
 
     @Override
     public void exitMultiplyExpression(SEALangParser.MultiplyExpressionContext ctx) {
-        intermediateArray.add(Constants.MULTIPLY);
+        intermediateArray.add(IntermediateConstants.MULTIPLY);
     }
 
     @Override
     public void exitDivideExpression(SEALangParser.DivideExpressionContext ctx) {
-        intermediateArray.add(Constants.DIVIDE);
+        intermediateArray.add(IntermediateConstants.DIVIDE);
     }
 
     @Override
     public void exitIntExpression(SEALangParser.IntExpressionContext ctx) {
-        intermediateArray.add(Constants.SET_INT_VAL + Constants.SEPARATOR + ctx.INT().getText());
+        intermediateArray.add(IntermediateConstants.SET_INT_VAL + IntermediateConstants.SEPARATOR + ctx.INT().getText());
     }
 
     @Override
     public void exitVariableExpression(SEALangParser.VariableExpressionContext ctx) {
-        intermediateArray.add(Constants.SET_VAR + Constants.SEPARATOR + ctx.VAR().getText());
+        intermediateArray.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
     }
 
     @Override
     public void exitNotCondition(SEALangParser.NotConditionContext ctx) {
-        intermediateArray.add(Constants.NOT);
+        intermediateArray.add(IntermediateConstants.NOT);
     }
 
     @Override
     public void exitComparatorCondition(SEALangParser.ComparatorConditionContext ctx) {
         String conditionOperator = null;
         if (ctx.op.getText().contains("==")) {
-            conditionOperator = Constants.EQUAL;
+            conditionOperator = IntermediateConstants.EQUAL;
         } else if (ctx.op.getText().contains("<=")) {
-            conditionOperator = Constants.LESS_THAN_EQUAL;
+            conditionOperator = IntermediateConstants.LESS_THAN_EQUAL;
         } else if (ctx.op.getText().contains(">=")) {
-            conditionOperator = Constants.GREAT_THAN_EQUAL;
+            conditionOperator = IntermediateConstants.GREAT_THAN_EQUAL;
         } else if (ctx.op.getText().contains("!=")) {
-            conditionOperator = Constants.NOT_EQUAL;
+            conditionOperator = IntermediateConstants.NOT_EQUAL;
         } else if (ctx.op.getText().contains("<")) {
-            conditionOperator = Constants.LESS_THAN;
+            conditionOperator = IntermediateConstants.LESS_THAN;
         } else if (ctx.op.getText().contains(">")) {
-            conditionOperator = Constants.GREATER_THAN;
+            conditionOperator = IntermediateConstants.GREATER_THAN;
         }
         intermediateArray.add(conditionOperator);
     }
@@ -116,41 +118,41 @@ public class MainParserListener extends SEALangBaseListener {
     public void exitMultiConditionCondition(SEALangParser.MultiConditionConditionContext ctx) {
         String multiConditionOperator = null;
         if (ctx.op.getText().contains("&&")) {
-            multiConditionOperator = Constants.AND;
+            multiConditionOperator = IntermediateConstants.AND;
         } else if (ctx.op.getText().contains("||")) {
-            multiConditionOperator = Constants.OR;
+            multiConditionOperator = IntermediateConstants.OR;
         }
         intermediateArray.add(multiConditionOperator);
     }
 
     @Override
     public void exitBoolCondition(SEALangParser.BoolConditionContext ctx) {
-        intermediateArray.add(Constants.SET_BOOL_VAL + Constants.SEPARATOR + ctx.BOOLEAN().getText());
+        intermediateArray.add(IntermediateConstants.SET_BOOL_VAL + IntermediateConstants.SEPARATOR + ctx.BOOLEAN().getText());
     }
 
     @Override
     public void exitVariableCondition(SEALangParser.VariableConditionContext ctx) {
-        intermediateArray.add(Constants.SET_VAR + Constants.SEPARATOR + ctx.VAR().getText());
+        intermediateArray.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
     }
 
     @Override
     public void exitShow(SEALangParser.ShowContext ctx) {
         if (ctx.VAR() != null) {
             intermediateArray.add(
-                    Constants.SHOW + Constants.SEPARATOR + Constants.VAR + Constants.SEPARATOR + ctx.VAR().getText());
+                    IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
         } else if (ctx.INT() != null) {
             intermediateArray.add(
-                    Constants.SHOW + Constants.SEPARATOR + Constants.VAL + Constants.SEPARATOR + ctx.INT().getText());
+                    IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + ctx.INT().getText());
         } else if (ctx.BOOLEAN() != null) {
-            intermediateArray.add(Constants.SHOW + Constants.SEPARATOR + Constants.VAL + Constants.SEPARATOR
+            intermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL + IntermediateConstants.SEPARATOR
                     + ctx.BOOLEAN().getText());
         } else if (ctx.STRING() != null) {
-            intermediateArray.add(Constants.SHOW + Constants.SEPARATOR + Constants.VAL + Constants.SEPARATOR
+            intermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL + IntermediateConstants.SEPARATOR
                     + ctx.STRING().getText());
         }
     }
 
-    public ArrayList<String> getIntermediateMap() {
+    public ArrayList<String> getIntermediateCode() {
         return intermediateArray;
     }
 }

@@ -1,13 +1,5 @@
-public enum Type {
-	INT("Int"), STRING("String"), BOOLEAN("Boolean");
-
-	private final String val;
-
-	Type(String val) {
-		this.val = val;
-	}
-
-	public String getVal() {
-		return val;
-	}
+public class Type {
+	public static final String INT = "Int";
+	public static final String BOOLEAN = "Boolean";
+	public static final String STRING = "String";
 }
