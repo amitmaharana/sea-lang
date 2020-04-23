@@ -1,57 +1,73 @@
 Int a;
 Int b;
 Int c;
+
+show "Case 1";
 a = 20;
 b = 15;
 c = b + a;
 show c;
 show "pass if 35";
 
+show "Case 2";
 b = 2;
 c = b - a;
 show c;
 show "pass if -18";
 
+show "Case 3";
 b = 4;
 c = a / b;
 show c;
 show "pass if 5";
 
+show "Case 4";
 a = 250;
 c = a * b;
 show c;
 show "pass if 1000";
 
+show "Case 5";
 Int d;
 d = (c / 5) * 4;
 show d;
 show "pass if 800";
 
+show "Case 6";
 a = 2 * (4 - b);
 show a;
 show "pass if 0";
 
+show "Case 7";
 c = 40;
 a = 23;
 b = (5 * 2)-(c*a);
 show b;
 show "pass if -910";
 
+show "Case 8";
 d = 2;
 c = ((5*c) - (b));
 show c;
 show "pass if 1110";
 
+show "Case 9";
 c = c / 10;
 show c;
 show "pass if 111";
 
+show "Case 10";
 a = 5;
 b = 7;
 (a < b) ? show "pass" : show "fail";
+
+show "Case 11";
 c = 10;
 (c > b + a) ? show "fail" : show "pass";
 
+show "Case 12";
 d = 20;
 ((a + c) < (d / a)) ? show "pass" : show "fail";
+
+show "Case 13";
 (a * ( a * a ) < ( c + 100)) ? show "fail" : show "pass";

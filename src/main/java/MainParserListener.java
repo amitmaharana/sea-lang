@@ -67,13 +67,13 @@ public class MainParserListener extends SEALangBaseListener {
 		if (ctx.getText().contains("+")) {
 			intermediateArray.add(Constants.PLUS + Constants.SEPARATOR + ctx.getText());
 		}
-		if (ctx.getText().contains("-")) {
+		else if (ctx.getText().contains("-")) {
 			intermediateArray.add(Constants.MINUS + Constants.SEPARATOR + ctx.getText());
 		}
-		if (ctx.getText().contains("*")) {
+		else if (ctx.getText().contains("*")) {
 			intermediateArray.add(Constants.MULTIPLY + Constants.SEPARATOR + ctx.getText());
 		}
-		if (ctx.getText().contains("/")) {
+		else if (ctx.getText().contains("/")) {
 			intermediateArray.add(Constants.DIVIDE + Constants.SEPARATOR + ctx.getText());
 		}
 
