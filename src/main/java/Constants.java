@@ -16,6 +16,7 @@ public class Constants {
     public static final String LESS_THAN_EQUAL = "LESS_THAN_EQUAL";
     public static final String GREAT_THAN_EQUAL = "GREAT_THAN_EQUAL";
     public static final String NOT_EQUAL = "NOT_EQUAL";
+    public static final String NOT = "NOT";
     public static final String LESS_THAN = "LESS_THAN";
     public static final String GREATER_THAN = "GREATER_THAN";
     public static final String AND = "AND";

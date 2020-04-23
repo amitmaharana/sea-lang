@@ -9,11 +9,26 @@ block : (declaration | command)+ ;
 /** declaration: User can declare Int, String*/
 declaration : TYPE VAR SEMICOLON ;
 
-/** condition: User can use NOT, nested conditions, comparators, and chaining of multiple conditions.*/
-condition : (NOT)? (VAR |(OPB condition CPB | expression comparator expression | BOOLEAN) condition_chain);
-condition_chain: multi_condition condition condition_chain | ;
+/*condition: User can use NOT, nested conditions, comparators, and chaining of multiple conditions*/
+condition: OPB condition CPB#parCondition
+               | NOT condition #notCondition
+               | left = expression op = comparator right = expression #comparatorCondition
+               | left = condition op = multi_condition right = condition #multiConditionCondition
+               | BOOLEAN #boolCondition
+               | VAR #variableCondition;
+
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
-multi_condition : AND | OR ;
+multi_condition : AND | OR;
+
+
+/** expression: This will perform airthmatic operations on numbers or variables.
+*This will also evaluate ternary_block, and nested expressions.
+*/
+expression : term expression_com;
+expression_com : (MINUS | PLUS) term expression_com | ;
+term : util term_com ;
+term_com : (MULTIPLY | DIVIDE) util term_com | ;
+util : (VAR | INT | OPB  ternary_block  CPB | OPB expression CPB) ;
 
 /** command: User can use multiple and nested If-else, loops, assignment operator, and display data types*/
 command : (if_block |
@@ -67,16 +82,6 @@ show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
 
 /** ternary_block: User can use ternary operator and evaluate expressions.*/
 ternary_block : condition QUESTION expression COLON expression ;
-
-/** expression: This will perform airthmatic operations on numbers or variables.
-*This will also evaluate ternary_block, and nested expressions.
-*/
-expression : term expression_com;
-expression_com : (MINUS | PLUS) term expression_com | ;
-term : util term_com ;
-term_com : (MULTIPLY | DIVIDE) util term_com | ;
-util : (VAR | INT | OPB  ternary_block  CPB | OPB expression CPB) ;
-
 
 TYPE : 'Int' | 'Boolean' |'String';
 PLUS : '+' ;

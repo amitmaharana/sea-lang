@@ -65,39 +65,48 @@ public class MainParserListener extends SEALangBaseListener {
     }
 
     @Override
-    public void enterUtil(SEALangParser.UtilContext ctx) {
-
+    public void exitNotCondition(SEALangParser.NotConditionContext ctx) {
+        intermediateArray.add(Constants.NOT);
     }
 
     @Override
-    public void exitCondition(SEALangParser.ConditionContext ctx) {
-        if (ctx.BOOLEAN() != null) {
-            intermediateArray.add(Constants.SET_BOOL_VAL + Constants.SEPARATOR + ctx.BOOLEAN().getText());
-        } else {
-            String conditionOperator = null;
-            if (ctx.getText().contains("&&")) {
-                conditionOperator = Constants.AND;
-            } else if (ctx.getText().contains("||")) {
-                conditionOperator = Constants.OR;
-            } else if (ctx.getText().contains("==")) {
-                conditionOperator = Constants.EQUAL;
-            } else if (ctx.getText().contains("<=")) {
-                conditionOperator = Constants.LESS_THAN_EQUAL;
-            } else if (ctx.getText().contains(">=")) {
-                conditionOperator = Constants.GREAT_THAN_EQUAL;
-            } else if (ctx.getText().contains("!=")) {
-                conditionOperator = Constants.NOT_EQUAL;
-            } else if (ctx.getText().contains("<")) {
-                conditionOperator = Constants.LESS_THAN;
-            } else if (ctx.getText().contains(">")) {
-                conditionOperator = Constants.GREATER_THAN;
-            } else if (ctx.getText().contains("(") && ctx.getText().contains(")")) {
-                conditionOperator = Constants.BRACKETS;
-            }
-            if(conditionOperator !=null){
-                intermediateArray.add(conditionOperator);
-            }
+    public void exitComparatorCondition(SEALangParser.ComparatorConditionContext ctx) {
+        String conditionOperator = null;
+        if (ctx.op.getText().contains("==")) {
+            conditionOperator = Constants.EQUAL;
+        } else if (ctx.op.getText().contains("<=")) {
+            conditionOperator = Constants.LESS_THAN_EQUAL;
+        } else if (ctx.op.getText().contains(">=")) {
+            conditionOperator = Constants.GREAT_THAN_EQUAL;
+        } else if (ctx.op.getText().contains("!=")) {
+            conditionOperator = Constants.NOT_EQUAL;
+        } else if (ctx.op.getText().contains("<")) {
+            conditionOperator = Constants.LESS_THAN;
+        } else if (ctx.op.getText().contains(">")) {
+            conditionOperator = Constants.GREATER_THAN;
         }
+        intermediateArray.add(conditionOperator);
+    }
+
+    @Override
+    public void exitMultiConditionCondition(SEALangParser.MultiConditionConditionContext ctx) {
+        String multiConditionOperator = null;
+        if (ctx.op.getText().contains("&&")) {
+            multiConditionOperator = Constants.AND;
+        } else if (ctx.op.getText().contains("||")) {
+            multiConditionOperator = Constants.OR;
+        }
+        intermediateArray.add(multiConditionOperator);
+    }
+
+    @Override
+    public void exitBoolCondition(SEALangParser.BoolConditionContext ctx) {
+        intermediateArray.add(Constants.SET_BOOL_VAL + Constants.SEPARATOR + ctx.BOOLEAN().getText());
+    }
+
+    @Override
+    public void exitVariableCondition(SEALangParser.VariableConditionContext ctx) {
+        intermediateArray.add(Constants.SET_VAR + Constants.SEPARATOR + ctx.VAR().getText());
     }
 
     @Override

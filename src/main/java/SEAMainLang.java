@@ -84,6 +84,9 @@ public class SEAMainLang {
                         b2 = booleanStack.pop();
                         booleanStack.push(b1 || b2);
                         break;
+                    case Constants.NOT:
+                        booleanStack.push(!booleanStack.pop());
+                        break;
                     case Constants.EQUAL:
                         booleanStack.push(integerStack.pop() == integerStack.pop());
                         break;
@@ -101,9 +104,6 @@ public class SEAMainLang {
                         break;
                     case Constants.LESS_THAN_EQUAL:
                         booleanStack.push(integerStack.pop() >= integerStack.pop());
-                        break;
-                    case Constants.BRACKETS:
-                        booleanStack.push(booleanStack.pop());
                         break;
                     case Constants.SET_INT_VAL:
                         integerStack.push(Integer.parseInt(data[1]));
