@@ -6,17 +6,31 @@ program : block;
 /** List of either declaration or commands.*/
 block : (declaration | command)+ ;
 
-/** declaration: User can declare Int, Boolean, String, and expressions.*/
-declaration : TYPE VAR (ASSIGN INT |
-                        ASSIGN BOOLEAN |
-                        ASSIGN STRING |
-                        ASSIGN expression)? SEMICOLON ;
+/** declaration: User can declare Int, String*/
+declaration : TYPE VAR SEMICOLON ;
 
-/** condition: User can use NOT, nested conditions, comparators, and chaining of multiple conditions.*/
-condition : (NOT)? ((OPB condition CPB | BOOLEAN | expression comparator expression | VAR) condition_chain);
-condition_chain: multi_condition condition condition_chain | ;
+/*condition: User can use NOT, nested conditions, comparators, and chaining of multiple conditions*/
+condition: OPB condition CPB#parCondition
+               | NOT condition #notCondition
+               | left = expression op = comparator right = expression #comparatorCondition
+               | left = condition op = multi_condition right = condition #multiConditionCondition
+               | BOOLEAN #boolCondition
+               | VAR #variableCondition;
+
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
-multi_condition : AND | OR ;
+multi_condition : AND | OR;
+
+
+/** expression: This will perform airthmatic operations on numbers or variables.
+*This will also evaluate ternary_block, and nested expressions.
+*/
+expression: OPB expression CPB #parExpression
+               | left = expression op = MULTIPLY right = expression #multiplyExpression
+               | left = expression op = DIVIDE right = expression #divideExpression
+               | left = expression op = PLUS right = expression #plusExpression
+               | left = expression op = MINUS right = expression #minusExpression
+               | INT #intExpression
+               | VAR #variableExpression;
 
 /** command: User can use multiple and nested If-else, loops, assignment operator, and display data types*/
 command : (if_block |
@@ -62,8 +76,8 @@ range_block :
         block
     CCB  ;
 
-/** assign_block: User can use this to assign expressions or boolean or strings to a variable.*/
-assign_block : VAR ASSIGN (expression | BOOLEAN | STRING) SEMICOLON ;
+/** assign_block: User can use this to assign expressions or strings to a variable.*/
+assign_block : VAR ASSIGN (condition | STRING | expression) SEMICOLON ;
 
 /** show: User can use this to display a variable.*/
 show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
@@ -71,17 +85,7 @@ show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
 /** ternary_block: User can use ternary operator and evaluate expressions.*/
 ternary_block : condition QUESTION expression COLON expression ;
 
-/** expression: This will perform airthmatic operations on numbers or variables.
-*This will also evaluate ternary_block, and nested expressions.
-*/
-expression : term expression_com;
-expression_com : (MINUS | PLUS) term expression_com | ;
-term : util term_com ;
-term_com : (MULTIPLY | DIVIDE) util term_com | ;
-util : (VAR | INT | OPB  ternary_block  CPB | OPB expression CPB) ;
-
-
-TYPE : 'Int' | 'Boolean' | 'String' ;
+TYPE : 'Int' | 'Boolean' |'String';
 PLUS : '+' ;
 MINUS : '-' ;
 MULTIPLY : '*' ;
