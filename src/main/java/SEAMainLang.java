@@ -73,6 +73,29 @@ public class SEAMainLang {
                             System.out.println("No such variable declared Variable name: " + variableName);
                             error = true;
                         }
+                break;
+                case Constants.SET_INT_VAL:
+                    integerStack.push(Integer.parseInt(data[1]));
+                    break;
+                case Constants.SET_BOOL_VAL:
+                    booleanStack.push(Boolean.parseBoolean(data[1]));
+                    break;
+                case Constants.SET_VAR:
+                    integerStack.push(integerMap.get(data[1]));
+                    break;
+                    case Constants.PLUS:
+                        integerStack.push(integerStack.pop() + integerStack.pop());
+                        break;
+                    case Constants.MINUS:
+                        int rhs = integerStack.pop();
+                        integerStack.push(integerStack.pop() - rhs);
+                        break;
+                    case Constants.MULTIPLY:
+                        integerStack.push(integerStack.pop() * integerStack.pop());
+                        break;
+                    case Constants.DIVIDE:
+                        int denominator = integerStack.pop();
+                        integerStack.push(integerStack.pop() / denominator);
                         break;
                     case Constants.AND:
                         boolean b1 = booleanStack.pop();
@@ -105,50 +128,43 @@ public class SEAMainLang {
                     case Constants.LESS_THAN_EQUAL:
                         booleanStack.push(integerStack.pop() >= integerStack.pop());
                         break;
-                    case Constants.SET_INT_VAL:
-                        integerStack.push(Integer.parseInt(data[1]));
-                        break;
-                    case Constants.SET_BOOL_VAL:
-                        booleanStack.push(Boolean.parseBoolean(data[1]));
-                        break;
-                    case Constants.SET_VAR:
-                        integerStack.push(integerMap.get(data[1]));
-                        break;
-                    case Constants.SHOW:
-                        type = data[1];
-                        switch (type) {
-                            case Constants.VAR:
-                                variableName = data[2];
-                                if (integerMap.containsKey(variableName)) {
-                                    System.out.println(integerMap.get(variableName));
-                                } else if (booleanMap.containsKey(variableName)) {
-                                    System.out.println(booleanMap.get(variableName));
-                                } else if (stringMap.containsKey(variableName)) {
-                                    System.out.println(stringMap.get(variableName));
-                                } else {
-                                    System.out.println("No such variable declared");
-                                    error = true;
-                                }
-                                break;
-                            case Constants.VAL:
-                                System.out.println(data[2]);
-                                break;
-                        }
+                case Constants.SHOW:
+                    type = data[1];
+                    switch (type) {
+                        case Constants.VAR:
+                            variableName = data[2];
+                            if (integerMap.containsKey(variableName)) {
+                                System.out.println(integerMap.get(variableName));
+                            } else if (booleanMap.containsKey(variableName)) {
+                                System.out.println(booleanMap.get(variableName));
+                            } else if (stringMap.containsKey(variableName)) {
+                                System.out.println(stringMap.get(variableName));
+                            } else {
+                                System.out.println("No such variable declared");
+                                error = true;
+                            }
+                            break;
+                        case Constants.VAL:
+                            System.out.println(data[2]);
+                            break;
+                    }
 
-                        break;
-                }
+                    break;
             }
-
-            System.out.println(integerMap);
-            System.out.println(booleanMap);
-            System.out.println(stringMap);
-
-        } catch (IOException |
-                ClassCastException ex) {
-            Logger.getLogger(SEAMainLang.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        System.out.println(integerMap);
+        System.out.println(booleanMap);
+        System.out.println(stringMap);
+
+    } catch(IOException |
+    ClassCastException ex)
+
+    {
+        Logger.getLogger(SEAMainLang.class.getName()).log(Level.SEVERE, null, ex);
     }
+
+}
 
     private static boolean checkIfAlreadyDefined(String variableName) {
         return integerMap.containsKey(variableName) || booleanMap.containsKey(variableName) || stringMap.containsKey(variableName);

@@ -12,6 +12,10 @@ public class Constants {
     public static final String SEPARATOR = ":";
     public static final String VAR = "VAR";
     public static final String VAL = "VAL";
+    public static final String PLUS = "PLUS";
+    public static final String MINUS = "MINUS";
+    public static final String MULTIPLY = "MULTIPLY";
+    public static final String DIVIDE = "DIVIDE";
     public static final String EQUAL = "EQUAL";
     public static final String LESS_THAN_EQUAL = "LESS_THAN_EQUAL";
     public static final String GREAT_THAN_EQUAL = "GREAT_THAN_EQUAL";

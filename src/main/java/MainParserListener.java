@@ -60,9 +60,22 @@ public class MainParserListener extends SEALangBaseListener {
     public void enterExpression(SEALangParser.ExpressionContext ctx) {
     }
 
-    @Override
-    public void exitExpression(SEALangParser.ExpressionContext ctx) {
-    }
+	@Override
+	public void exitExpression(SEALangParser.ExpressionContext ctx) {
+		if (ctx.getText().contains("+")) {
+			intermediateArray.add(Constants.PLUS + Constants.SEPARATOR + ctx.getText());
+		}
+		else if (ctx.getText().contains("-")) {
+			intermediateArray.add(Constants.MINUS + Constants.SEPARATOR + ctx.getText());
+		}
+		else if (ctx.getText().contains("*")) {
+			intermediateArray.add(Constants.MULTIPLY + Constants.SEPARATOR + ctx.getText());
+		}
+		else if (ctx.getText().contains("/")) {
+			intermediateArray.add(Constants.DIVIDE + Constants.SEPARATOR + ctx.getText());
+		}
+
+	}
 
     @Override
     public void exitNotCondition(SEALangParser.NotConditionContext ctx) {
