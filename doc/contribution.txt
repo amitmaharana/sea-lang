@@ -34,9 +34,17 @@ Week 2 (Apr 2 - Apr 9)
     - Discussed and implemented grammar
     - Wrote test cases
     - Setting up development evironment
-    
-Contribution plan for final milestone - 
-1. Shwetank Bhardwaj - Execution Enviroment
-2. Shubham Bhardwaj - Execution Enviroment
-3. Eric Wegener - Execution Environment
-4. Amit Maharana - Execution Enviroment
+      
+Week 3 (Apr 9 - Apr 16)
+1. Shwetank Bhardwaj
+    - boolean operations parsed
+    - boolean operations evaluated
+2. Shubham Bhardwaj
+    - boolean operations parsed
+    - boolean operations evaluated
+3. Eric Wegener
+    - arithmetic operations parsed
+    - arithmetic operations evaluated
+4. Amit Maharana
+    - arithmetic operations parsed
+    - arithmetic operations evaluated
