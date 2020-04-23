@@ -25,10 +25,10 @@ multi_condition : AND | OR;
 *This will also evaluate ternary_block, and nested expressions.
 */
 expression: OPB expression CPB #parExpression
-               | left = expression op = PLUS right = expression #plusExpression
-               | left = expression op = MINUS right = expression #minusExpression
                | left = expression op = MULTIPLY right = expression #multiplyExpression
                | left = expression op = DIVIDE right = expression #divideExpression
+               | left = expression op = PLUS right = expression #plusExpression
+               | left = expression op = MINUS right = expression #minusExpression
                | INT #intExpression
                | VAR #variableExpression;
 
