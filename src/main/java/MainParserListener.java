@@ -57,25 +57,34 @@ public class MainParserListener extends SEALangBaseListener {
     }
 
     @Override
-    public void enterExpression(SEALangParser.ExpressionContext ctx) {
+    public void exitPlusExpression(SEALangParser.PlusExpressionContext ctx) {
+        intermediateArray.add(Constants.PLUS);
     }
 
-	@Override
-	public void exitExpression(SEALangParser.ExpressionContext ctx) {
-		if (ctx.getText().contains("+")) {
-			intermediateArray.add(Constants.PLUS + Constants.SEPARATOR + ctx.getText());
-		}
-		else if (ctx.getText().contains("-")) {
-			intermediateArray.add(Constants.MINUS + Constants.SEPARATOR + ctx.getText());
-		}
-		else if (ctx.getText().contains("*")) {
-			intermediateArray.add(Constants.MULTIPLY + Constants.SEPARATOR + ctx.getText());
-		}
-		else if (ctx.getText().contains("/")) {
-			intermediateArray.add(Constants.DIVIDE + Constants.SEPARATOR + ctx.getText());
-		}
+    @Override
+    public void exitMinusExpression(SEALangParser.MinusExpressionContext ctx) {
+        intermediateArray.add(Constants.MINUS);
+    }
 
-	}
+    @Override
+    public void exitMultiplyExpression(SEALangParser.MultiplyExpressionContext ctx) {
+        intermediateArray.add(Constants.MULTIPLY);
+    }
+
+    @Override
+    public void exitDivideExpression(SEALangParser.DivideExpressionContext ctx) {
+        intermediateArray.add(Constants.DIVIDE);
+    }
+
+    @Override
+    public void exitIntExpression(SEALangParser.IntExpressionContext ctx) {
+        intermediateArray.add(Constants.SET_INT_VAL+ Constants.SEPARATOR+ctx.INT().getText());
+    }
+
+    @Override
+    public void exitVariableExpression(SEALangParser.VariableExpressionContext ctx) {
+        intermediateArray.add(Constants.SET_VAR + Constants.SEPARATOR + ctx.VAR().getText());
+    }
 
     @Override
     public void exitNotCondition(SEALangParser.NotConditionContext ctx) {
@@ -120,15 +129,6 @@ public class MainParserListener extends SEALangBaseListener {
     @Override
     public void exitVariableCondition(SEALangParser.VariableConditionContext ctx) {
         intermediateArray.add(Constants.SET_VAR + Constants.SEPARATOR + ctx.VAR().getText());
-    }
-
-    @Override
-    public void exitUtil(SEALangParser.UtilContext ctx) {
-        if (ctx.VAR() != null) {
-            intermediateArray.add(Constants.SET_VAR + Constants.SEPARATOR + ctx.VAR().getText());
-        } else if (ctx.INT() != null) {
-            intermediateArray.add(Constants.SET_INT_VAL + Constants.SEPARATOR + ctx.INT().getText());
-        }
     }
 
     @Override

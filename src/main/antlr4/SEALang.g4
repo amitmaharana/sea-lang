@@ -24,11 +24,13 @@ multi_condition : AND | OR;
 /** expression: This will perform airthmatic operations on numbers or variables.
 *This will also evaluate ternary_block, and nested expressions.
 */
-expression : term expression_com;
-expression_com : (MINUS | PLUS) term expression_com | ;
-term : util term_com ;
-term_com : (MULTIPLY | DIVIDE) util term_com | ;
-util : (VAR | INT | OPB  ternary_block  CPB | OPB expression CPB) ;
+expression: OPB expression CPB #parExpression
+               | left = expression op = PLUS right = expression #plusExpression
+               | left = expression op = MINUS right = expression #minusExpression
+               | left = expression op = MULTIPLY right = expression #multiplyExpression
+               | left = expression op = DIVIDE right = expression #divideExpression
+               | INT #intExpression
+               | VAR #variableExpression;
 
 /** command: User can use multiple and nested If-else, loops, assignment operator, and display data types*/
 command : (if_block |
