@@ -20,6 +20,10 @@ condition: OPB condition CPB#parCondition
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
 multi_condition : AND | OR;
 
+/*
+condition_block is for ifelse, looping, ternary statements.
+*/
+condition_block : OPB condition CPB | condition;
 
 /** expression: This will perform airthmatic operations on numbers or variables.
 *This will also evaluate ternary_block, and nested expressions.
@@ -42,29 +46,32 @@ command : (if_block |
 
 /** if_block: User can use either only if, if-else, if-elseif-else, or nested if-else*/
 if_block :
-    IF OPB condition CPB
-    OCB
-        block
-    CCB
-    (ELSE IF OPB condition CPB
-    OCB
-        block
-    CCB)*
-    (ELSE
-    OCB
-        block
-    CCB)? ;
+    IF OPB condition_block CPB
+            OCB
+                block
+            CCB
+    (else_statement)? ;
+
+else_if_statement: ELSE IF condition_block
+               OCB
+                   block
+               CCB;
+
+else_statement: ELSE
+            OCB
+                block
+            CCB;
 
 /** while_block: User can use nested while loops with conditions and execute a block.*/
 while_block :
-    WHILE OPB condition CPB
+    WHILE condition_block
     OCB
         block
     CCB ;
 
 /** for_block: User can use nested for loops and execute a block.*/
 for_block :
-    FOR OPB ((TYPE VAR ASSIGN INT)| (VAR ASSIGN INT) | ) SEMICOLON condition SEMICOLON ((VAR (INC | DEC | ASSIGN expression)) | ) CPB
+    FOR OPB ((TYPE VAR ASSIGN INT)| (VAR ASSIGN INT) | ) SEMICOLON condition_block SEMICOLON ((VAR (INC | DEC | ASSIGN expression)) | ) CPB
     OCB
         block
     CCB ;
@@ -83,7 +90,7 @@ assign_block : VAR ASSIGN (condition | STRING | expression | ternary_block) SEMI
 show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
 
 /** ternary_block: User can use ternary operator and evaluate expressions.*/
-ternary_block : condition QUESTION (expression | BOOLEAN) COLON (expression | BOOLEAN) ;
+ternary_block : condition_block QUESTION (expression | BOOLEAN) COLON (expression | BOOLEAN) ;
 
 TYPE : 'Int' | 'Boolean' |'String';
 PLUS : '+' ;
