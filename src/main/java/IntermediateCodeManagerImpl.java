@@ -156,7 +156,22 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
     public void exitVariableCondition(SEALangParser.VariableConditionContext ctx) {
         intermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + ctx.VAR().getText());
     }
-
+    
+    @Override
+    public void enterTernary_block(SEALangParser.Ternary_blockContext ctx) {
+        intermediateArray.add(IntermediateConstants.IF + SEPARATOR + nestingCount);
+        nestingStack.push(nestingCount);
+        nestingCount += 1;
+        }
+    
+    @Override
+    public void exitTernary_block(SEALangParser.Ternary_blockContext ctx) {
+    	intermediateArray.add(intermediateArray.size()-1, IntermediateConstants.ASSIGN + SEPARATOR + "b"); // Need VAR name from ASSIGN
+        intermediateArray.add(intermediateArray.size()-1, IntermediateConstants.ELSE + SEPARATOR + nestingStack.peek());
+        intermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + "b");
+        intermediateArray.add(IntermediateConstants.EXIT_IF + SEPARATOR + nestingStack.pop());
+    }
+    
     @Override
     public void exitShow(SEALangParser.ShowContext ctx) {
         if (ctx.VAR() != null) {
