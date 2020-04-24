@@ -1,0 +1,365 @@
+Int a;
+Int b;
+Int c;
+Int d;
+Boolean x;
+Boolean y;
+
+
+show "boolean and not condition";
+
+show "Case 1 - boolean";
+x = True ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 2 - boolean false";
+x = False ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 3 - double not condition";
+x = !!True ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 4 - not condition";
+x = True;
+x = !x ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 5 - double not condition";
+x = True;
+x = !!x ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Pass to 10 for space in testing";
+
+
+
+show "comparator conditions";
+show "Case 10 - less than";
+a = 5;
+b = 7;
+x = a < b ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 11 - fail less than";
+a = 5;
+b = 7;
+x = b < a ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 12 - greater than";
+a = 7;
+b = 5;
+x = a > b ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 13 - fail greater than";
+a = 7;
+b = 5;
+x = b > a ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 14 - greater than equal";
+a = 5;
+b = 5;
+x = a >= b ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+a = 6;
+b = 5;
+x = a >= b ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 15 - fail greater than equal";
+a = 5;
+b = 4;
+x = b >= a ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 16 - less than equal";
+a = 5;
+b = 5;
+x = a <= b ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+a = 4;
+b = 5;
+x = a <= b ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 17 - fail less than equal";
+a = 5;
+b = 6;
+x = b <= a ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 18 - equal";
+a = 5;
+b = 5;
+x = a == b ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 19 - fail equal";
+a = 5;
+b = 6;
+x = b == a ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 20 - not equal";
+a = 6;
+b = 5;
+x = a != b ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 21 - fail not equal";
+a = 6;
+b = 6;
+x = b != a ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "pass to 30 for space";
+
+show "multi condition";
+show "Case 30 - AND";
+x = True && True ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 31 - Fail AND";
+x = True && False ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 32 - Fail AND";
+x = False && True ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 33 - Fail AND";
+x = False && False ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 34 - OR";
+x = True || True ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 35 - OR";
+x = True || False ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 36 - OR";
+x = False || True ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 37 - Fail OR";
+x = False || False ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+show "pass to 46 for space";
+
+
+show "multi comparitor conditions";
+show "Case 46 - less than AND";
+a = 5;
+b = 7;
+c = 8;
+d = 9;
+x = a < b && c < d ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 47 - less than AND fail";
+a = 5;
+b = 7;
+c = 8;
+d = 9;
+x = a < b && c > d ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 48 - Mixed AND";
+y = True;
+c = 9;
+d = 8;
+x = y && c > d ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 49 - Mixed AND fail";
+y = False;
+c = 9;
+d = 8;
+x = y && c > d ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 50 - Mixed AND fail";
+y = True;
+c = 9;
+d = 8;
+x = y && c < d ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 51 - Mixed AND fail";
+y = False;
+c = 9;
+d = 8;
+x = y && c < d ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 52 - Mixed OR";
+y = True;
+c = 9;
+d = 8;
+x = c > d || y ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 53 - Mixed OR";
+y = False;
+c = 9;
+d = 8;
+x = c > d || y ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 54 - Mixed OR";
+y = True;
+c = 9;
+d = 8;
+x = c < d || y ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 55 - Mixed OR fail";
+y = False;
+c = 9;
+d = 8;
+x = c < d || y ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+
+show "Case 56 - less than OR";
+a = 7;
+b = 5;
+c = 8;
+d = 9;
+x = a < b || c < d ? True : False;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "Case 57 - less than AND fail";
+a = 7;
+b = 5;
+c = 8;
+d = 9;
+x = a < b || c > d ? False : True;
+if (x) { show "pass"; }
+else {   show "fail"; }
+
+
+show "pass to 65 for space";
+
+show "execution set";
+show "Case 65 - Both true";
+x = True ? True : True;
+if (x) { show "pass"; }
+else   { show "fail"; }
+
+show "Case 66 - Both false";
+x = True ? False : False;
+if (!x) { show "pass"; }
+else   { show "fail"; }
+
+
+show "Case 67 - integer val + ";
+a = True ? 5 + 5 : 5 - 5;
+if (a == 10) { show "pass"; }
+else   { show "fail"; }
+
+show "Case 68 - integer val -";
+a = False ? 5 + 5 : 5 - 5;
+if (a == 0) { show "pass"; }
+else   { show "fail"; }
+
+show "Case 69 - integer val *";
+a = True ? 5 * 5 : 5 / 5;
+if (a == 25) { show "pass"; }
+else   { show "fail"; }
+
+show "Case 70 - integer val /";
+a = False ? 5 * 5 : 5 / 5;
+if (a == 1) { show "pass"; }
+else   { show "fail"; }
+
+
+
+show "complete";
+
+
+
+
+
+
