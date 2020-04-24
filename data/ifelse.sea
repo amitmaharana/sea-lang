@@ -1,39 +1,24 @@
-Int a;
-Int b;
-Int c;
-Int d;
-Boolean x;
-Boolean y;
-
-show "condition was tested extensively in ternary test";
-show "expression was tested extensively in ternary test";
-
-show "";
-
-y = True;
-a = 11;
-
+String line;
+Int y;
+Int j;
+y = 5;
 
 show "Case 1 - if";
 if (5 == 5) {
-    String line;
     line = "passed";
     show line;
 }
 
 show "Case 2 - if failed";
 if (6 ==5) {
-    String line2;
-    line2 = "failed";
+    line = "failed";
     show line;
 }
 show "passed if previous line is not failed.";
 
 show "Case 3 - if-else - if passes.";
-if(y) {
-    // output check on true
-    Int j;
-    j = 8;
+if(y == 5) {
+j = 8;
     show j;
     show "pass if previous line is 8.";
 } else {
@@ -41,94 +26,29 @@ if(y) {
 }
 
 show "Case 4 - If fails, and else passes.";
-if (!y) {
+if (y + 6 != 11) {
     // fail
     show "fail";
 } else {
-    // j should not exist from last if
-    Int j;
     j = 9;
     show j;
     show "pass if previous line is 9.";
 }
 
-show "Case 5 - If-elseif-else if passes else-if passes, else fails";
-x = True;
-if (y == True) {
-    // j should not exist from last else.
-    Int j;
-    j = 11;
+show "Case 5 - Check nesting";
+if (y + 6 == 11) {
+    if(y == 6 || y == 5){
+    j = 20;
     show j;
-    show "pass if previous linen is 11.";
-} else if (x != False) {
-    Int j;
-    String k;
-    j = a * a;
-    k = "SEA language";
-    show j;
-    show k;
-    show "pass if previous lines are 121 and SEA language.";
-} else {
-    show "failed";
-}
-
-
-show "Case 6 - If-elseif-else if passes else-if contains nested if, else fails";
-x = True;
-if (y == True) {
-    // j should not exist from last else.
-    Int j;
-    j = 11;
-    show j;
-    show "pass if previous linen is 11.";
-} else if (x != False) {
-    Int j;
-    String k;
-    j = a * a;
-    k = "first passing";
-    show k;
-    show "Previous line is SEA language.";
-    if (k == 121) {
-        show "second passing.";
-    } else {
-        show "failed.";
     }
-
-    if (k / 11 == 11) {
-        show "third passing.";
+    else{
+    j = 51;
+    show j;
     }
-    show "passed if three passings show.";
-
 } else {
-    show "failed";
-}
-
-
-show "Case 7 - If-elseif-else if fails else-if passes, else fails"
-if (False) {
-    show "failed";
-} else if(True) {
-    String j;
-    j = "This is a test.";
+    j = 9;
     show j;
-    show "passed if the previous line is a test.";
-} else {
-    show "failed.";
 }
-
-show "Case 8 - If-elseif-else if fails else-if fails, else passes";
-if (False) {
-    show "failed";
-} else if(True) {
-    show "failed.";
-} else {
-    String j;
-    j = "This is a test.";
-    show j;
-    show "passed if the previous line is a test.";
-}
-
+show "pass if previous line is 20.";
 
 show "complete";
-
-
