@@ -30,6 +30,8 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
                     + SEPARATOR + ctx.STRING().getText());
         } else if (ctx.condition() != null) {
             intermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+        } else if (ctx.ternary_block() != null) {
+            intermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
         }
     }
 
@@ -156,26 +158,25 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
     public void exitVariableCondition(SEALangParser.VariableConditionContext ctx) {
         intermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + ctx.VAR().getText());
     }
-    
-	@Override
-	public void enterTernary_block(SEALangParser.Ternary_blockContext ctx) {
-		intermediateArray.add(IntermediateConstants.IF + SEPARATOR + nestingCount);
-		nestingStack.push(nestingCount);
-		nestingCount += 1;
-	}
 
-	@Override
-	public void exitTernary_block(SEALangParser.Ternary_blockContext ctx) {
-		int rhsIdx = ctx.getText().indexOf(ctx.COLON().toString());
-		String rhs = ctx.getText().substring(rhsIdx + 1);
-		intermediateArray.add(intermediateArray.size() - rhs.length(), IntermediateConstants.ASSIGN + SEPARATOR + "b");
-		// Need VAR name from ASSIGN
-		intermediateArray.add(intermediateArray.size() - rhs.length(),
-				IntermediateConstants.ELSE + SEPARATOR + nestingStack.peek());
-		intermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + "b");
-		intermediateArray.add(IntermediateConstants.EXIT_IF + SEPARATOR + nestingStack.pop());
-	}
-    
+    @Override
+    public void enterTernary_block(SEALangParser.Ternary_blockContext ctx) {
+        intermediateArray.add(IntermediateConstants.IF + SEPARATOR + nestingCount);
+        nestingStack.push(nestingCount);
+        nestingCount += 1;
+    }
+
+    @Override
+    public void enterTernary_false_block(SEALangParser.Ternary_false_blockContext ctx) {
+        Integer peek = nestingStack.peek();
+        intermediateArray.add(IntermediateConstants.ELSE + SEPARATOR + peek);
+    }
+
+    @Override
+    public void exitTernary_false_block(SEALangParser.Ternary_false_blockContext ctx) {
+        intermediateArray.add(IntermediateConstants.EXIT_IF + SEPARATOR + nestingStack.pop());
+    }
+
     @Override
     public void exitShow(SEALangParser.ShowContext ctx) {
         if (ctx.VAR() != null) {

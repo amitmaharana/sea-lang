@@ -90,7 +90,10 @@ assign_block : VAR ASSIGN (condition | STRING | expression | ternary_block) SEMI
 show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
 
 /** ternary_block: User can use ternary operator and evaluate expressions.*/
-ternary_block : condition_block QUESTION (expression | BOOLEAN) COLON (expression | BOOLEAN) ;
+ternary_block : condition_block QUESTION ternary_true_block COLON ternary_false_block ;
+ternary_true_block : (expression | condition);
+ternary_false_block : (expression | condition);
+
 
 TYPE : 'Int' | 'Boolean' |'String';
 PLUS : '+' ;
