@@ -28,4 +28,8 @@ public class IntermediateConstants {
 	public static final String GREATER_THAN = "GREATER_THAN";
 	public static final String AND = "AND";
 	public static final String OR = "OR";
-}
+	public static final String EXIT_CONDITION = "EXIT_CONDITION";
+	public static final String IF = "IF";
+	public static final String EXIT_IF = "EXIT_IF";
+	public static final String ELSE = "ELSE";
+	}
