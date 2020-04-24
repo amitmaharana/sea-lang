@@ -1,8 +1,8 @@
 package constants;
 
 /**
- * This file will contain the constants used by IntermediateCodeManagerImpl and the
- * executor
+ * This file will contain the constants used by IntermediateCodeManagerImpl and
+ * the executor
  */
 public class IntermediateConstants {
 
