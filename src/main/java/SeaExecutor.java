@@ -125,7 +125,7 @@ public class SeaExecutor {
 
     private void performExitCondition() {
         if (!mBooleanStack.pop()) {
-            moveToElse(IntermediateConstants.ELSE + SEPARATOR + mNestingStack.peek());
+            moveToElseOrSingleIfEnd(IntermediateConstants.ELSE + SEPARATOR + mNestingStack.peek());
         }
     }
 
@@ -303,11 +303,15 @@ public class SeaExecutor {
                 || mStringMap.containsKey(variableName);
     }
 
-    private void moveToElse(String elseStatement) {
+    private void moveToElseOrSingleIfEnd(String elseStatement) {
+        int nestedNumber = Integer.parseInt(elseStatement.split(SEPARATOR)[1]);
         int size = mIntermediateCode.size();
         for (int i = mIndex; i < size; i++) {
             String value = mIntermediateCode.get(i);
-            if (value.equals(elseStatement)) {
+            if (value.equals(elseStatement) || value.contains(IntermediateConstants.EXIT_IF + SEPARATOR + nestedNumber)) {
+                if (value.contains(IntermediateConstants.EXIT_IF + SEPARATOR + nestedNumber)) {
+                    mNestingStack.pop();
+                }
                 mIndex = i;
                 break;
             }
