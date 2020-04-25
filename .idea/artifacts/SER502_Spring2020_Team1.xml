@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="SER502-Spring2020-Team1">
-    <output-path>$PROJECT_DIR$/target/SER502_Spring2020_Team1</output-path>
-    <root id="archive" name="SER502-Spring2020-Team1.jar">
-      <element id="module-output" name="SER502-Spring2020-Team1" />
-    </root>
-  </artifact>
-</component>
