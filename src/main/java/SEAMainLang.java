@@ -31,6 +31,8 @@ public class SEAMainLang {
 		} catch (ArithmeticException | VariableAlreadyDefinedException | LogicalOperatorException
 				| VariableNotDeclaredException e) {
 			System.out.println(e.getMessage());
+		} catch (IndexOutOfBoundsException ex) {
+			System.out.println("Please enter filename!\nUsage: SEALang.jar filename.sea");
 		}
 	}
 }
