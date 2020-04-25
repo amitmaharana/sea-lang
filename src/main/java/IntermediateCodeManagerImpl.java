@@ -9,6 +9,7 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 
     private ArrayList<String> mIntermediateArray = new ArrayList<>();
     private Stack<Integer> mNestingStack = new Stack<>();
+    private String forRangeVariable;
     private int mNestingCount = 1;
 
     @Override
@@ -106,7 +107,6 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
             mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + ctx.VAR().getText());
             mIntermediateArray.add(DEC);
             mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
-
         }
     }
 
@@ -120,7 +120,57 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
     }
 
     @Override
+    public void enterRange_from(SEALangParser.Range_fromContext ctx) {
+    }
+
+    @Override
+    public void exitRange_from(SEALangParser.Range_fromContext ctx) {
+        forRangeVariable = ctx.VAR().get(0).getText();
+        if (ctx.INT() != null) {
+            mIntermediateArray.add(SET_INT_VAL + SEPARATOR + ctx.INT().getText());
+            mIntermediateArray.add(SET_INT_VAL + SEPARATOR + "1");
+            mIntermediateArray.add(MINUS);
+            mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + forRangeVariable);
+        } else if (ctx.VAR().size() > 1) {
+            mIntermediateArray.add(SET_VAR + SEPARATOR + ctx.VAR().get(1).getText());
+            mIntermediateArray.add(SET_INT_VAL + SEPARATOR + "1");
+            mIntermediateArray.add(MINUS);
+            mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + forRangeVariable);
+        } else if (ctx.expression() != null) {
+            mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + forRangeVariable);
+            mIntermediateArray.add(SET_VAR + SEPARATOR + forRangeVariable);
+            mIntermediateArray.add(SET_INT_VAL + SEPARATOR + "1");
+            mIntermediateArray.add(MINUS);
+            mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + forRangeVariable);
+        }
+
+        mNestingStack.push(mNestingCount);
+        mIntermediateArray.add(IntermediateConstants.LOOP + SEPARATOR + mNestingCount);
+        mNestingCount += 1;
+
+        mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + forRangeVariable);
+        mIntermediateArray.add(INC);
+        mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + forRangeVariable);
+    }
+
+    @Override
+    public void exitRange_to(SEALangParser.Range_toContext ctx) {
+        mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + forRangeVariable);
+        if (ctx.INT() != null) {
+            mIntermediateArray.add(SET_INT_VAL + SEPARATOR + ctx.INT().getText());
+            mIntermediateArray.add(LESS_THAN_EQUAL);
+        } else if (ctx.VAR() != null) {
+            mIntermediateArray.add(SET_VAR + SEPARATOR + ctx.VAR().getText());
+            mIntermediateArray.add(LESS_THAN_EQUAL);
+        } else if (ctx.expression() != null) {
+            mIntermediateArray.add(GREAT_THAN_EQUAL);
+        }
+        mIntermediateArray.add(IntermediateConstants.EXIT_CONDITION);
+    }
+
+    @Override
     public void exitRange_block(SEALangParser.Range_blockContext ctx) {
+        mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + SEPARATOR + mNestingStack.pop());
     }
 
     @Override

@@ -80,10 +80,12 @@ for_updation : ((VAR ASSIGN expression) | (VAR INC) | (VAR DEC) |);
 
 /** range_block: User can use nested for range loops and execute a block.*/
 range_block :
-    FOR VAR IN RANGE OPB (INT | VAR | expression) COMMA (INT | VAR | expression) CPB
+    FOR range_from COMMA range_to CPB
     OCB
         block
     CCB  ;
+range_from : VAR IN RANGE OPB (INT | VAR | expression);
+range_to : (INT | VAR | expression);
 
 /** assign_block: User can use this to assign expressions or strings to a variable.*/
 assign_block : VAR ASSIGN (condition | STRING | expression | ternary_block) SEMICOLON ;
