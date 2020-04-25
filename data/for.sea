@@ -3,11 +3,11 @@ Int b;
 Int c;
 Int d;
 Boolean x;
-Boolean y;
+Int y;
 String j;
 String k;
 
-show "For loop\n"
+show "For loop\n";
 show "Case 1 - decrement\n";
 for (Int l = 9; l > 0; l--) {
     show "This is test ";
@@ -19,7 +19,7 @@ show "passed.\n";
 
 
 show "Case 2 - increment\n";
-for (a = 9; a < 15; a = a++) {
+for (a = 9; a < 15; a++) {
     show "This is test ";
     show a;
     show "\n";
@@ -30,7 +30,7 @@ show "passed.\n";
 x = False;
 show "Nested Block set"
 show "Case 3 - boolean, nested\n";
-for (a = 1; a < 10; a * 2) {
+for (a = 1; a < 10; a = a * 2) {
     y = 0;
     while(y < 5) {
         show "this is nested\n";
@@ -43,7 +43,7 @@ show "passed.\n";
 show "Case 4 - nested if\n";
 b = 0
 for (a = 1; a < 11; a = b) {
-    y = 0;
+    y = 2;
     if (y < 3) {
         b = a + y;
     }

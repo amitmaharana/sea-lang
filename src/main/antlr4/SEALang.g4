@@ -71,10 +71,12 @@ while_block :
 
 /** for_block: User can use nested for loops and execute a block.*/
 for_block :
-    FOR OPB ((TYPE VAR ASSIGN INT)| (VAR ASSIGN INT) | ) SEMICOLON condition_block SEMICOLON ((VAR (INC | DEC | ASSIGN expression)) | ) CPB
+    FOR OPB for_assign SEMICOLON condition_block SEMICOLON for_updation CPB
     OCB
         block
     CCB ;
+for_assign : ((TYPE VAR ASSIGN expression)| (VAR ASSIGN expression) | );
+for_updation : ((VAR ASSIGN expression) | (VAR INC) | (VAR DEC) |);
 
 /** range_block: User can use nested for range loops and execute a block.*/
 range_block :

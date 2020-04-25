@@ -3,7 +3,7 @@ import constants.IntermediateConstants;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import static constants.IntermediateConstants.SEPARATOR;
+import static constants.IntermediateConstants.*;
 
 public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 
@@ -15,6 +15,7 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
     public void enterDeclaration(SEALangParser.DeclarationContext ctx) {
         mIntermediateArray.add(IntermediateConstants.DECLARATION + SEPARATOR + ctx.TYPE().getText()
                 + SEPARATOR + ctx.VAR().getText());
+
     }
 
     @Override
@@ -75,7 +76,43 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
     }
 
     @Override
+    public void enterFor_assign(SEALangParser.For_assignContext ctx) {
+        if (ctx.getText().contains("Int")) {
+            mIntermediateArray.add(IntermediateConstants.DECLARATION + SEPARATOR + ctx.TYPE().getText()
+                    + SEPARATOR + ctx.VAR().getText());
+        }
+    }
+
+    @Override
+    public void exitFor_assign(SEALangParser.For_assignContext ctx) {
+        if (ctx.expression() != null) {
+            mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+        }
+        mNestingStack.push(mNestingCount);
+        mIntermediateArray.add(IntermediateConstants.LOOP + SEPARATOR + mNestingCount);
+        mNestingCount += 1;
+    }
+
+    @Override
+    public void exitFor_updation(SEALangParser.For_updationContext ctx) {
+        if (ctx.expression() != null) {
+            mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+        }
+        if (ctx.getText().contains("++")) {
+            mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + ctx.VAR().getText());
+            mIntermediateArray.add(INC);
+            mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+        } else if (ctx.getText().contains("--")) {
+            mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + ctx.VAR().getText());
+            mIntermediateArray.add(DEC);
+            mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+
+        }
+    }
+
+    @Override
     public void exitFor_block(SEALangParser.For_blockContext ctx) {
+        mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + SEPARATOR + mNestingStack.pop());
     }
 
     @Override

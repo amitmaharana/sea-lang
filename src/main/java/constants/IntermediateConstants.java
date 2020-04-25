@@ -19,6 +19,8 @@ public class IntermediateConstants {
 	public static final String MINUS = "MINUS";
 	public static final String MULTIPLY = "MULTIPLY";
 	public static final String DIVIDE = "DIVIDE";
+	public static final String INC = "INC";
+	public static final String DEC = "DEC";
 	public static final String EQUAL = "EQUAL";
 	public static final String LESS_THAN_EQUAL = "LESS_THAN_EQUAL";
 	public static final String GREAT_THAN_EQUAL = "GREAT_THAN_EQUAL";

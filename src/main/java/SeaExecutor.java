@@ -80,6 +80,12 @@ public class SeaExecutor {
                 case IntermediateConstants.DIVIDE:
                     performDivision();
                     break;
+                case IntermediateConstants.INC:
+                    performIncrement();
+                    break;
+                case IntermediateConstants.DEC:
+                    performDecrement();
+                    break;
                 case IntermediateConstants.AND:
                     performAndOperation();
                     break;
@@ -227,6 +233,22 @@ public class SeaExecutor {
             }
         } else {
             throw new ArithmeticException(ErrorConstants.DIV);
+        }
+    }
+
+    private void performIncrement() throws ArithmeticException {
+        if (ValidatorUtil.isIncrementDecrementPossible(mIntegerStack.size())) {
+            mIntegerStack.push(mIntegerStack.pop() + 1);
+        } else {
+            throw new ArithmeticException(ErrorConstants.ADD);
+        }
+    }
+
+    private void performDecrement() throws ArithmeticException {
+        if (ValidatorUtil.isIncrementDecrementPossible(mIntegerStack.size())) {
+            mIntegerStack.push(mIntegerStack.pop() - 1);
+        } else {
+            throw new ArithmeticException(ErrorConstants.ADD);
         }
     }
 
