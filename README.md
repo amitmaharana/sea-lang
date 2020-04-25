@@ -19,12 +19,12 @@
 
 #### 1. Build the Compiler
 ```java
-mvn clean install
+mvn clean package
 ```
 
 #### 2. Run the Runtime
 ```java
-placeholder
+java -cp target/SEALang-1.0-jar-with-dependencies.jar SEAMainLang data/filename.sea
 ```
 
 ### Demo Video
