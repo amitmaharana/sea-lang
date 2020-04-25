@@ -24,7 +24,7 @@ mvn clean package
 
 #### 2. Run the Runtime
 ```java
-java -cp target/SEALang-1.0-jar-with-dependencies.jar SEAMainLang data/filename.sea
+java -cp target/SEALang.jar SEAMainLang data/filename.sea
 ```
 
 ### Demo Video
