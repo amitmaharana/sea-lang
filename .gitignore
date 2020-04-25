@@ -23,5 +23,7 @@
 hs_err_pid*
 /target/
 /bin/
-.idea/
-SER502-Spring2020-Team1.iml
+/.idea/
+.classpath
+.project
+.settings
