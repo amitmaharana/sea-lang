@@ -1,22 +1,23 @@
-import exception.LogicalOperatorException;
-import exception.VariableAlreadyDefinedException;
-import exception.VariableNotDeclaredException;
-import org.antlr.v4.runtime.ANTLRFileStream;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import exception.ArithmeticException;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+
+import exception.ArithmeticException;
+import exception.LogicalOperatorException;
+import exception.VariableAlreadyDefinedException;
+import exception.VariableNotDeclaredException;
+
 public class SEAMainLang {
 
 	public static void main(String[] args) {
 		try {
-			CharStream input = (CharStream) new ANTLRFileStream(args[0]);
+			CharStream input = CharStreams.fromFileName(args[0]);
 			SEALangLexer lexer = new SEALangLexer(input);
 			SEALangParser parser = new SEALangParser(new CommonTokenStream(lexer));
 			IntermediateCodeManagerImpl intermediateCodeManager = new IntermediateCodeManagerImpl();
