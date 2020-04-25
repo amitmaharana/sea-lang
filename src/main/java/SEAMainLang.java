@@ -16,7 +16,7 @@ public class SEAMainLang {
 
 	public static void main(String[] args) {
 		try {
-			CharStream input = (CharStream) new ANTLRFileStream("./data/test.sea");
+			CharStream input = (CharStream) new ANTLRFileStream(args[0]);
 			SEALangLexer lexer = new SEALangLexer(input);
 			SEALangParser parser = new SEALangParser(new CommonTokenStream(lexer));
 			IntermediateCodeManagerImpl intermediateCodeManager = new IntermediateCodeManagerImpl();
