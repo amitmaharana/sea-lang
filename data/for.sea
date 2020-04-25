@@ -1,0 +1,74 @@
+Int a;
+Int b;
+Int c;
+Int d;
+Boolean x;
+Boolean y;
+String j;
+String k;
+
+show "For loop\n"
+show "Case 1 - decrement\n";
+for (Int l = 9; l > 0; l--) {
+    show "This is test ";
+    show l;
+    show "\n";
+    l = l - 1;
+}
+show "passed.\n";
+
+
+show "Case 2 - increment\n";
+for (a = 9; a < 15; a = a++) {
+    show "This is test ";
+    show a;
+    show "\n";
+}
+show "passed.\n";
+
+
+x = False;
+show "Nested Block set"
+show "Case 3 - boolean, nested\n";
+for (a = 1; a < 10; a * 2) {
+    y = 0;
+    while(y < 5) {
+        show "this is nested\n";
+        y = y + 1;
+    }
+}
+show "passed.\n";
+
+
+show "Case 4 - nested if\n";
+b = 0
+for (a = 1; a < 11; a = b) {
+    y = 0;
+    if (y < 3) {
+        b = a + y;
+    }
+}
+show "passed.\n";
+
+
+show "Case 5 - nested for and assign\n";
+b = 0
+for (a = 2; a < 100; a = b - 1) {
+    for (Int l = 0; l < 10; l++) {
+        b = a + l;
+        show "For loop executing."
+    }
+    show "passed.\n";
+}
+
+
+show "Case 6 - nested range\n";
+a = 2
+b = 7
+for (a = 2; a < 100) {
+    for a in range (0,5) {
+        show "range loop\n";
+        b = a + b * 2;
+    }
+}
+
