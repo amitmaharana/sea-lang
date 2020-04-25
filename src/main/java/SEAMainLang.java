@@ -17,22 +17,23 @@ public class SEAMainLang {
 
 	public static void main(String[] args) {
 		try {
-			CharStream input = CharStreams.fromFileName(args[0]);
-			SEALangLexer lexer = new SEALangLexer(input);
-			SEALangParser parser = new SEALangParser(new CommonTokenStream(lexer));
-			IntermediateCodeManagerImpl intermediateCodeManager = new IntermediateCodeManagerImpl();
-			ParseTreeWalker.DEFAULT.walk(intermediateCodeManager, parser.program());
-			List<String> list = intermediateCodeManager.getIntermediateCode();
-			SeaExecutor seaExecutor = new SeaExecutor(list);
-			seaExecutor.execute();
-
+			if (args.length == 1 && args[0].endsWith(".sea")) {
+				CharStream input = CharStreams.fromFileName(args[0]);
+				SEALangLexer lexer = new SEALangLexer(input);
+				SEALangParser parser = new SEALangParser(new CommonTokenStream(lexer));
+				IntermediateCodeManagerImpl intermediateCodeManager = new IntermediateCodeManagerImpl();
+				ParseTreeWalker.DEFAULT.walk(intermediateCodeManager, parser.program());
+				List<String> list = intermediateCodeManager.getIntermediateCode();
+				SeaExecutor seaExecutor = new SeaExecutor(list);
+				seaExecutor.execute();
+			} else {
+				System.out.println("Incorrect/Missing parameters!\nUsage: SEALang.jar filename.sea");
+			}
 		} catch (IOException | ClassCastException ex) {
 			Logger.getLogger(SEAMainLang.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (ArithmeticException | VariableAlreadyDefinedException | LogicalOperatorException
 				| VariableNotDeclaredException e) {
 			System.out.println(e.getMessage());
-		} catch (IndexOutOfBoundsException ex) {
-			System.out.println("Please enter filename!\nUsage: SEALang.jar filename.sea");
 		}
 	}
 }
