@@ -4,6 +4,7 @@ import exception.ArithmeticException;
 import exception.LogicalOperatorException;
 import exception.VariableAlreadyDefinedException;
 import exception.VariableNotDeclaredException;
+import util.Type;
 import util.ValidatorUtil;
 
 import java.util.HashMap;
@@ -20,6 +21,7 @@ public class SeaExecutor {
     private Stack<Integer> mIntegerStack = new Stack<>();
     private Stack<Boolean> mBooleanStack = new Stack<>();
     private Stack<Integer> mNestingStack = new Stack<>();
+    private Stack<Boolean> mIfElseLoopStack = new Stack<>();
     private List<String> mIntermediateCode;
     private Integer mIndex = 0;
 
@@ -39,11 +41,15 @@ public class SeaExecutor {
             int localNestedCount = 0;
             if (value.contains(IntermediateConstants.IF) ||
                     value.contains(IntermediateConstants.ELSE) ||
-                    value.contains(IntermediateConstants.EXIT_IF)) {
+                    value.contains(IntermediateConstants.EXIT_IF) ||
+                    value.contains(LOOP) ||
+                    value.contains(EXIT_LOOP)) {
                 localNestedCount = Integer.parseInt(data[1]);
-                if (value.contains(IntermediateConstants.IF)) {
+
+                if (value.contains(IF) || value.contains(LOOP)) {
                     mNestingStack.push(localNestedCount);
                 }
+
             }
 
             switch (data[0]) {
@@ -104,8 +110,20 @@ public class SeaExecutor {
                 case EXIT_CONDITION:
                     performExitCondition();
                     break;
+                case IF:
+                    mIfElseLoopStack.push(false);
+                    break;
                 case ELSE:
                     moveToExitIF(EXIT_IF + SEPARATOR + localNestedCount);
+                    break;
+                case EXIT_IF:
+                    mNestingStack.pop();
+                    break;
+                case LOOP:
+                    mIfElseLoopStack.push(true);
+                    break;
+                case EXIT_LOOP:
+                    moveToLoopingCondition(LOOP + SEPARATOR + mNestingStack.pop());
                     break;
                 case IntermediateConstants.SHOW:
                     String type = data[1];
@@ -124,8 +142,14 @@ public class SeaExecutor {
     }
 
     private void performExitCondition() {
-        if (!mBooleanStack.pop()) {
-            moveToElseOrSingleIfEnd(IntermediateConstants.ELSE + SEPARATOR + mNestingStack.peek());
+        if (mIfElseLoopStack.pop()) {
+            if (!mBooleanStack.pop()) {
+                moveToExitLoop(IntermediateConstants.EXIT_LOOP + SEPARATOR + mNestingStack.pop());
+            }
+        } else {
+            if (!mBooleanStack.pop()) {
+                moveToElseOrSingleIfEnd(IntermediateConstants.ELSE + SEPARATOR + mNestingStack.peek());
+            }
         }
     }
 
@@ -326,6 +350,27 @@ public class SeaExecutor {
             if (value.contains(IntermediateConstants.EXIT_IF + SEPARATOR + nestedNumber)) {
                 mIndex = i;
                 mNestingStack.pop();
+                break;
+            }
+        }
+    }
+
+    private void moveToExitLoop(String endingCondition) {
+        int size = mIntermediateCode.size();
+        for (int i = mIndex; i < size; i++) {
+            String value = mIntermediateCode.get(i);
+            if (value.equals(endingCondition)) {
+                mIndex = i;
+                break;
+            }
+        }
+    }
+
+    private void moveToLoopingCondition(String condition) {
+        for (int i = mIndex; i >= 0; i--) {
+            String value = mIntermediateCode.get(i);
+            if (value.equals(condition)) {
+                mIndex = i - 1;
                 break;
             }
         }

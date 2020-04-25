@@ -32,4 +32,6 @@ public class IntermediateConstants {
 	public static final String IF = "IF";
 	public static final String EXIT_IF = "EXIT_IF";
 	public static final String ELSE = "ELSE";
-	}
+	public static final String LOOP = "LOOP";
+	public static final String EXIT_LOOP = "EXIT_LOOP";
+}

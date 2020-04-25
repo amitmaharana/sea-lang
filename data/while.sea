@@ -3,12 +3,12 @@ Int b;
 Int c;
 Int d;
 Boolean x;
-Boolean y;
+Int y;
 String j;
 String k;
 
 a = 9;
-show "While\n"
+show "While\n";
 show "Case 1 - decrement\n";
 while(a > 0) {
     show "This is test ";
@@ -27,7 +27,7 @@ while(a <= 10) {
 }
 
 x = False;
-show "Nested Block set"
+show "Nested Block set";
 show "Case 3 - boolean, nested\n";
 while(!x) {
     y = 0;
@@ -55,7 +55,7 @@ x = False;
 while(!x) {
     for (Int l = 0; l < 10; l++) {
         x = (l == 8) ? True : False;
-        show "For loop executing."
+        show "For loop executing.";
     }
     show "passed.\n";
 }
@@ -63,8 +63,8 @@ while(!x) {
 
 show "Case 6 - nested range\n";
 x = False;
-a = 0
-while(x == False) {
+a = 0;
+while(!x) {
     for a in range (0,21) {
         show "range loop\n";
         a = a + 7;
