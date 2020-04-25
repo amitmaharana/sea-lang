@@ -7,7 +7,7 @@ public class ValidatorUtil {
 	}
 
 	public static boolean isIncrementDecrementPossible(int size) {
-		return size > 1;
+		return size > 0;
 	}
 
 	public static boolean isAndOROperationValid(int size) {
