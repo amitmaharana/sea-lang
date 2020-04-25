@@ -12,19 +12,22 @@
 * Download JDK from [here](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 * Download Apache Maven from [here](https://maven.apache.org/download.cgi)
 * Add path variables to environment as shown [here](https://mkyong.com/maven/how-to-install-maven-in-windows/)
-* Clone this repository and run below commands in project directory 
-```./SER502-Spring2020-Team1/```
+* Clone this repository and go to project directory 
+```
+git clone https://github.com/amitmaharana/SER502-Spring2020-Team1.git
+cd SER502-Spring2020-Team1
+```
 
 ### Instructions to Build and Run
 
 #### 1. Build the Compiler
-```java
+```
 mvn clean package
 ```
 
 #### 2. Run the Runtime
-```java
-java -cp target/SEALang.jar SEAMainLang data/filename.sea
+```
+java -jar target/SEALang.jar data/filename.sea
 ```
 
 ### Demo Video
