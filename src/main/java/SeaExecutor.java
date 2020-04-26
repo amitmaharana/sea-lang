@@ -1,14 +1,10 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import constants.ErrorConstants;
 import constants.IntermediateConstants;
+import exception.*;
 import exception.ArithmeticException;
-import exception.LogicalOperatorException;
-import exception.StringOperatorException;
-import exception.VariableAlreadyDefinedException;
-import exception.VariableNotDeclaredException;
 import util.Type;
 import util.ValidatorUtil;
 
@@ -17,6 +13,12 @@ public class SeaExecutor {
 	private HashMap<String, Integer> mIntegerMap = new HashMap<>();
 	private HashMap<String, Boolean> mBooleanMap = new HashMap<>();
 	private HashMap<String, String> mStringMap = new HashMap<>();
+	private HashMap<String, Integer[]> mIntegerArrayMap = new HashMap<>();
+	private HashMap<String, Boolean[]> mBooleanArrayMap = new HashMap<String, Boolean[]>();
+	private HashMap<String, String[]> mStringArrayMap = new HashMap<>();
+	private Stack<Integer[]> mIntegerArrayStack = new Stack<>();
+	private Stack<Boolean[]> mBooleanArrayStack = new Stack<>();
+	private Stack<String[]> mStringArrayStack = new Stack<>();
 	private Stack<Integer> mIntegerStack = new Stack<>();
 	private Stack<Boolean> mBooleanStack = new Stack<>();
 	private Stack<String> mStringStack = new Stack<>();
@@ -30,7 +32,7 @@ public class SeaExecutor {
 	}
 
 	public void execute() throws ArithmeticException, VariableNotDeclaredException, VariableAlreadyDefinedException,
-			LogicalOperatorException, StringOperatorException {
+			LogicalOperatorException, StringOperatorException, ArrayOperatorException {
 		int size = mIntermediateCode.size();
 
 		for (mIndex = 0; mIndex < size; mIndex++) {
@@ -65,6 +67,23 @@ public class SeaExecutor {
 				break;
 			case IntermediateConstants.SET_STRING_VAL:
 				mStringStack.push(data[1].split("\"")[1]);
+				break;
+			case IntermediateConstants.END_INT_ARRAY:
+				addIntegerArrayToStack();
+				break;
+			case IntermediateConstants.END_BOOL_ARRAY:
+				addBooleanArrayToStack();
+				break;
+			case IntermediateConstants.END_STRING_ARRAY:
+				addStringArrayToStack();
+				break;
+			case IntermediateConstants.FROM_INT_ARRAY:
+			case IntermediateConstants.FROM_BOOL_ARRAY:
+			case IntermediateConstants.FROM_STRING_ARRAY:
+				getValueFromArray();
+				break;
+			case IntermediateConstants.ARRAY_LENGTH:
+				getArrayLength();
 				break;
 			case IntermediateConstants.SET_VAR:
 				setVariableToStack(data[1]);
@@ -129,6 +148,15 @@ public class SeaExecutor {
 			case IntermediateConstants.BOOL_TO_STRING:
 				performBooleanToStringOperation();
 				break;
+			case IntermediateConstants.SPLIT:
+				performSplitOperation();
+				break;
+			case IntermediateConstants.SUBSTRING:
+				performSubstringOperation(1);
+				break;
+			case IntermediateConstants.SUBSTRING_DOUBLE:
+				performSubstringOperation(2);
+				break;
 			case IntermediateConstants.EXIT_CONDITION:
 				performExitCondition();
 				break;
@@ -164,6 +192,30 @@ public class SeaExecutor {
 		// printMaps();
 	}
 
+	private void getArrayLength() throws ArrayOperatorException {
+		if (mIntegerArrayStack.size() > 0) {
+			mIntegerStack.push(mIntegerArrayStack.pop().length);
+		} else if (mBooleanArrayStack.size() > 0) {
+			mIntegerStack.push(mBooleanArrayStack.pop().length);
+		} else if (mStringArrayStack.size() > 0) {
+			mIntegerStack.push(mStringArrayStack.pop().length);
+		} else {
+			throw new ArrayOperatorException(ErrorConstants.NO_ARRAY);
+		}
+	}
+
+	private void getValueFromArray() throws ArrayOperatorException {
+		if (mIntegerArrayStack.size() > 0) {
+			mIntegerStack.push(mIntegerArrayStack.pop()[mIntegerStack.pop()]);
+		} else if (mBooleanArrayStack.size() > 0) {
+			mBooleanStack.push(mBooleanArrayStack.pop()[mIntegerStack.pop()]);
+		} else if (mStringArrayStack.size() > 0) {
+			mStringStack.push(mStringArrayStack.pop()[mIntegerStack.pop()]);
+		} else {
+			throw new ArrayOperatorException(ErrorConstants.NO_ARRAY);
+		}
+	}
+
 	private void performExitCondition() {
 		if (mIfElseLoopStack.pop()) {
 			if (!mBooleanStack.pop()) {
@@ -192,6 +244,18 @@ public class SeaExecutor {
 		case Type.STRING:
 			mStringMap.put(variableName, "");
 			break;
+		case Type.INT_ARRAY:
+			Integer int_array[] = {};
+			mIntegerArrayMap.put(variableName, int_array);
+			break;
+		case Type.BOOLEAN_ARRAY:
+			Boolean bool_array[] = {};
+			mBooleanArrayMap.put(variableName, bool_array);
+			break;
+		case Type.STRING_ARRAY:
+			String str_array[] = {};
+			mStringArrayMap.put(variableName, str_array);
+			break;
 		}
 	}
 
@@ -203,6 +267,12 @@ public class SeaExecutor {
 			mBooleanMap.put(variableName, mBooleanStack.pop());
 		} else if (mStringMap.containsKey(variableName)) {
 			mStringMap.put(variableName, mStringStack.pop());
+		} else if (mIntegerArrayMap.containsKey(variableName)) {
+			mIntegerArrayMap.put(variableName, mIntegerArrayStack.pop());
+		} else if (mBooleanArrayMap.containsKey(variableName)) {
+			mBooleanArrayMap.put(variableName, mBooleanArrayStack.pop());
+		} else if (mStringArrayMap.containsKey(variableName)) {
+			mStringArrayMap.put(variableName, mStringArrayStack.pop());
 		} else {
 			throw new VariableNotDeclaredException(variableName);
 		}
@@ -215,7 +285,70 @@ public class SeaExecutor {
 			mBooleanStack.push(mBooleanMap.get(variableName));
 		} else if (mStringMap.containsKey(variableName)) {
 			mStringStack.push(mStringMap.get(variableName));
+		} else if (mIntegerArrayMap.containsKey(variableName)) {
+			mIntegerArrayStack.push(mIntegerArrayMap.get(variableName));
+		} else if (mBooleanArrayMap.containsKey(variableName)) {
+			mBooleanArrayStack.push(mBooleanArrayMap.get(variableName));
+		} else if (mStringArrayMap.containsKey(variableName)) {
+			mStringArrayStack.push(mStringArrayMap.get(variableName));
 		}
+	}
+
+	private void addIntegerArrayToStack() {
+		int length = 0;
+		Integer int_array[] = {};
+		for (int i = mIndex - 1; i >= 0; i--) {
+			String value = mIntermediateCode.get(i);
+			if (value.equals(IntermediateConstants.START_INT_ARRAY)) {
+				break;
+			}
+			length += 1;
+		}
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < length; i++) {
+			list.add(mIntegerStack.pop());
+		}
+		Collections.reverse(list);
+		int_array = list.toArray(new Integer[0]);
+		mIntegerArrayStack.push(int_array);
+	}
+
+	private void addBooleanArrayToStack() {
+		int length = 0;
+		Boolean bool_array[] = {};
+		for (int i = mIndex - 1; i >= 0; i--) {
+			String value = mIntermediateCode.get(i);
+			if (value.equals(IntermediateConstants.START_BOOL_ARRAY)) {
+				break;
+			}
+			length += 1;
+		}
+		List<Boolean> list = new ArrayList<Boolean>();
+		for (int i = 0; i < length; i++) {
+			list.add(mBooleanStack.pop());
+		}
+		Collections.reverse(list);
+		bool_array = list.toArray(new Boolean[0]);
+		mBooleanArrayStack.push(bool_array);
+	}
+
+	private void addStringArrayToStack() {
+		int length = 0;
+		String str_array[] = {};
+		for (int i = mIndex - 1; i >= 0; i--) {
+			String value = mIntermediateCode.get(i);
+			if (value.equals(IntermediateConstants.START_STRING_ARRAY)) {
+				break;
+			}
+			length += 1;
+		}
+		List<String> list = new ArrayList<String>();
+		for (int i = 0; i < length; i++) {
+			list.add(mStringStack.pop());
+		}
+		Collections.reverse(list);
+		str_array = list.toArray(new String[0]);
+		mStringArrayStack.push(str_array);
 	}
 
 	private void performAddition() throws ArithmeticException {
@@ -390,6 +523,31 @@ public class SeaExecutor {
 		}
 	}
 
+	private void performSplitOperation() throws StringOperatorException {
+		if (ValidatorUtil.isSplitOperationPossible(mStringStack.size())) {
+			String splitter = mStringStack.pop();
+			String string = mStringStack.pop();
+			String splitStrings[] = string.split(splitter);
+			mStringArrayStack.push(splitStrings);
+		} else {
+			throw new StringOperatorException(ErrorConstants.SPLIT);
+		}
+	}
+
+	private void performSubstringOperation(int operators) throws StringOperatorException {
+		if (ValidatorUtil.isSubstringOperationPossible(mStringStack.size(), mIntegerStack.size())) {
+			if (operators == 1) {
+				mStringStack.push(mStringStack.pop().substring(mIntegerStack.pop()));
+			} else if (operators == 2) {
+				int to = mIntegerStack.pop();
+				int from = mIntegerStack.pop();
+				mStringStack.push(mStringStack.pop().substring(from, to));
+			}
+		} else {
+			throw new StringOperatorException(ErrorConstants.SUBSTRING);
+		}
+	}
+
 	private void showVariable(String variableName) throws VariableNotDeclaredException {
 		if (mIntegerMap.containsKey(variableName)) {
 			System.out.println(mIntegerMap.get(variableName));
@@ -397,6 +555,12 @@ public class SeaExecutor {
 			System.out.println(mBooleanMap.get(variableName));
 		} else if (mStringMap.containsKey(variableName)) {
 			System.out.println(mStringMap.get(variableName));
+		} else if (mIntegerArrayMap.containsKey(variableName)) {
+			System.out.println(Arrays.toString(mIntegerArrayMap.get(variableName)));
+		} else if (mBooleanArrayMap.containsKey(variableName)) {
+			System.out.println(Arrays.toString(mBooleanArrayMap.get(variableName)));
+		} else if (mStringArrayMap.containsKey(variableName)) {
+			System.out.println(Arrays.toString(mStringArrayMap.get(variableName)));
 		} else {
 			throw new VariableNotDeclaredException(variableName);
 		}

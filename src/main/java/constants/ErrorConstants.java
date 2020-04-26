@@ -20,4 +20,7 @@ public class ErrorConstants {
 	public static final String LENGTH = "Not able to perform length operation";
 	public static final String CONCAT = "Not able to perform string concatenation";
 	public static final String TO_STRING = "Not able to perform to string operation";
+	public static final String SPLIT = "Not able to perform split string operation";
+	public static final String SUBSTRING = "Not able to perform substring operation";
+    public static final String NO_ARRAY = "No such array exists";
 }

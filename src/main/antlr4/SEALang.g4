@@ -14,9 +14,10 @@ condition: OPB condition CPB#parCondition
                | NOT condition #notCondition
                | left = expression op = comparator right = expression #comparatorCondition
                | left = condition op = multi_condition right = condition #multiConditionCondition
+               | left = string_expression op = EQUALS right = string_expression #equalsStringCondition
                | BOOLEAN #boolCondition
                | VAR #variableCondition
-               | left = string_expression op = EQUALS right = string_expression #equalsStringCondition;
+               | VAR OSB INT CSB #boolArrayCondition;
 
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
 multi_condition : AND | OR;
@@ -35,7 +36,8 @@ expression: OPB expression CPB #parExpression
                | left = expression op = PLUS right = expression #plusExpression
                | left = expression op = MINUS right = expression #minusExpression
                | INT #intExpression
-               | VAR #variableExpression;
+               | VAR #variableExpression
+               | VAR OSB INT CSB #intArrayExpression;
 
 /** command: User can use multiple and nested If-else, loops, assignment operator, and display data types*/
 command : (if_block |
@@ -94,15 +96,28 @@ range_inc_to : (INT | VAR | expression);
 range_dec_to : (INT | VAR | expression);
 
 /** assign_block: User can use this to assign expressions or strings to a variable.*/
-assign_block : VAR ASSIGN (condition | expression | ternary_block | string_operations) SEMICOLON ;
+assign_block : VAR ASSIGN (condition | expression | ternary_block | string_operations | array | array_properties) SEMICOLON ;
 string_expression: (VAR | STRING);
 
 /* String operations */
 string_operations:  left = string_expression DOT CONCAT OPB right = string_expression CPB #concatOperation
-    | (VAR | STRING) DOT LENGTH #lengthOperation
+    | string_expression DOT LENGTH OPB CPB #lengthOperation
+    | string_expression DOT SPLIT OPB STRING CPB #splitOperation
+    | string_expression DOT SUBSTRING OPB expression CPB #substringOperation
+    | string_expression DOT SUBSTRING OPB expression COMMA expression CPB #substringDoubleOperation
     | INTEGER DOT TOSTRING OPB expression CPB  #integerToStringOperation
     | BOOL DOT TOSTRING OPB condition CPB #booleanToStringOperation
-    | STRING #stringOperation;
+    | STRING #stringOperation
+    | VAR OSB INT CSB #stringArrayOperation;
+
+/* Arrays */
+array : int_array | bool_array | string_array;
+int_array : OSB (INT (COMMA INT)* |) CSB;
+bool_array : OSB (BOOLEAN (COMMA BOOLEAN)* |) CSB;
+string_array : OSB (STRING (COMMA STRING)* |) CSB;
+
+/* Arrays Properties */
+array_properties: VAR DOT LENGTH #arrayLengthProperty;
 
 
 /** show: User can use this to display a variable.*/
@@ -115,7 +130,7 @@ ternary_false_block : (expression | condition);
 
 INTEGER : 'Integer';
 BOOL : 'Boolean';
-TYPE : 'Int' | 'Bool' |'String';
+TYPE : 'Int' | 'Bool' | 'String' | 'Int[]' | 'Bool[]' | 'String[]';
 PLUS : '+' ;
 MINUS : '-' ;
 MULTIPLY : '*' ;
@@ -136,6 +151,8 @@ OPB : '(' ;
 CPB : ')' ;
 OCB : '{' ;
 CCB : '}' ;
+OSB : '[' ;
+CSB : ']' ;
 SEMICOLON : ';' ;
 COLON : ':' ;
 COMMA : ',' ;
@@ -151,6 +168,8 @@ LENGTH : 'length';
 CONCAT : 'concat';
 EQUALS : 'equals';
 TOSTRING : 'toString';
+SPLIT : 'split';
+SUBSTRING : 'substring';
 VAR : [a-z]+ ;
 INT : [0-9]+ ;
 STRING : '"' (~["\r\n] | '""')* '"' ;

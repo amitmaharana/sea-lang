@@ -33,4 +33,12 @@ public class ValidatorUtil {
 	public static boolean isBooleanToStringPossible(int size) {
 		return size > 0;
 	}
+
+    public static boolean isSplitOperationPossible(int size) {
+		return size > 1;
+	}
+
+	public static boolean isSubstringOperationPossible(int size, int size1) {
+		return size > 0 && size1 > 0;
+	}
 }

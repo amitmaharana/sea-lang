@@ -3,16 +3,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import exception.*;
+import exception.ArithmeticException;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-
-import exception.ArithmeticException;
-import exception.LogicalOperatorException;
-import exception.StringOperatorException;
-import exception.VariableAlreadyDefinedException;
-import exception.VariableNotDeclaredException;
 
 public class SEAMainLang {
 
@@ -33,7 +29,7 @@ public class SEAMainLang {
 		} catch (IOException | ClassCastException ex) {
 			Logger.getLogger(SEAMainLang.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (ArithmeticException | VariableAlreadyDefinedException | LogicalOperatorException
-				| VariableNotDeclaredException | StringOperatorException e) {
+				| VariableNotDeclaredException | StringOperatorException | ArrayOperatorException e) {
 			System.out.println(e.getMessage());
 		}
 	}
