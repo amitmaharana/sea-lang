@@ -1,9 +1,7 @@
 import constants.ErrorConstants;
 import constants.IntermediateConstants;
 import exception.ArithmeticException;
-import exception.LogicalOperatorException;
-import exception.VariableAlreadyDefinedException;
-import exception.VariableNotDeclaredException;
+import exception.*;
 import util.Type;
 import util.ValidatorUtil;
 
@@ -20,6 +18,7 @@ public class SeaExecutor {
     private HashMap<String, String> mStringMap = new HashMap<>();
     private Stack<Integer> mIntegerStack = new Stack<>();
     private Stack<Boolean> mBooleanStack = new Stack<>();
+    private Stack<String> mStringStack = new Stack<>();
     private Stack<Integer> mNestingStack = new Stack<>();
     private Stack<Boolean> mIfElseLoopStack = new Stack<>();
     private List<String> mIntermediateCode;
@@ -30,7 +29,7 @@ public class SeaExecutor {
     }
 
     public void execute() throws ArithmeticException, VariableNotDeclaredException, VariableAlreadyDefinedException,
-            LogicalOperatorException {
+            LogicalOperatorException, StringOperatorException {
         int size = mIntermediateCode.size();
 
         for (mIndex = 0; mIndex < size; mIndex++) {
@@ -64,6 +63,9 @@ public class SeaExecutor {
                     break;
                 case IntermediateConstants.SET_BOOL_VAL:
                     mBooleanStack.push(Boolean.parseBoolean(data[1]));
+                    break;
+                case IntermediateConstants.SET_STRING_VAL:
+                    mStringStack.push(data[1].split("\"")[1]);
                     break;
                 case IntermediateConstants.SET_VAR:
                     setVariableToStack(data[1]);
@@ -112,6 +114,12 @@ public class SeaExecutor {
                     break;
                 case IntermediateConstants.LESS_THAN_EQUAL:
                     performLessThanEqualToOperation();
+                    break;
+                case COMPARE:
+                    performCompareOperation();
+                    break;
+                case LENGTH:
+                    performLengthOperation();
                     break;
                 case EXIT_CONDITION:
                     performExitCondition();
@@ -184,7 +192,7 @@ public class SeaExecutor {
         } else if (mBooleanMap.containsKey(variableName)) {
             mBooleanMap.put(variableName, mBooleanStack.pop());
         } else if (mStringMap.containsKey(variableName)) {
-            mStringMap.put(variableName, data[2]);
+            mStringMap.put(variableName, data[2].split("\"")[1]);
         } else {
             throw new VariableNotDeclaredException(variableName);
         }
@@ -195,6 +203,8 @@ public class SeaExecutor {
             mIntegerStack.push(mIntegerMap.get(variableName));
         } else if (mBooleanMap.containsKey(variableName)) {
             mBooleanStack.push(mBooleanMap.get(variableName));
+        } else if (mStringMap.containsKey(variableName)) {
+            mStringStack.push(mStringMap.get(variableName));
         }
     }
 
@@ -325,6 +335,23 @@ public class SeaExecutor {
             mBooleanStack.push(mIntegerStack.pop() >= mIntegerStack.pop());
         } else {
             throw new LogicalOperatorException(ErrorConstants.LESS_THAN_EQ_OP);
+        }
+    }
+
+    private void performCompareOperation() throws StringOperatorException {
+        if (ValidatorUtil.isArithmeticOperationPossible(mStringStack.size())) {
+            int compare = mStringStack.pop().compareTo(mStringStack.pop());
+            mBooleanStack.push((compare <= 0) ? true : false);
+        } else {
+            throw new StringOperatorException(ErrorConstants.COMPARE_OP);
+        }
+    }
+
+    private void performLengthOperation() throws StringOperatorException {
+        if(ValidatorUtil.isLengthOperationPossible(mStringStack.size())) {
+            mIntegerStack.push(mStringStack.pop().length());
+        } else {
+            throw new StringOperatorException(ErrorConstants.LENGTH);
         }
     }
 

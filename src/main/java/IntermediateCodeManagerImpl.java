@@ -1,9 +1,8 @@
 import constants.IntermediateConstants;
-import jdk.nashorn.internal.ir.CallNode;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
+
 import static constants.IntermediateConstants.*;
 
 
@@ -33,6 +32,8 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
         } else if (ctx.condition() != null) {
             mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
         } else if (ctx.ternary_block() != null) {
+            mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+        } else if (ctx.length() != null) {
             mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
         }
     }
@@ -215,6 +216,15 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
     }
 
     @Override
+    public void exitString_operator(SEALangParser.String_operatorContext ctx) {
+        if (ctx.VAR() != null) {
+            mIntermediateArray.add(SET_VAR + SEPARATOR + ctx.VAR().getText());
+        } else if (ctx.STRING() != null) {
+            mIntermediateArray.add(SET_STRING_VAL + SEPARATOR + ctx.STRING().getText());
+        }
+    }
+
+    @Override
     public void exitNotCondition(SEALangParser.NotConditionContext ctx) {
         mIntermediateArray.add(IntermediateConstants.NOT);
     }
@@ -236,6 +246,13 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
             conditionOperator = IntermediateConstants.GREATER_THAN;
         }
         mIntermediateArray.add(conditionOperator);
+    }
+
+    @Override
+    public void exitCompareStringCondition(SEALangParser.CompareStringConditionContext ctx) {
+        if (ctx.op.getText().contains("compare")) {
+            mIntermediateArray.add(COMPARE);
+        }
     }
 
     @Override
@@ -276,6 +293,16 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
     @Override
     public void exitTernary_false_block(SEALangParser.Ternary_false_blockContext ctx) {
         mIntermediateArray.add(IntermediateConstants.EXIT_IF + SEPARATOR + mNestingStack.pop());
+    }
+
+    @Override
+    public void exitLength(SEALangParser.LengthContext ctx) {
+        if (ctx.VAR() != null) {
+            mIntermediateArray.add(SET_VAR + SEPARATOR + ctx.VAR().getText());
+        } else if (ctx.STRING() != null) {
+            mIntermediateArray.add(SET_STRING_VAL + SEPARATOR + ctx.STRING().getText());
+        }
+        mIntermediateArray.add(LENGTH);
     }
 
     @Override

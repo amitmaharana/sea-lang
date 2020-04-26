@@ -36,4 +36,7 @@ public class IntermediateConstants {
 	public static final String ELSE = "ELSE";
 	public static final String LOOP = "LOOP";
 	public static final String EXIT_LOOP = "EXIT_LOOP";
+    public static final String COMPARE = "COMPARE";
+	public static final String SET_STRING_VAL = "SET_STRING_VAL";
+    public static final String LENGTH = "LENGTH";
 }

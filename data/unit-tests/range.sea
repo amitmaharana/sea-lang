@@ -10,22 +10,18 @@ String k;
 //a = 9;
 //show "Range\n";
 //show "Case 1 - decrement\n";
-//for a in range (0,19) {
+//for a -- in range (19,0) {
 //    show "This is test ";
 //    show a;
-//    show "\n";
-//    a = a - 1;
 //}
 //show "passed.\n";
 
 
 show "Case 2 - increment\n";
 a = 9;
-for a in range (0,21) {
+for a ++ in range (0,21) {
     show "This is test ";
     show a;
-    show "\n";
-    a = a + 1;
 }
 show "passed.\n";
 
@@ -34,7 +30,7 @@ x = False;
 show "Nested Block set";
 show "Case 3 - boolean, nested\n";
 a = 1;
-for a in range (0,10) {
+for a ++ in range (0,10) {
     y = 0;
     while(y < 5) {
         show "this is nested\n";
@@ -47,7 +43,7 @@ show "passed.\n";
 
 show "Case 4 - nested if\n";
 a = 1;
-for a in range (0,11) {
+for a ++ in range (0,11) {
     y = 0;
     if (y < 3) {
         a = a + y;
@@ -59,7 +55,7 @@ show "passed.\n";
 show "Case 5 - nested for and assign\n";
 a = 2;
 Int l;
-for a in range (1,100) {
+for a ++ in range (1,100) {
     for (l = 0; l < 10; l++) {
         a = a + l;
         show "For loop executing.";
@@ -71,8 +67,8 @@ for a in range (1,100) {
 //a = 2;
 //b = 7;
 //for a in range (1,100) {
-//    for a in range (0,5) {
+//    for c in range (0,5) {
 //        show "range loop\n";
-//        a = a + b * 2;
+//        a = c + b * 2;
 //    }
 //}

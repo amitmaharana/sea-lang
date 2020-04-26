@@ -17,4 +17,6 @@ public class ValidatorUtil {
 	public static boolean isNotOperatorValid(int size) {
 		return size > 0;
 	}
+
+    public static boolean isLengthOperationPossible(int size) { return size > 0; }
 }
