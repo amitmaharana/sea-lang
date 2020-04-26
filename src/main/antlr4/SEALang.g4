@@ -51,12 +51,10 @@ if_block :
                 block
             CCB
     (else_statement)? ;
-
 else_if_statement: ELSE IF condition_block
                OCB
                    block
                CCB;
-
 else_statement: ELSE
             OCB
                 block
@@ -79,13 +77,20 @@ for_assign : ((TYPE VAR ASSIGN expression)| (VAR ASSIGN expression) | );
 for_updation : ((VAR ASSIGN expression) | (VAR INC) | (VAR DEC) |);
 
 /** range_block: User can use nested for range loops and execute a block.*/
-range_block :
-    FOR range_from COMMA range_to CPB
+range_block: range_dec_block | range_inc_block;
+range_inc_block :
+    FOR VAR INC IN RANGE OPB range_from COMMA range_inc_to CPB
     OCB
         block
     CCB  ;
-range_from : VAR IN RANGE OPB (INT | VAR | expression);
-range_to : (INT | VAR | expression);
+range_dec_block :
+      FOR VAR DEC IN RANGE OPB range_from COMMA range_dec_to CPB
+      OCB
+          block
+      CCB  ;
+range_from : (INT | VAR | expression);
+range_inc_to : (INT | VAR | expression);
+range_dec_to : (INT | VAR | expression);
 
 /** assign_block: User can use this to assign expressions or strings to a variable.*/
 assign_block : VAR ASSIGN (condition | STRING | expression | ternary_block) SEMICOLON ;
@@ -97,7 +102,6 @@ show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
 ternary_block : condition_block QUESTION ternary_true_block COLON ternary_false_block ;
 ternary_true_block : (expression | condition);
 ternary_false_block : (expression | condition);
-
 
 TYPE : 'Int' | 'Boolean' |'String';
 PLUS : '+' ;
