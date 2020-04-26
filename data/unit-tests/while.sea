@@ -7,68 +7,69 @@ Int y;
 String j;
 String k;
 
-show "For loop\n";
+a = 9;
+show "While\n";
 show "Case 1 - decrement\n";
-for (Int l = 9; l > 0; l--) {
-    show "This is test ";
-    show l;
-    show "\n";
-    l = l - 1;
-}
-show "passed.\n";
-
-
-show "Case 2 - increment\n";
-for (a = 9; a < 15; a++) {
+while(a > 0) {
     show "This is test ";
     show a;
     show "\n";
+    a = a - 1;
 }
-show "passed.\n";
 
+
+show "Case 2 - increment\n";
+while(a <= 10) {
+    show "This is test ";
+    show a;
+    show "\n";
+    a = a + 1;
+}
 
 x = False;
-show "Nested Block set"
+show "Nested Block set";
 show "Case 3 - boolean, nested\n";
-for (a = 1; a < 10; a = a * 2) {
+while(!x) {
     y = 0;
     while(y < 5) {
         show "this is nested\n";
+        x = (y == 4) ? True : False;
         y = y + 1;
     }
+    show "passed.\n";
 }
-show "passed.\n";
-
 
 show "Case 4 - nested if\n";
-b = 0
-for (a = 1; a < 11; a = b) {
-    y = 2;
-    if (y < 3) {
-        b = a + y;
+x = False;
+while(!x) {
+    y = 0;
+    if (y < 5) {
+        x = True;
     }
+    show "passed.\n";
 }
-show "passed.\n";
 
 
 show "Case 5 - nested for and assign\n";
-b = 0
-for (a = 2; a < 100; a = b - 1) {
-    for (Int l = 0; l < 10; l++) {
-        b = a + l;
-        show "For loop executing."
+x = False;
+Int l;
+while(!x) {
+    for (l = 0; l < 10; l++) {
+        x = (l == 8) ? True : False;
+        show x;
+        show "For loop executing.";
     }
     show "passed.\n";
 }
 
 
 show "Case 6 - nested range\n";
-a = 2
-b = 7
-for (a = 2; a < 100) {
-    for a in range (0,5) {
+x = False;
+a = 0;
+while(!x) {
+    for a in range (0,21) {
         show "range loop\n";
-        b = a + b * 2;
+        a = a + 7;
     }
 }
 

@@ -1,0 +1,18 @@
+// Write a program to check if a number is even or odd
+
+Int n;
+Boolean odd;
+
+n = 153;
+
+show "Input";
+show n;
+
+odd = ((n - (n / 2) * 2) == 0)? False : True;
+
+if(!odd){
+	show "is an even number";
+}
+else{
+	show "is an odd number";
+}

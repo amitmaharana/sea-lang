@@ -1,0 +1,25 @@
+// Write a program to find the smallest among 3 numbers
+
+Int a;
+Int b;
+Int c;
+
+a = 13;
+b = 10;
+c = 8;
+
+Int result;
+
+if(a < b && a < c){
+	result = a;
+}
+else{
+	if(b < a && b < c){
+		result = b;
+		}
+	else{
+		result = c;
+		}
+}
+
+show result;
