@@ -11,8 +11,10 @@ show a;
 show b;
 
 for(Int i = 2; i < 10; i++){
-c=a+b;
-show c;
-a=b;
-b=c;
+	c = a + b;
+	
+	show c;
+	
+	a = b;
+	b = c;
 }

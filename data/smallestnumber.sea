@@ -10,7 +10,16 @@ c = 8;
 
 Int result;
 
-result = (a < b)? a : b;
-result = (result < c)? result : c;
+if(a < b){
+	if(a < c){
+		result = a;
+	}
+	else{
+		result = c;
+	}
+}
+else{
+	result = b;
+}
 
 show result;
