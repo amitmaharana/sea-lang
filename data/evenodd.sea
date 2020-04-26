@@ -1,16 +1,16 @@
 // Write a program to check if a number is even or odd
 
 Int n;
-Boolean even;
+Boolean odd;
 
 n = 6;
 
 show "Input";
 show n;
 
-even = ((n / 2) * 2 == n)? True : False;
+odd = ((n / 2) * 2 == n)? False : True;
 
-if(even){
+if(!odd){
 	show "is an even number";
 }
 else{
