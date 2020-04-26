@@ -27,7 +27,7 @@ mvn clean package
 
 #### 2. Run the Runtime
 ```
-java -jar target/SEALang.jar [data/filename].sea
+java -jar target/SEALang.jar data/filename.sea
 ```
 
 ### Demo Video
