@@ -1,10 +1,15 @@
-import constants.IntermediateConstants;
-import jdk.nashorn.internal.ir.CallNode;
+import static constants.IntermediateConstants.DEC;
+import static constants.IntermediateConstants.GREAT_THAN_EQUAL;
+import static constants.IntermediateConstants.INC;
+import static constants.IntermediateConstants.LESS_THAN_EQUAL;
+import static constants.IntermediateConstants.SEPARATOR;
+import static constants.IntermediateConstants.SET_INT_VAL;
+import static constants.IntermediateConstants.SET_VAR;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
-import static constants.IntermediateConstants.*;
+
+import constants.IntermediateConstants;
 
 
 public class IntermediateCodeManagerImpl extends SEALangBaseListener {

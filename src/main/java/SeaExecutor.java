@@ -1,3 +1,15 @@
+import static constants.IntermediateConstants.ELSE;
+import static constants.IntermediateConstants.EXIT_CONDITION;
+import static constants.IntermediateConstants.EXIT_IF;
+import static constants.IntermediateConstants.EXIT_LOOP;
+import static constants.IntermediateConstants.IF;
+import static constants.IntermediateConstants.LOOP;
+import static constants.IntermediateConstants.SEPARATOR;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
+
 import constants.ErrorConstants;
 import constants.IntermediateConstants;
 import exception.ArithmeticException;
@@ -6,12 +18,6 @@ import exception.VariableAlreadyDefinedException;
 import exception.VariableNotDeclaredException;
 import util.Type;
 import util.ValidatorUtil;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
-
-import static constants.IntermediateConstants.*;
 
 public class SeaExecutor {
 
