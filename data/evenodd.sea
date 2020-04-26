@@ -3,12 +3,12 @@
 Int n;
 Boolean odd;
 
-n = 6;
+n = 153;
 
 show "Input";
 show n;
 
-odd = ((n / 2) * 2 == n)? False : True;
+odd = ((n - (n / 2) * 2) == 0)? False : True;
 
 if(!odd){
 	show "is an even number";
