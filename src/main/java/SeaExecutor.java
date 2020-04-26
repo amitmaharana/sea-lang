@@ -1,10 +1,18 @@
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
 
 import constants.ErrorConstants;
 import constants.IntermediateConstants;
-import exception.*;
 import exception.ArithmeticException;
+import exception.ArrayOperatorException;
+import exception.LogicalOperatorException;
+import exception.StringOperatorException;
+import exception.VariableAlreadyDefinedException;
+import exception.VariableNotDeclaredException;
 import util.Type;
 import util.ValidatorUtil;
 
