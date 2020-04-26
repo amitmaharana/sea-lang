@@ -1,4 +1,11 @@
 import constants.IntermediateConstants;
+import static constants.IntermediateConstants.DEC;
+import static constants.IntermediateConstants.GREAT_THAN_EQUAL;
+import static constants.IntermediateConstants.INC;
+import static constants.IntermediateConstants.LESS_THAN_EQUAL;
+import static constants.IntermediateConstants.SEPARATOR;
+import static constants.IntermediateConstants.SET_INT_VAL;
+import static constants.IntermediateConstants.SET_VAR;
 
 import java.util.ArrayList;
 import java.util.Stack;
