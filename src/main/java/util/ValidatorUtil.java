@@ -18,11 +18,19 @@ public class ValidatorUtil {
 		return size > 0;
 	}
 
-    public static boolean isLengthOperationPossible(int size) { return size > 0; }
+	public static boolean isLengthOperationPossible(int size) {
+		return size > 0;
+	}
 
-	public static boolean isConcatOperationPossible(int size) { return size > 1; }
+	public static boolean isConcatOperationPossible(int size) {
+		return size > 1;
+	}
 
-	public static boolean isIntegerToStringPossible(int size) { return size > 0; }
+	public static boolean isIntegerToStringPossible(int size) {
+		return size > 0;
+	}
 
-	public static boolean isBooleanToStringPossible(int size) { return size > 0; }
+	public static boolean isBooleanToStringPossible(int size) {
+		return size > 0;
+	}
 }

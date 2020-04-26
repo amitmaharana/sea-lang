@@ -7,14 +7,14 @@ Int y;
 String j;
 String k;
 
-//a = 9;
-//show "Range\n";
-//show "Case 1 - decrement\n";
-//for a -- in range (19,0) {
-//    show "This is test ";
-//    show a;
-//}
-//show "passed.\n";
+a = 9;
+show "Range\n";
+show "Case 1 - decrement\n";
+for a -- in range (19,0) {
+    show "This is test ";
+    show a;
+}
+show "passed.\n";
 
 
 show "Case 2 - increment\n";
@@ -63,12 +63,12 @@ for a ++ in range (1,100) {
     show "passed.\n";
 }
 
-//show "Case 6 - nested range\n";
-//a = 2;
-//b = 7;
-//for a in range (1,100) {
-//    for c in range (0,5) {
-//        show "range loop\n";
-//        a = c + b * 2;
-//    }
-//}
+show "Case 6 - nested range\n";
+a = 2;
+b = 7;
+for a ++ in range (1,100) {
+    for c in range (0,5) {
+        show "range loop\n";
+        a = c + b * 2;
+    }
+}

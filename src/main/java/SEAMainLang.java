@@ -1,14 +1,18 @@
-import exception.ArithmeticException;
-import exception.*;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import exception.ArithmeticException;
+import exception.LogicalOperatorException;
+import exception.StringOperatorException;
+import exception.VariableAlreadyDefinedException;
+import exception.VariableNotDeclaredException;
 
 public class SEAMainLang {
 

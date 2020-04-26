@@ -36,10 +36,10 @@ public class IntermediateConstants {
 	public static final String ELSE = "ELSE";
 	public static final String LOOP = "LOOP";
 	public static final String EXIT_LOOP = "EXIT_LOOP";
-    public static final String COMPARE = "COMPARE";
+	public static final String COMPARE = "COMPARE";
 	public static final String SET_STRING_VAL = "SET_STRING_VAL";
 	public static final String LENGTH = "LENGTH";
 	public static final String CONCAT = "CONCAT";
 	public static final String BOOL_TO_STRING = "BOOL_TO_STRING";
-    public static final String INT_TO_STRING = "INT_TO_STRING";
+	public static final String INT_TO_STRING = "INT_TO_STRING";
 }
