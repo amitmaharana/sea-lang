@@ -1,5 +1,5 @@
 import static constants.IntermediateConstants.BOOL_TO_STRING;
-import static constants.IntermediateConstants.COMPARE;
+import static constants.IntermediateConstants.EQUALS;
 import static constants.IntermediateConstants.CONCAT;
 import static constants.IntermediateConstants.DEC;
 import static constants.IntermediateConstants.GREAT_THAN_EQUAL;
@@ -255,9 +255,9 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	}
 
 	@Override
-	public void exitCompareStringCondition(SEALangParser.CompareStringConditionContext ctx) {
-		if (ctx.op.getText().contains("compare")) {
-			mIntermediateArray.add(COMPARE);
+	public void exitEqualsStringCondition(SEALangParser.EqualsStringConditionContext ctx) {
+		if (ctx.op.getText().contains("equals")) {
+			mIntermediateArray.add(EQUALS);
 		}
 	}
 

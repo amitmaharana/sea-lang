@@ -16,7 +16,7 @@ condition: OPB condition CPB#parCondition
                | left = condition op = multi_condition right = condition #multiConditionCondition
                | BOOLEAN #boolCondition
                | VAR #variableCondition
-               | left = string_expression op = COMPARE right = string_expression #compareStringCondition;
+               | left = string_expression op = EQUALS right = string_expression #equalsStringCondition;
 
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
 multi_condition : AND | OR;
@@ -113,9 +113,9 @@ ternary_block : condition_block QUESTION ternary_true_block COLON ternary_false_
 ternary_true_block : (expression | condition);
 ternary_false_block : (expression | condition);
 
-INTEGER : 'Int';
+INTEGER : 'Integer';
 BOOL : 'Boolean';
-TYPE : 'Int' | 'Boolean' |'String';
+TYPE : 'Int' | 'Bool' |'String';
 PLUS : '+' ;
 MINUS : '-' ;
 MULTIPLY : '*' ;
@@ -149,7 +149,7 @@ RANGE: 'range' ;
 IN : 'in' ;
 LENGTH : 'length';
 CONCAT : 'concat';
-COMPARE : 'compare';
+EQUALS : 'equals';
 TOSTRING : 'toString';
 VAR : [a-z]+ ;
 INT : [0-9]+ ;

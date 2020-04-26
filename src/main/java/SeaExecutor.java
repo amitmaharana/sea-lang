@@ -122,8 +122,8 @@ public class SeaExecutor {
 			case IntermediateConstants.LESS_THAN_EQUAL:
 				performLessThanEqualToOperation();
 				break;
-			case IntermediateConstants.COMPARE:
-				performCompareOperation();
+			case IntermediateConstants.EQUALS:
+				performEqualsOperation();
 				break;
 			case IntermediateConstants.LENGTH:
 				performLengthOperation();
@@ -354,12 +354,11 @@ public class SeaExecutor {
 		}
 	}
 
-	private void performCompareOperation() throws StringOperatorException {
+	private void performEqualsOperation() throws StringOperatorException {
 		if (ValidatorUtil.isArithmeticOperationPossible(mStringStack.size())) {
-			int compare = mStringStack.pop().compareTo(mStringStack.pop());
-			mBooleanStack.push((compare <= 0) ? true : false);
+			mBooleanStack.push(mStringStack.pop().equals(mStringStack.pop()));
 		} else {
-			throw new StringOperatorException(ErrorConstants.COMPARE_OP);
+			throw new StringOperatorException(ErrorConstants.EQUALS_OP);
 		}
 	}
 
