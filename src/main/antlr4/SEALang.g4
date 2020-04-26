@@ -16,9 +16,8 @@ condition: OPB condition CPB#parCondition
                | left = condition op = multi_condition right = condition #multiConditionCondition
                | BOOLEAN #boolCondition
                | VAR #variableCondition
-               | left = string_operator op = COMPARE right = string_operator #compareStringCondition;
+               | left = string_expression op = COMPARE right = string_expression #compareStringCondition;
 
-string_operator: (VAR | STRING);
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
 multi_condition : AND | OR;
 
@@ -95,7 +94,16 @@ range_inc_to : (INT | VAR | expression);
 range_dec_to : (INT | VAR | expression);
 
 /** assign_block: User can use this to assign expressions or strings to a variable.*/
-assign_block : VAR ASSIGN (condition | STRING | expression | ternary_block | to_string | length | concat) SEMICOLON ;
+assign_block : VAR ASSIGN (condition | expression | ternary_block | string_operations) SEMICOLON ;
+string_expression: (VAR | STRING);
+
+/* String operations */
+string_operations:  left = string_expression DOT CONCAT OPB right = string_expression CPB #concatOperation
+    | (VAR | STRING) DOT LENGTH #lengthOperation
+    | INTEGER DOT TOSTRING OPB expression CPB  #integerToStringOperation
+    | BOOL DOT TOSTRING OPB condition CPB #booleanToStringOperation
+    | STRING #stringOperation;
+
 
 /** show: User can use this to display a variable.*/
 show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
@@ -105,15 +113,8 @@ ternary_block : condition_block QUESTION ternary_true_block COLON ternary_false_
 ternary_true_block : (expression | condition);
 ternary_false_block : (expression | condition);
 
-/** string length */
-length : (VAR | STRING) DOT LENGTH;
-
-/** string concat */
-concat : (VAR | STRING) DOT CONCAT OPB (VAR | STRING) CPB;
-
-/** to string */
-to_string : (VAR | INT | BOOLEAN) DOT TOSTRING;
-
+INTEGER : 'Int';
+BOOL : 'Boolean';
 TYPE : 'Int' | 'Boolean' |'String';
 PLUS : '+' ;
 MINUS : '-' ;

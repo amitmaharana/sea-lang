@@ -1,21 +1,15 @@
-import static constants.IntermediateConstants.ELSE;
-import static constants.IntermediateConstants.EXIT_CONDITION;
-import static constants.IntermediateConstants.EXIT_IF;
-import static constants.IntermediateConstants.EXIT_LOOP;
-import static constants.IntermediateConstants.IF;
-import static constants.IntermediateConstants.LOOP;
-import static constants.IntermediateConstants.SEPARATOR;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
-
 import constants.ErrorConstants;
 import constants.IntermediateConstants;
 import exception.ArithmeticException;
 import exception.*;
 import util.Type;
 import util.ValidatorUtil;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
+
+import static constants.IntermediateConstants.*;
 
 public class SeaExecutor {
 
@@ -121,11 +115,20 @@ public class SeaExecutor {
                 case IntermediateConstants.LESS_THAN_EQUAL:
                     performLessThanEqualToOperation();
                     break;
-                case COMPARE:
+                case IntermediateConstants.COMPARE:
                     performCompareOperation();
                     break;
-                case LENGTH:
+                case IntermediateConstants.LENGTH:
                     performLengthOperation();
+                    break;
+                case IntermediateConstants.CONCAT:
+                    performConcatOperation();
+                    break;
+                case IntermediateConstants.INT_TO_STRING:
+                    performIntegerToStringOperation();
+                    break;
+                case IntermediateConstants.BOOL_TO_STRING:
+                    performBooleanToStringOperation();
                     break;
                 case EXIT_CONDITION:
                     performExitCondition();
@@ -198,7 +201,7 @@ public class SeaExecutor {
         } else if (mBooleanMap.containsKey(variableName)) {
             mBooleanMap.put(variableName, mBooleanStack.pop());
         } else if (mStringMap.containsKey(variableName)) {
-            mStringMap.put(variableName, data[2].split("\"")[1]);
+            mStringMap.put(variableName, mStringStack.pop());
         } else {
             throw new VariableNotDeclaredException(variableName);
         }
@@ -358,6 +361,32 @@ public class SeaExecutor {
             mIntegerStack.push(mStringStack.pop().length());
         } else {
             throw new StringOperatorException(ErrorConstants.LENGTH);
+        }
+    }
+
+    private void performConcatOperation() throws StringOperatorException {
+        if(ValidatorUtil.isConcatOperationPossible(mStringStack.size())) {
+            String second = mStringStack.pop();
+            String first = mStringStack.pop();
+            mStringStack.push(first + second);
+        } else {
+            throw new StringOperatorException(ErrorConstants.CONCAT);
+        }
+    }
+
+    private void performIntegerToStringOperation() throws StringOperatorException {
+        if(ValidatorUtil.isIntegerToStringPossible(mIntegerStack.size())) {
+            mStringStack.push(mIntegerStack.pop().toString());
+        } else {
+            throw new StringOperatorException(ErrorConstants.TO_STRING);
+        }
+    }
+
+    private void performBooleanToStringOperation() throws StringOperatorException {
+        if(ValidatorUtil.isBooleanToStringPossible(mBooleanStack.size())) {
+            mStringStack.push(mBooleanStack.pop().toString());
+        } else {
+            throw new StringOperatorException(ErrorConstants.TO_STRING);
         }
     }
 
