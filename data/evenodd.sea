@@ -1,0 +1,11 @@
+// Write a program to check if a number if even or odd
+Int n;
+n = 10321;
+show "Input";
+show n;
+	if((n / 2) * 2 == n){
+		show "is an even number";
+	}
+	else{
+	show "is an odd number"; 
+	} 

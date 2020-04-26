@@ -144,7 +144,7 @@ public class SeaExecutor {
                     break;
             }
         }
-        printMaps();
+        //printMaps();
     }
 
     private void performExitCondition() {
