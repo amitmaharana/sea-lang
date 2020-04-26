@@ -1,7 +1,7 @@
 // Write a program to check if a number is even or odd
 
 Int n;
-Boolean odd;
+Bool odd;
 
 n = 153;
 

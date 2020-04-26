@@ -1,11 +1,3 @@
-import static constants.IntermediateConstants.ELSE;
-import static constants.IntermediateConstants.EXIT_CONDITION;
-import static constants.IntermediateConstants.EXIT_IF;
-import static constants.IntermediateConstants.EXIT_LOOP;
-import static constants.IntermediateConstants.IF;
-import static constants.IntermediateConstants.LOOP;
-import static constants.IntermediateConstants.SEPARATOR;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
@@ -44,15 +36,15 @@ public class SeaExecutor {
 		for (mIndex = 0; mIndex < size; mIndex++) {
 
 			String value = mIntermediateCode.get(mIndex);
-			String[] data = value.split(SEPARATOR);
+			String[] data = value.split(IntermediateConstants.SEPARATOR);
 
 			int localNestedCount = 0;
 			if (value.contains(IntermediateConstants.IF) || value.contains(IntermediateConstants.ELSE)
-					|| value.contains(IntermediateConstants.EXIT_IF) || value.contains(LOOP)
-					|| value.contains(EXIT_LOOP)) {
+					|| value.contains(IntermediateConstants.EXIT_IF) || value.contains(IntermediateConstants.LOOP)
+					|| value.contains(IntermediateConstants.EXIT_LOOP)) {
 				localNestedCount = Integer.parseInt(data[1]);
 
-				if (value.contains(IF) || value.contains(LOOP)) {
+				if (value.contains(IntermediateConstants.IF) || value.contains(IntermediateConstants.LOOP)) {
 					mNestingStack.push(localNestedCount);
 				}
 
@@ -137,23 +129,24 @@ public class SeaExecutor {
 			case IntermediateConstants.BOOL_TO_STRING:
 				performBooleanToStringOperation();
 				break;
-			case EXIT_CONDITION:
+			case IntermediateConstants.EXIT_CONDITION:
 				performExitCondition();
 				break;
-			case IF:
+			case IntermediateConstants.IF:
 				mIfElseLoopStack.push(false);
 				break;
-			case ELSE:
-				moveToExitIF(EXIT_IF + SEPARATOR + localNestedCount);
+			case IntermediateConstants.ELSE:
+				moveToExitIF(IntermediateConstants.EXIT_IF + IntermediateConstants.SEPARATOR + localNestedCount);
 				break;
-			case EXIT_IF:
+			case IntermediateConstants.EXIT_IF:
 				mNestingStack.pop();
 				break;
-			case LOOP:
+			case IntermediateConstants.LOOP:
 				mIfElseLoopStack.push(true);
 				break;
-			case EXIT_LOOP:
-				moveToLoopingCondition(LOOP + SEPARATOR + mNestingStack.pop());
+			case IntermediateConstants.EXIT_LOOP:
+				moveToLoopingCondition(
+						IntermediateConstants.LOOP + IntermediateConstants.SEPARATOR + mNestingStack.pop());
 				break;
 			case IntermediateConstants.SHOW:
 				String type = data[1];
@@ -174,11 +167,12 @@ public class SeaExecutor {
 	private void performExitCondition() {
 		if (mIfElseLoopStack.pop()) {
 			if (!mBooleanStack.pop()) {
-				moveToExitLoop(IntermediateConstants.EXIT_LOOP + SEPARATOR + mNestingStack.pop());
+				moveToExitLoop(IntermediateConstants.EXIT_LOOP + IntermediateConstants.SEPARATOR + mNestingStack.pop());
 			}
 		} else {
 			if (!mBooleanStack.pop()) {
-				moveToElseOrSingleIfEnd(IntermediateConstants.ELSE + SEPARATOR + mNestingStack.peek());
+				moveToElseOrSingleIfEnd(
+						IntermediateConstants.ELSE + IntermediateConstants.SEPARATOR + mNestingStack.peek());
 			}
 		}
 	}
@@ -418,13 +412,13 @@ public class SeaExecutor {
 	}
 
 	private void moveToElseOrSingleIfEnd(String elseStatement) {
-		int nestedNumber = Integer.parseInt(elseStatement.split(SEPARATOR)[1]);
+		int nestedNumber = Integer.parseInt(elseStatement.split(IntermediateConstants.SEPARATOR)[1]);
 		int size = mIntermediateCode.size();
 		for (int i = mIndex; i < size; i++) {
 			String value = mIntermediateCode.get(i);
 			if (value.equals(elseStatement)
-					|| value.contains(IntermediateConstants.EXIT_IF + SEPARATOR + nestedNumber)) {
-				if (value.contains(IntermediateConstants.EXIT_IF + SEPARATOR + nestedNumber)) {
+					|| value.contains(IntermediateConstants.EXIT_IF + IntermediateConstants.SEPARATOR + nestedNumber)) {
+				if (value.contains(IntermediateConstants.EXIT_IF + IntermediateConstants.SEPARATOR + nestedNumber)) {
 					mNestingStack.pop();
 				}
 				mIndex = i;
@@ -434,11 +428,11 @@ public class SeaExecutor {
 	}
 
 	private void moveToExitIF(String exitIfStatement) {
-		int nestedNumber = Integer.parseInt(exitIfStatement.split(SEPARATOR)[1]);
+		int nestedNumber = Integer.parseInt(exitIfStatement.split(IntermediateConstants.SEPARATOR)[1]);
 		int size = mIntermediateCode.size();
 		for (int i = mIndex; i < size; i++) {
 			String value = mIntermediateCode.get(i);
-			if (value.contains(IntermediateConstants.EXIT_IF + SEPARATOR + nestedNumber)) {
+			if (value.contains(IntermediateConstants.EXIT_IF + IntermediateConstants.SEPARATOR + nestedNumber)) {
 				mIndex = i;
 				mNestingStack.pop();
 				break;

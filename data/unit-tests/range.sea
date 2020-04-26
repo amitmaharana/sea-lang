@@ -2,7 +2,7 @@ Int a;
 Int b;
 Int c;
 Int d;
-Boolean x;
+Bool x;
 Int y;
 String j;
 String k;
@@ -61,14 +61,4 @@ for a ++ in range (1,100) {
         show "For loop executing.";
     }
     show "passed.\n";
-}
-
-show "Case 6 - nested range\n";
-a = 2;
-b = 7;
-for a ++ in range (1,100) {
-    for c in range (0,5) {
-        show "range loop\n";
-        a = c + b * 2;
-    }
 }

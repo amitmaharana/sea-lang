@@ -3,7 +3,7 @@
 Int n;
 Int i;
 Int c;
-Boolean isprime;
+Bool isprime;
 String text;
 
 n = 11;

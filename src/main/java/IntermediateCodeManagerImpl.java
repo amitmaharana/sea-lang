@@ -1,16 +1,3 @@
-import static constants.IntermediateConstants.BOOL_TO_STRING;
-import static constants.IntermediateConstants.EQUALS;
-import static constants.IntermediateConstants.CONCAT;
-import static constants.IntermediateConstants.DEC;
-import static constants.IntermediateConstants.GREAT_THAN_EQUAL;
-import static constants.IntermediateConstants.INC;
-import static constants.IntermediateConstants.LENGTH;
-import static constants.IntermediateConstants.LESS_THAN_EQUAL;
-import static constants.IntermediateConstants.SEPARATOR;
-import static constants.IntermediateConstants.SET_INT_VAL;
-import static constants.IntermediateConstants.SET_STRING_VAL;
-import static constants.IntermediateConstants.SET_VAR;
-
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -24,8 +11,8 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 
 	@Override
 	public void enterDeclaration(SEALangParser.DeclarationContext ctx) {
-		mIntermediateArray.add(
-				IntermediateConstants.DECLARATION + SEPARATOR + ctx.TYPE().getText() + SEPARATOR + ctx.VAR().getText());
+		mIntermediateArray.add(IntermediateConstants.DECLARATION + IntermediateConstants.SEPARATOR
+				+ ctx.TYPE().getText() + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 	}
 
 	@Override
@@ -35,13 +22,17 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	@Override
 	public void exitAssign_block(SEALangParser.Assign_blockContext ctx) {
 		if (ctx.expression() != null) {
-			mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray
+					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		} else if (ctx.string_operations() != null) {
-			mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray
+					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		} else if (ctx.condition() != null) {
-			mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray
+					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		} else if (ctx.ternary_block() != null) {
-			mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray
+					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		}
 	}
 
@@ -52,32 +43,32 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 
 	@Override
 	public void enterIf_block(SEALangParser.If_blockContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.IF + SEPARATOR + mNestingCount);
+		mIntermediateArray.add(IntermediateConstants.IF + IntermediateConstants.SEPARATOR + mNestingCount);
 		mNestingStack.push(mNestingCount);
 		mNestingCount += 1;
 	}
 
 	@Override
 	public void exitIf_block(SEALangParser.If_blockContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.EXIT_IF + SEPARATOR + mNestingStack.pop());
+		mIntermediateArray.add(IntermediateConstants.EXIT_IF + IntermediateConstants.SEPARATOR + mNestingStack.pop());
 	}
 
 	@Override
 	public void enterElse_statement(SEALangParser.Else_statementContext ctx) {
 		Integer peek = mNestingStack.peek();
-		mIntermediateArray.add(IntermediateConstants.ELSE + SEPARATOR + peek);
+		mIntermediateArray.add(IntermediateConstants.ELSE + IntermediateConstants.SEPARATOR + peek);
 	}
 
 	@Override
 	public void enterWhile_block(SEALangParser.While_blockContext ctx) {
 		mNestingStack.push(mNestingCount);
-		mIntermediateArray.add(IntermediateConstants.LOOP + SEPARATOR + mNestingCount);
+		mIntermediateArray.add(IntermediateConstants.LOOP + IntermediateConstants.SEPARATOR + mNestingCount);
 		mNestingCount += 1;
 	}
 
 	@Override
 	public void exitWhile_block(SEALangParser.While_blockContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + SEPARATOR + mNestingStack.pop());
+		mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + IntermediateConstants.SEPARATOR + mNestingStack.pop());
 	}
 
 	@Override
@@ -87,19 +78,20 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	@Override
 	public void enterFor_assign(SEALangParser.For_assignContext ctx) {
 		if (ctx.getText().contains("Int")) {
-			mIntermediateArray.add(IntermediateConstants.DECLARATION + SEPARATOR + ctx.TYPE().getText() + SEPARATOR
-					+ ctx.VAR().getText());
+			mIntermediateArray.add(IntermediateConstants.DECLARATION + IntermediateConstants.SEPARATOR
+					+ ctx.TYPE().getText() + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		}
 	}
 
 	@Override
 	public void exitFor_assign(SEALangParser.For_assignContext ctx) {
 		if (ctx.expression() != null) {
-			mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray
+					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		}
 
 		mNestingStack.push(mNestingCount);
-		mIntermediateArray.add(IntermediateConstants.LOOP + SEPARATOR + mNestingCount);
+		mIntermediateArray.add(IntermediateConstants.LOOP + IntermediateConstants.SEPARATOR + mNestingCount);
 		mNestingCount += 1;
 	}
 
@@ -107,17 +99,20 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	public void exitFor_block(SEALangParser.For_blockContext ctx) {
 		if (ctx.for_updation() != null) {
 			if (ctx.for_updation().expression() != null) {
-				mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.for_updation().VAR().getText());
+				mIntermediateArray.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR
+						+ ctx.for_updation().VAR().getText());
 			}
-			mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + ctx.for_updation().VAR().getText());
+			mIntermediateArray.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR
+					+ ctx.for_updation().VAR().getText());
 			if (ctx.getText().contains("++")) {
-				mIntermediateArray.add(INC);
+				mIntermediateArray.add(IntermediateConstants.INC);
 			} else if (ctx.getText().contains("--")) {
-				mIntermediateArray.add(DEC);
+				mIntermediateArray.add(IntermediateConstants.DEC);
 			}
-			mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + ctx.for_updation().VAR().getText());
+			mIntermediateArray.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR
+					+ ctx.for_updation().VAR().getText());
 		}
-		mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + SEPARATOR + mNestingStack.pop());
+		mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + IntermediateConstants.SEPARATOR + mNestingStack.pop());
 	}
 
 	@Override
@@ -132,61 +127,74 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 
 	@Override
 	public void exitRange_inc_block(SEALangParser.Range_inc_blockContext ctx) {
-		mIntermediateArray.add(SET_VAR + SEPARATOR + forRangeVariableStack.peek());
-		mIntermediateArray.add(INC);
-		mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + forRangeVariableStack.pop());
-		mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + SEPARATOR + mNestingStack.pop());
+		mIntermediateArray
+				.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + forRangeVariableStack.peek());
+		mIntermediateArray.add(IntermediateConstants.INC);
+		mIntermediateArray
+				.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + forRangeVariableStack.pop());
+		mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + IntermediateConstants.SEPARATOR + mNestingStack.pop());
 	}
 
 	@Override
 	public void exitRange_dec_block(SEALangParser.Range_dec_blockContext ctx) {
-		mIntermediateArray.add(SET_VAR + SEPARATOR + forRangeVariableStack.peek());
-		mIntermediateArray.add(DEC);
-		mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + forRangeVariableStack.pop());
-		mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + SEPARATOR + mNestingStack.pop());
+		mIntermediateArray
+				.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + forRangeVariableStack.peek());
+		mIntermediateArray.add(IntermediateConstants.DEC);
+		mIntermediateArray
+				.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + forRangeVariableStack.pop());
+		mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + IntermediateConstants.SEPARATOR + mNestingStack.pop());
 	}
 
 	@Override
 	public void exitRange_from(SEALangParser.Range_fromContext ctx) {
 		if (ctx.INT() != null) {
-			mIntermediateArray.add(SET_INT_VAL + SEPARATOR + ctx.INT().getText());
+			mIntermediateArray
+					.add(IntermediateConstants.SET_INT_VAL + IntermediateConstants.SEPARATOR + ctx.INT().getText());
 		} else if (ctx.VAR() != null) {
-			mIntermediateArray.add(SET_VAR + SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray
+					.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		} else if (ctx.expression() != null) {
 		}
-		mIntermediateArray.add(IntermediateConstants.ASSIGN + SEPARATOR + forRangeVariableStack.peek());
+		mIntermediateArray
+				.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + forRangeVariableStack.peek());
 
 		mNestingStack.push(mNestingCount);
-		mIntermediateArray.add(IntermediateConstants.LOOP + SEPARATOR + mNestingCount);
+		mIntermediateArray.add(IntermediateConstants.LOOP + IntermediateConstants.SEPARATOR + mNestingCount);
 		mNestingCount += 1;
 	}
 
 	@Override
 	public void exitRange_inc_to(SEALangParser.Range_inc_toContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + forRangeVariableStack.peek());
+		mIntermediateArray
+				.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + forRangeVariableStack.peek());
 		if (ctx.INT() != null) {
-			mIntermediateArray.add(SET_INT_VAL + SEPARATOR + ctx.INT().getText());
-			mIntermediateArray.add(LESS_THAN_EQUAL);
+			mIntermediateArray
+					.add(IntermediateConstants.SET_INT_VAL + IntermediateConstants.SEPARATOR + ctx.INT().getText());
+			mIntermediateArray.add(IntermediateConstants.LESS_THAN_EQUAL);
 		} else if (ctx.VAR() != null) {
-			mIntermediateArray.add(SET_VAR + SEPARATOR + ctx.VAR().getText());
-			mIntermediateArray.add(LESS_THAN_EQUAL);
+			mIntermediateArray
+					.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray.add(IntermediateConstants.LESS_THAN_EQUAL);
 		} else if (ctx.expression() != null) {
-			mIntermediateArray.add(GREAT_THAN_EQUAL);
+			mIntermediateArray.add(IntermediateConstants.GREAT_THAN_EQUAL);
 		}
 		mIntermediateArray.add(IntermediateConstants.EXIT_CONDITION);
 	}
 
 	@Override
 	public void exitRange_dec_to(SEALangParser.Range_dec_toContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + forRangeVariableStack.peek());
+		mIntermediateArray
+				.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + forRangeVariableStack.peek());
 		if (ctx.INT() != null) {
-			mIntermediateArray.add(SET_INT_VAL + SEPARATOR + ctx.INT().getText());
-			mIntermediateArray.add(GREAT_THAN_EQUAL);
+			mIntermediateArray
+					.add(IntermediateConstants.SET_INT_VAL + IntermediateConstants.SEPARATOR + ctx.INT().getText());
+			mIntermediateArray.add(IntermediateConstants.GREAT_THAN_EQUAL);
 		} else if (ctx.VAR() != null) {
-			mIntermediateArray.add(SET_VAR + SEPARATOR + ctx.VAR().getText());
-			mIntermediateArray.add(GREAT_THAN_EQUAL);
+			mIntermediateArray
+					.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray.add(IntermediateConstants.GREAT_THAN_EQUAL);
 		} else if (ctx.expression() != null) {
-			mIntermediateArray.add(LESS_THAN_EQUAL);
+			mIntermediateArray.add(IntermediateConstants.LESS_THAN_EQUAL);
 		}
 		mIntermediateArray.add(IntermediateConstants.EXIT_CONDITION);
 	}
@@ -213,20 +221,23 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 
 	@Override
 	public void exitIntExpression(SEALangParser.IntExpressionContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.SET_INT_VAL + SEPARATOR + ctx.INT().getText());
+		mIntermediateArray
+				.add(IntermediateConstants.SET_INT_VAL + IntermediateConstants.SEPARATOR + ctx.INT().getText());
 	}
 
 	@Override
 	public void exitVariableExpression(SEALangParser.VariableExpressionContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + ctx.VAR().getText());
+		mIntermediateArray.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 	}
 
 	@Override
 	public void exitString_expression(SEALangParser.String_expressionContext ctx) {
 		if (ctx.VAR() != null) {
-			mIntermediateArray.add(SET_VAR + SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray
+					.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		} else if (ctx.STRING() != null) {
-			mIntermediateArray.add(SET_STRING_VAL + SEPARATOR + ctx.STRING().getText());
+			mIntermediateArray.add(
+					IntermediateConstants.SET_STRING_VAL + IntermediateConstants.SEPARATOR + ctx.STRING().getText());
 		}
 	}
 
@@ -257,7 +268,7 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	@Override
 	public void exitEqualsStringCondition(SEALangParser.EqualsStringConditionContext ctx) {
 		if (ctx.op.getText().contains("equals")) {
-			mIntermediateArray.add(EQUALS);
+			mIntermediateArray.add(IntermediateConstants.EQUALS);
 		}
 	}
 
@@ -274,17 +285,18 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 
 	@Override
 	public void exitBoolCondition(SEALangParser.BoolConditionContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.SET_BOOL_VAL + SEPARATOR + ctx.BOOLEAN().getText());
+		mIntermediateArray
+				.add(IntermediateConstants.SET_BOOL_VAL + IntermediateConstants.SEPARATOR + ctx.BOOLEAN().getText());
 	}
 
 	@Override
 	public void exitVariableCondition(SEALangParser.VariableConditionContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.SET_VAR + SEPARATOR + ctx.VAR().getText());
+		mIntermediateArray.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 	}
 
 	@Override
 	public void enterTernary_block(SEALangParser.Ternary_blockContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.IF + SEPARATOR + mNestingCount);
+		mIntermediateArray.add(IntermediateConstants.IF + IntermediateConstants.SEPARATOR + mNestingCount);
 		mNestingStack.push(mNestingCount);
 		mNestingCount += 1;
 	}
@@ -292,32 +304,35 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	@Override
 	public void enterTernary_false_block(SEALangParser.Ternary_false_blockContext ctx) {
 		Integer peek = mNestingStack.peek();
-		mIntermediateArray.add(IntermediateConstants.ELSE + SEPARATOR + peek);
+		mIntermediateArray.add(IntermediateConstants.ELSE + IntermediateConstants.SEPARATOR + peek);
 	}
 
 	@Override
 	public void exitTernary_false_block(SEALangParser.Ternary_false_blockContext ctx) {
-		mIntermediateArray.add(IntermediateConstants.EXIT_IF + SEPARATOR + mNestingStack.pop());
+		mIntermediateArray.add(IntermediateConstants.EXIT_IF + IntermediateConstants.SEPARATOR + mNestingStack.pop());
 	}
 
 	@Override
 	public void exitLengthOperation(SEALangParser.LengthOperationContext ctx) {
 		if (ctx.VAR() != null) {
-			mIntermediateArray.add(SET_VAR + SEPARATOR + ctx.VAR().getText());
+			mIntermediateArray
+					.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		} else if (ctx.STRING() != null) {
-			mIntermediateArray.add(SET_STRING_VAL + SEPARATOR + ctx.STRING().getText());
+			mIntermediateArray.add(
+					IntermediateConstants.SET_STRING_VAL + IntermediateConstants.SEPARATOR + ctx.STRING().getText());
 		}
-		mIntermediateArray.add(LENGTH);
+		mIntermediateArray.add(IntermediateConstants.LENGTH);
 	}
 
 	@Override
 	public void exitConcatOperation(SEALangParser.ConcatOperationContext ctx) {
-		mIntermediateArray.add(CONCAT);
+		mIntermediateArray.add(IntermediateConstants.CONCAT);
 	}
 
 	@Override
 	public void exitStringOperation(SEALangParser.StringOperationContext ctx) {
-		mIntermediateArray.add(SET_STRING_VAL + SEPARATOR + ctx.STRING().getText());
+		mIntermediateArray
+				.add(IntermediateConstants.SET_STRING_VAL + IntermediateConstants.SEPARATOR + ctx.STRING().getText());
 	}
 
 	@Override
@@ -327,23 +342,23 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 
 	@Override
 	public void exitBooleanToStringOperation(SEALangParser.BooleanToStringOperationContext ctx) {
-		mIntermediateArray.add(BOOL_TO_STRING);
+		mIntermediateArray.add(IntermediateConstants.BOOL_TO_STRING);
 	}
 
 	@Override
 	public void exitShow(SEALangParser.ShowContext ctx) {
 		if (ctx.VAR() != null) {
-			mIntermediateArray.add(IntermediateConstants.SHOW + SEPARATOR + IntermediateConstants.VAR + SEPARATOR
-					+ ctx.VAR().getText());
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR
+					+ IntermediateConstants.VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		} else if (ctx.INT() != null) {
-			mIntermediateArray.add(IntermediateConstants.SHOW + SEPARATOR + IntermediateConstants.VAL + SEPARATOR
-					+ ctx.INT().getText());
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR
+					+ IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + ctx.INT().getText());
 		} else if (ctx.BOOLEAN() != null) {
-			mIntermediateArray.add(IntermediateConstants.SHOW + SEPARATOR + IntermediateConstants.VAL + SEPARATOR
-					+ ctx.BOOLEAN().getText());
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR
+					+ IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + ctx.BOOLEAN().getText());
 		} else if (ctx.STRING() != null) {
-			mIntermediateArray.add(IntermediateConstants.SHOW + SEPARATOR + IntermediateConstants.VAL + SEPARATOR
-					+ ctx.STRING().getText());
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR
+					+ IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + ctx.STRING().getText());
 		}
 	}
 
