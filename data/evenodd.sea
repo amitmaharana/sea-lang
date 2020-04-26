@@ -1,4 +1,4 @@
-// Write a program to check if a number if even or odd
+// Write a program to check if a number is even or odd
 Int n;
 n = 10321;
 show "Input";
