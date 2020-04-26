@@ -1,0 +1,24 @@
+// Write a program to check if a number is prime or not
+
+Int n;
+Int i;
+Int c;
+Boolean isprime;
+String text;
+
+n = 11;
+i = 2;
+text = "is a prime number";
+
+while(i < n){
+	if((n - (n / i) * i) == 0){
+		c = c + 1;
+	}
+	i = i + 1;
+}
+
+isprime = (c == 0)? True : False;
+
+show n;
+show text;
+show isprime;
