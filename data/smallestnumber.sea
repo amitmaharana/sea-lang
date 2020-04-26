@@ -1,0 +1,16 @@
+// Write a program to find the smallest among 3 numbers
+
+Int a;
+Int b;
+Int c;
+
+a = 13;
+b = 25;
+c = 8;
+
+Int result;
+
+result = (a < b)? a : b;
+result = (result < c)? result : c;
+
+show result;
