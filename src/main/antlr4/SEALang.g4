@@ -15,7 +15,8 @@ condition: OPB condition CPB#parCondition
                | left = expression op = comparator right = expression #comparatorCondition
                | left = condition op = multi_condition right = condition #multiConditionCondition
                | BOOLEAN #boolCondition
-               | VAR #variableCondition;
+               | VAR #variableCondition
+               | left = string_expression op = EQUALS right = string_expression #equalsStringCondition;
 
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
 multi_condition : AND | OR;
@@ -51,12 +52,10 @@ if_block :
                 block
             CCB
     (else_statement)? ;
-
 else_if_statement: ELSE IF condition_block
                OCB
                    block
                CCB;
-
 else_statement: ELSE
             OCB
                 block
@@ -71,20 +70,40 @@ while_block :
 
 /** for_block: User can use nested for loops and execute a block.*/
 for_block :
-    FOR OPB ((TYPE VAR ASSIGN INT)| (VAR ASSIGN INT) | ) SEMICOLON condition_block SEMICOLON ((VAR (INC | DEC | ASSIGN expression)) | ) CPB
+    FOR OPB for_assign SEMICOLON condition_block SEMICOLON for_updation CPB
     OCB
         block
     CCB ;
+for_assign : ((TYPE VAR ASSIGN expression)| (VAR ASSIGN expression) | );
+for_updation : ((VAR ASSIGN expression) | (VAR INC) | (VAR DEC) |);
 
 /** range_block: User can use nested for range loops and execute a block.*/
-range_block :
-    FOR VAR IN RANGE OPB (INT | VAR | expression) COMMA (INT | VAR | expression) CPB
+range_block: range_dec_block | range_inc_block;
+range_inc_block :
+    FOR VAR INC IN RANGE OPB range_from COMMA range_inc_to CPB
     OCB
         block
     CCB  ;
+range_dec_block :
+      FOR VAR DEC IN RANGE OPB range_from COMMA range_dec_to CPB
+      OCB
+          block
+      CCB  ;
+range_from : (INT | VAR | expression);
+range_inc_to : (INT | VAR | expression);
+range_dec_to : (INT | VAR | expression);
 
 /** assign_block: User can use this to assign expressions or strings to a variable.*/
-assign_block : VAR ASSIGN (condition | STRING | expression | ternary_block) SEMICOLON ;
+assign_block : VAR ASSIGN (condition | expression | ternary_block | string_operations) SEMICOLON ;
+string_expression: (VAR | STRING);
+
+/* String operations */
+string_operations:  left = string_expression DOT CONCAT OPB right = string_expression CPB #concatOperation
+    | (VAR | STRING) DOT LENGTH #lengthOperation
+    | INTEGER DOT TOSTRING OPB expression CPB  #integerToStringOperation
+    | BOOL DOT TOSTRING OPB condition CPB #booleanToStringOperation
+    | STRING #stringOperation;
+
 
 /** show: User can use this to display a variable.*/
 show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
@@ -94,8 +113,9 @@ ternary_block : condition_block QUESTION ternary_true_block COLON ternary_false_
 ternary_true_block : (expression | condition);
 ternary_false_block : (expression | condition);
 
-
-TYPE : 'Int' | 'Boolean' |'String';
+INTEGER : 'Integer';
+BOOL : 'Boolean';
+TYPE : 'Int' | 'Bool' |'String';
 PLUS : '+' ;
 MINUS : '-' ;
 MULTIPLY : '*' ;
@@ -120,12 +140,17 @@ SEMICOLON : ';' ;
 COLON : ':' ;
 COMMA : ',' ;
 QUESTION : '?' ;
+DOT : '.';
 IF : 'if' ;
 ELSE : 'else' ;
 WHILE : 'while' ;
 FOR : 'for' ;
 RANGE: 'range' ;
 IN : 'in' ;
+LENGTH : 'length';
+CONCAT : 'concat';
+EQUALS : 'equals';
+TOSTRING : 'toString';
 VAR : [a-z]+ ;
 INT : [0-9]+ ;
 STRING : '"' (~["\r\n] | '""')* '"' ;

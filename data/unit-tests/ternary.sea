@@ -2,8 +2,8 @@ Int a;
 Int b;
 Int c;
 Int d;
-Boolean x;
-Boolean y;
+Bool x;
+Bool y;
 
 
 show "boolean and not condition";

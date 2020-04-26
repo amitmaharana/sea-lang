@@ -1,0 +1,29 @@
+String a;
+a = "one";
+show a;
+
+String b;
+b = "five";
+show b;
+
+Int len;
+len = a.length;
+show len;
+
+len = "sea language".length;
+show len;
+
+String c;
+c = a.concat(b);
+show c;
+
+Bool x;
+x = False;
+
+String d;
+d = Boolean.toString(x);
+show d;
+
+String e;
+e = Integer.toString(len);
+show e;

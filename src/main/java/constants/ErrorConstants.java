@@ -16,4 +16,8 @@ public class ErrorConstants {
 	public static final String MUL = "Not able to perform multiplication";
 	public static final String SUB = "Not able to perform subtraction";
 	public static final String ADD = "Not able to perform addition";
+	public static final String EQUALS_OP = "Not able to perform string comparison";
+	public static final String LENGTH = "Not able to perform length operation";
+	public static final String CONCAT = "Not able to perform string concatenation";
+	public static final String TO_STRING = "Not able to perform to string operation";
 }
