@@ -1,3 +1,0 @@
-Boolean b;
-b = (True && True) || (4<2) && True;
-show b;
