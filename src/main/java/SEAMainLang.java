@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import exception.ArithmeticException;
+import exception.ArrayOperatorException;
 import exception.LogicalOperatorException;
 import exception.StringOperatorException;
 import exception.VariableAlreadyDefinedException;
@@ -33,7 +34,7 @@ public class SEAMainLang {
 		} catch (IOException | ClassCastException ex) {
 			Logger.getLogger(SEAMainLang.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (ArithmeticException | VariableAlreadyDefinedException | LogicalOperatorException
-				| VariableNotDeclaredException | StringOperatorException e) {
+				| VariableNotDeclaredException | StringOperatorException | ArrayOperatorException e) {
 			System.out.println(e.getMessage());
 		}
 	}

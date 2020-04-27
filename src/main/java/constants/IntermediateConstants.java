@@ -42,4 +42,17 @@ public class IntermediateConstants {
 	public static final String CONCAT = "CONCAT";
 	public static final String BOOL_TO_STRING = "BOOL_TO_STRING";
 	public static final String INT_TO_STRING = "INT_TO_STRING";
+	public static final String SPLIT = "SPLIT";
+	public static final String SUBSTRING = "SUBSTRING";
+    public static final String SUBSTRING_DOUBLE = "SUBSTRING_DOUBLE";
+	public static final String START_INT_ARRAY = "START_INT_ARRAY";
+	public static final String END_INT_ARRAY = "END_INT_ARRAY";
+	public static final String START_BOOL_ARRAY = "START_BOOL_ARRAY";
+	public static final String END_BOOL_ARRAY = "END_BOOL_ARRAY";
+	public static final String START_STRING_ARRAY = "START_STRING_ARRAY";
+	public static final String END_STRING_ARRAY = "END_STRING_ARRAY";
+	public static final String FROM_INT_ARRAY = "FROM_INT_ARRAY";
+	public static final String FROM_BOOL_ARRAY = "FROM_BOOL_ARRAY";
+	public static final String FROM_STRING_ARRAY = "FROM_STRING_ARRAY";
+	public static final String ARRAY_LENGTH = "ARRAY_LENGTH";
 }

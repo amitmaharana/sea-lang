@@ -1,0 +1,38 @@
+Int[] a;
+a = [2,3,4,5,6];
+show a;
+Int l;
+Int v;
+l = a.length;
+show l;
+for (Int i = 0; i < l; i++) {
+    v = a[i];
+    show v;
+}
+
+
+
+Bool[] b;
+b = [True,False,True];
+show b;
+l = b.length;
+show l;
+Bool w;
+for (Int j = 0; j < l; j++) {
+    w = b[j];
+    show w;
+}
+
+
+
+String s;
+s = "12-34-56";
+String[] c;
+c = s.split("-");
+show c;
+l = c.length;
+show l;
+for (Int k = 0; k < l; k++) {
+    s = c[k];
+    show s;
+}
