@@ -7,10 +7,13 @@ b = "five";
 show b;
 
 Int len;
-//len = a.length;
+len = a.length();
 show len;
 
 len = "sea language".length;
+show len;
+
+len = "happy".length();
 show len;
 
 String c;
