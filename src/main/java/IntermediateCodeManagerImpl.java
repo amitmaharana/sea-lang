@@ -16,10 +16,6 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	}
 
 	@Override
-	public void enterAssign_block(SEALangParser.Assign_blockContext ctx) {
-	}
-
-	@Override
 	public void exitAssign_block(SEALangParser.Assign_blockContext ctx) {
 		if (ctx.expression() != null) {
 			mIntermediateArray
@@ -75,10 +71,6 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	@Override
 	public void exitWhile_block(SEALangParser.While_blockContext ctx) {
 		mIntermediateArray.add(IntermediateConstants.EXIT_LOOP + IntermediateConstants.SEPARATOR + mNestingStack.pop());
-	}
-
-	@Override
-	public void enterFor_block(SEALangParser.For_blockContext ctx) {
 	}
 
 	@Override

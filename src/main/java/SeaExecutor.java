@@ -253,15 +253,15 @@ public class SeaExecutor {
 			mStringMap.put(variableName, "");
 			break;
 		case Type.INT_ARRAY:
-			Integer int_array[] = {};
+			Integer[] int_array = {};
 			mIntegerArrayMap.put(variableName, int_array);
 			break;
 		case Type.BOOLEAN_ARRAY:
-			Boolean bool_array[] = {};
+			Boolean[] bool_array = {};
 			mBooleanArrayMap.put(variableName, bool_array);
 			break;
 		case Type.STRING_ARRAY:
-			String str_array[] = {};
+			String[] str_array = {};
 			mStringArrayMap.put(variableName, str_array);
 			break;
 		}
@@ -304,7 +304,7 @@ public class SeaExecutor {
 
 	private void addIntegerArrayToStack() {
 		int length = 0;
-		Integer int_array[] = {};
+		Integer[] int_array = {};
 		for (int i = mIndex - 1; i >= 0; i--) {
 			String value = mIntermediateCode.get(i);
 			if (value.equals(IntermediateConstants.START_INT_ARRAY)) {
@@ -323,7 +323,7 @@ public class SeaExecutor {
 
 	private void addBooleanArrayToStack() {
 		int length = 0;
-		Boolean bool_array[] = {};
+		Boolean[] bool_array = {};
 		for (int i = mIndex - 1; i >= 0; i--) {
 			String value = mIntermediateCode.get(i);
 			if (value.equals(IntermediateConstants.START_BOOL_ARRAY)) {
@@ -342,7 +342,7 @@ public class SeaExecutor {
 
 	private void addStringArrayToStack() {
 		int length = 0;
-		String str_array[] = {};
+		String[] str_array = {};
 		for (int i = mIndex - 1; i >= 0; i--) {
 			String value = mIntermediateCode.get(i);
 			if (value.equals(IntermediateConstants.START_STRING_ARRAY)) {
@@ -535,7 +535,7 @@ public class SeaExecutor {
 		if (ValidatorUtil.isSplitOperationPossible(mStringStack.size())) {
 			String splitter = mStringStack.pop();
 			String string = mStringStack.pop();
-			String splitStrings[] = string.split(splitter);
+			String[] splitStrings = string.split(splitter);
 			mStringArrayStack.push(splitStrings);
 		} else {
 			throw new StringOperatorException(ErrorConstants.SPLIT);
