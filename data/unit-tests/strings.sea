@@ -42,6 +42,10 @@ String[] arr;
 arr = e.split("l");
 show arr;
 
+Int y;
+y = arr.length;
+show y;
+
 String substr;
 substr = c.substring(5);
 show substr;
