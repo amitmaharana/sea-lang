@@ -17,7 +17,7 @@ condition: OPB condition CPB#parCondition
                | left = string_expression op = EQUALS right = string_expression #equalsStringCondition
                | BOOLEAN #boolCondition
                | VAR #variableCondition
-               | VAR OSB INT CSB #boolArrayCondition;
+               | VAR OSB (INT | VAR) CSB #boolArrayCondition;
 
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
 multi_condition : AND | OR;
@@ -37,7 +37,7 @@ expression: OPB expression CPB #parExpression
                | left = expression op = MINUS right = expression #minusExpression
                | INT #intExpression
                | VAR #variableExpression
-               | VAR OSB INT CSB #intArrayExpression;
+               | VAR OSB (INT | VAR) CSB #intArrayExpression;
 
 /** command: User can use multiple and nested If-else, loops, assignment operator, and display data types*/
 command : (if_block |
@@ -108,7 +108,7 @@ string_operations:  left = string_expression DOT CONCAT OPB right = string_expre
     | INTEGER DOT TOSTRING OPB expression CPB  #integerToStringOperation
     | BOOL DOT TOSTRING OPB condition CPB #booleanToStringOperation
     | STRING #stringOperation
-    | VAR OSB INT CSB #stringArrayOperation;
+    | VAR OSB (INT | VAR) CSB #stringArrayOperation;
 
 /* Arrays */
 array : int_array | bool_array | string_array;
