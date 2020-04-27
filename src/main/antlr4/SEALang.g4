@@ -54,10 +54,6 @@ if_block :
                 block
             CCB
     (else_statement)? ;
-else_if_statement: ELSE IF condition_block
-               OCB
-                   block
-               CCB;
 else_statement: ELSE
             OCB
                 block
