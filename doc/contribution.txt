@@ -8,34 +8,34 @@ Team Members:
 
 Week 1 (Mar 26 - Apr 2)
 1. Shwetank Bhardwaj
-      - Understanding requirements for compiler design
+    - understanding requirements for compiler design
 3. Shubham Bhardwaj
-      - Understanding requirements for compiler design
+    - understanding requirements for compiler design
 3. Eric Wegener
-      - Exploring tools for project
-      - Understanding requirements for compiler design
+    - exploring tools for project
+    - understanding requirements for compiler design
 4. Amit Maharana
-      - Exploring tools for project
-      - Understanding requirements for compiler design
+    - exploring tools for project
+    - understanding requirements for compiler design
       
 Week 2 (Apr 2 - Apr 9)
 1. Shwetank Bhardwaj
-    - Discussed and implemented grammar
-    - Wrote test cases
-    - Studied and explored about compiler implementation process and provided design
+    - discussed and implemented grammar
+    - wrote test cases
+    - studied and explored about compiler implementation process and provided design
 2. Shubham Bhardwaj
-    - Discussed and implemented grammar
-    - Wrote test cases
-    - Studied and explored about compiler implementation process and provided design
+    - discussed and implemented grammar
+    - wrote test cases
+    - studied and explored about compiler implementation process and provided design
 3. Eric Wegener
-    - Discussed and implemented grammar
-    - Setting up development evironment
+    - discussed and implemented grammar
+    - setting up development evironment
 4. Amit Maharana
-    - Discussed and implemented grammar
-    - Wrote test cases
-    - Setting up development evironment
+    - discussed and implemented grammar
+    - wrote test cases
+    - setting up development evironment
       
-Week 3&4 (Apr 9 - Apr 23)
+Week 3 & 4 (Apr 9 - Apr 23)
 1. Shwetank Bhardwaj
     - boolean operations parsed
     - boolean operations evaluated
@@ -48,3 +48,29 @@ Week 3&4 (Apr 9 - Apr 23)
 4. Amit Maharana
     - arithmetic operations parsed
     - arithmetic operations evaluated
+      
+Week 5 (Apr 23 - Apr 28)
+1. Shwetank Bhardwaj
+    - while parsed
+    - while loop evaluated
+    - for loop parsed
+    - for loop evaluated
+    - string operations parsed
+    - string operations evaluated
+2. Shubham Bhardwaj
+    - for loop parsed
+    - for loop evaluated
+    - for range loop parsed
+    - for range evaluated
+    - string operations parsed
+    - string operations evaluated
+    - arrays parsed
+    - arrays evaluated
+3. Eric Wegener
+    - wrote test cases
+    - prepared presentation
+    - prepared demo video
+4. Amit Maharana
+    - wrote test cases
+    - ternary condition parsed
+    - ternary condition evaluated
