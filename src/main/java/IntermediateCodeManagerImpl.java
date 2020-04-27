@@ -1,3 +1,11 @@
+/**
+* Generates intermediate code from parse tree
+*
+* @author  Team 1
+* @version 1.0
+* @since   2020-04-07 
+*/
+
 import java.util.ArrayList;
 import java.util.Stack;
 

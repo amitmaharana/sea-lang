@@ -3,7 +3,12 @@ package constants;
 /**
  * This file will contain the constants used by IntermediateCodeManagerImpl and
  * the executor
+ * 
+ * @author Team 1
+ * @version 1.0
+ * @since 2020-04-07
  */
+
 public class IntermediateConstants {
 
 	public static final String DECLARATION = "DECLARATION";
@@ -44,7 +49,7 @@ public class IntermediateConstants {
 	public static final String INT_TO_STRING = "INT_TO_STRING";
 	public static final String SPLIT = "SPLIT";
 	public static final String SUBSTRING = "SUBSTRING";
-    public static final String SUBSTRING_DOUBLE = "SUBSTRING_DOUBLE";
+	public static final String SUBSTRING_DOUBLE = "SUBSTRING_DOUBLE";
 	public static final String START_INT_ARRAY = "START_INT_ARRAY";
 	public static final String END_INT_ARRAY = "END_INT_ARRAY";
 	public static final String START_BOOL_ARRAY = "START_BOOL_ARRAY";
