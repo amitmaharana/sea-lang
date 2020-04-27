@@ -31,6 +31,9 @@ java -jar target/SEALang.jar data/filename.sea
 ```
 
 ### Demo Video
+```
+placeholder
+```
 
 ### Contributors
 * Amit Maharana
