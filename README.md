@@ -1,5 +1,11 @@
 # SEA Programming Language
 
+### Contributors
+* Amit Maharana
+* Eric Wegener
+* Shubham Bhardwaj
+* Shwetank Bhardwaj
+
 ### Build System
 * Compiler - Windows
 * Runtime - Windows
@@ -34,9 +40,3 @@ java -jar target/SEALang.jar data/filename.sea
 ```
 placeholder
 ```
-
-### Contributors
-* Amit Maharana
-* Eric Wegener
-* Shubham Bhardwaj
-* Shwetank Bhardwaj
