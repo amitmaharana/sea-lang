@@ -299,7 +299,9 @@ public class SeaExecutor {
 		String variableName = data[1];
 		if (mIntegerArrayMap.containsKey(variableName)) {
 			Integer array[] = mIntegerArrayStack.pop();
-			array[mIntegerStack.pop()] = mIntegerStack.pop();
+			int value = mIntegerStack.pop();
+			int index = mIntegerStack.pop();
+			array[index] = value;
 			mIntegerArrayMap.put(variableName, array);
 		} else if (mBooleanArrayMap.containsKey(variableName)) {
 			Boolean array[] = mBooleanArrayStack.pop();
