@@ -59,7 +59,7 @@ public class IntermediateConstants {
 	public static final String FROM_ARRAY = "FROM_ARRAY";
 	public static final String ARRAY_LENGTH = "ARRAY_LENGTH";
 	public static final String ASSIGN_TO_ARRAY = "ASSIGN_TO_ARRAY";
-    public static final String STRING = "STRING";
+	public static final String STRING = "STRING";
 	public static final String INTEGER = "INTEGER";
 	public static final String BOOLEAN = "BOOLEAN";
 	public static final String INTEGER_ARRAY = "INTEGER_ARRAY";
