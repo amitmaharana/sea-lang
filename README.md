@@ -80,7 +80,7 @@ Integer.toString(4 + 3)
 Boolean.toString(5 != 3)
 ```
 
-#### String Expressions
+#### String Operations
 ```
 s.concat("abc")
 s.split("-")
