@@ -94,7 +94,7 @@ s.length()
 ```
 d.length
 ```
-<sup><sup>length operation needs to be assigned to variable first</sup></sup>
+<sup><sup>output of length operation needs to be assigned to variable first</sup></sup>
 
 #### If - Else
 ```
