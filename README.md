@@ -39,9 +39,7 @@ java -jar target/SEALang.jar data/filename.sea
 ```
 
 ### Demo Video
-```
-placeholder
-```
+[YouTube Link](https://www.youtube.com/watch?v=CPQTNG_H11o)
 
 ### Syntax
 
