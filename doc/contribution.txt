@@ -76,4 +76,5 @@ Week 5 (Apr 23 - Apr 28)
     - wrote test cases
     - ternary condition parsed
     - ternary condition evaluated
+    - wrote sample programs for execution
     - prepared demo video
