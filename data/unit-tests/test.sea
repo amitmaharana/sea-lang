@@ -1,8 +1,0 @@
-String a;
-a = "a";
-
-Int c;
-c =  a.length;
-show c;
-c =  "abc".length;
-show c;
