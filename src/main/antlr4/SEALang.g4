@@ -124,7 +124,7 @@ assign_block :
     | VAR OSB expression CSB ASSIGN (condition | expression | ternary_block | string_expression | array_properties) SEMICOLON #assignArrayBlock;
 
 /** show: User can use this to display a variable.*/
-show : 'show' (VAR | expression | condition | string_expression| array) SEMICOLON;
+show : 'show' (VAR | expression | condition | string_expression| int_array| bool_array| string_array) SEMICOLON;
 
 INTEGER : 'Integer';
 BOOL : 'Boolean';

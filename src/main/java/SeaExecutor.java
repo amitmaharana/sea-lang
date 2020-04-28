@@ -200,7 +200,7 @@ public class SeaExecutor {
 					showVariable(data[2]);
 					break;
 				case IntermediateConstants.VAL:
-					showValue();
+					showValue(data[2]);
 					break;
 				}
 				break;
@@ -602,18 +602,18 @@ public class SeaExecutor {
 		}
 	}
 
-	private void showValue() {
-		if (mIntegerStack.size() > 0) {
+	private void showValue(String dataType) {
+		if (dataType.equals(IntermediateConstants.INTEGER)) {
 			System.out.println(mIntegerStack.pop());
-		} else if (mBooleanStack.size() > 0) {
+		} else if (dataType.equals(IntermediateConstants.BOOLEAN)) {
 			System.out.println(mBooleanStack.pop());
-		} else if (mStringStack.size() > 0) {
+		} else if (dataType.equals(IntermediateConstants.STRING)) {
 			System.out.println(mStringStack.pop());
-		} else if (mIntegerArrayStack.size() > 0) {
+		} else if (dataType.equals(IntermediateConstants.INTEGER_ARRAY)) {
 			System.out.println(Arrays.toString(mIntegerArrayStack.pop()));
-		} else if (mBooleanArrayStack.size() > 0) {
+		} else if (dataType.equals(IntermediateConstants.BOOLEAN_ARRAY)) {
 			System.out.println(Arrays.toString(mBooleanArrayStack.pop()));
-		} else if (mStringArrayStack.size() > 0) {
+		} else if (dataType.equals(IntermediateConstants.STRING_ARRAY)) {
 			System.out.println(Arrays.toString(mStringArrayStack.pop()));
 		}
 	}

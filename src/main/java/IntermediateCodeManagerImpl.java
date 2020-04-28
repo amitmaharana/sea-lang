@@ -401,8 +401,18 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 		if (ctx.VAR() != null) {
 			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR
 					+ IntermediateConstants.VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
-		} else {
-			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL);
+		} else if (ctx.string_expression() != null) {
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + IntermediateConstants.STRING);
+		} else if (ctx.expression() != null) {
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + IntermediateConstants.INTEGER);
+		} else if (ctx.condition() != null) {
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + IntermediateConstants.BOOLEAN);
+		} else if (ctx.int_array() != null) {
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + IntermediateConstants.INTEGER_ARRAY);
+		} else if (ctx.bool_array() != null) {
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + IntermediateConstants.BOOLEAN_ARRAY);
+		} else if (ctx.string_array() != null) {
+			mIntermediateArray.add(IntermediateConstants.SHOW + IntermediateConstants.SEPARATOR + IntermediateConstants.VAL + IntermediateConstants.SEPARATOR + IntermediateConstants.STRING_ARRAY);
 		}
 	}
 
