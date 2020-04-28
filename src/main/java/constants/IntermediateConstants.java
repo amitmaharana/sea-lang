@@ -56,8 +56,10 @@ public class IntermediateConstants {
 	public static final String END_BOOL_ARRAY = "END_BOOL_ARRAY";
 	public static final String START_STRING_ARRAY = "START_STRING_ARRAY";
 	public static final String END_STRING_ARRAY = "END_STRING_ARRAY";
-	public static final String FROM_INT_ARRAY = "FROM_INT_ARRAY";
-	public static final String FROM_BOOL_ARRAY = "FROM_BOOL_ARRAY";
-	public static final String FROM_STRING_ARRAY = "FROM_STRING_ARRAY";
+	public static final String FROM_ARRAY = "FROM_ARRAY";
 	public static final String ARRAY_LENGTH = "ARRAY_LENGTH";
+	public static final String EXPRESSION = "EXPRESSION";
+	public static final String CONDITION = "CONDITION";
+	public static final String STRING = "STRING";
+	public static final String ARRAY = "ARRAY";
 }

@@ -27,7 +27,7 @@ expression: OPB expression CPB #parExpression
                | left = expression op = MINUS right = expression #minusExpression
                | INT #intExpression
                | VAR #variableExpression
-               | VAR OSB (INT | VAR) CSB #intArrayExpression;
+               | VAR OSB expression CSB #intArrayExpression;
 
 /*condition: User can use NOT, nested conditions, comparators, and chaining of multiple conditions*/
 condition: OPB condition CPB#parCondition
@@ -37,7 +37,7 @@ condition: OPB condition CPB#parCondition
                | left = string_expression op = EQUALS right = string_expression #equalsStringCondition
                | BOOLEAN #boolCondition
                | VAR #variableCondition
-               | VAR OSB (INT | VAR) CSB #boolArrayCondition;
+               | VAR OSB expression CSB #boolArrayCondition;
 
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
 multi_condition : AND | OR;
@@ -102,7 +102,7 @@ string_expression:  left = string_expression DOT CONCAT OPB right = string_expre
     | BOOL DOT TOSTRING OPB condition CPB #booleanToStringOperation
     | STRING #stringOperation
     | VAR #varOperation
-    | VAR OSB (INT | VAR) CSB #stringArrayOperation;
+    | VAR OSB expression CSB #stringArrayOperation;
 
 /* Arrays */
 array : int_array | bool_array | string_array;
@@ -122,7 +122,7 @@ ternary_false_block : (expression | condition);
 assign_block : VAR ASSIGN (condition | expression | ternary_block | string_expression | array | array_properties) SEMICOLON ;
 
 /** show: User can use this to display a variable.*/
-show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
+show : 'show' (VAR| expression | condition | string_expression| array) SEMICOLON;
 
 INTEGER : 'Integer';
 BOOL : 'Boolean';

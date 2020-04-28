@@ -93,9 +93,7 @@ public class SeaExecutor {
 			case IntermediateConstants.END_STRING_ARRAY:
 				addStringArrayToStack();
 				break;
-			case IntermediateConstants.FROM_INT_ARRAY:
-			case IntermediateConstants.FROM_BOOL_ARRAY:
-			case IntermediateConstants.FROM_STRING_ARRAY:
+			case IntermediateConstants.FROM_ARRAY:
 				getValueFromArray();
 				break;
 			case IntermediateConstants.ARRAY_LENGTH:
@@ -199,7 +197,7 @@ public class SeaExecutor {
 					showVariable(data[2]);
 					break;
 				case IntermediateConstants.VAL:
-					showValue(data[2]);
+					showValue();
 					break;
 				}
 				break;
@@ -582,8 +580,20 @@ public class SeaExecutor {
 		}
 	}
 
-	private void showValue(String value) {
-		System.out.println(value);
+	private void showValue() {
+		if (mIntegerStack.size() > 0) {
+			System.out.println(mIntegerStack.pop());
+		} else if (mBooleanStack.size() > 0) {
+			System.out.println(mBooleanStack.pop());
+		} else if (mStringStack.size() > 0) {
+			System.out.println(mStringStack.pop());
+		} else if (mIntegerArrayStack.size() > 0) {
+			System.out.println(Arrays.toString(mIntegerArrayStack.pop()));
+		} else if (mBooleanArrayStack.size() > 0) {
+			System.out.println(Arrays.toString(mBooleanArrayStack.pop()));
+		} else if (mStringArrayStack.size() > 0) {
+			System.out.println(Arrays.toString(mStringArrayStack.pop()));
+		}
 	}
 
 	private boolean checkIfAlreadyDefined(String variableName) {
