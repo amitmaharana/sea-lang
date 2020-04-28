@@ -20,7 +20,7 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 		if (ctx.expression() != null) {
 			mIntermediateArray
 					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
-		} else if (ctx.string_operations() != null) {
+		} else if (ctx.string_expression() != null) {
 			mIntermediateArray
 					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 		} else if (ctx.condition() != null) {
@@ -229,17 +229,6 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	}
 
 	@Override
-	public void exitString_expression(SEALangParser.String_expressionContext ctx) {
-		if (ctx.VAR() != null) {
-			mIntermediateArray
-					.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
-		} else if (ctx.STRING() != null) {
-			mIntermediateArray.add(
-					IntermediateConstants.SET_STRING_VAL + IntermediateConstants.SEPARATOR + ctx.STRING().getText());
-		}
-	}
-
-	@Override
 	public void exitInt_array(SEALangParser.Int_arrayContext ctx) {
 		int size = ctx.INT().size();
 		mIntermediateArray.add(IntermediateConstants.START_INT_ARRAY);
@@ -404,6 +393,11 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	public void exitStringOperation(SEALangParser.StringOperationContext ctx) {
 		mIntermediateArray
 				.add(IntermediateConstants.SET_STRING_VAL + IntermediateConstants.SEPARATOR + ctx.STRING().getText());
+	}
+
+	@Override
+	public void exitVarOperation(SEALangParser.VarOperationContext ctx) {
+		mIntermediateArray.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 	}
 
 	@Override
