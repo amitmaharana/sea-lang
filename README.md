@@ -1,5 +1,7 @@
 # SEA Programming Language
 
+![alt text](https://raw.githubusercontent.com/amitmaharana/amitmaharana.github.io/master/images/sample_sealang.png)
+
 ### Contributors
 * Amit Maharana
 * Eric Wegener
