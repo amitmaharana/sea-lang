@@ -74,6 +74,7 @@ Week 5 (Apr 23 - Apr 28)
     - prepared demo video
 4. Amit Maharana
     - wrote test cases
+    - configured project to generate CLI artifact
     - ternary condition parsed
     - ternary condition evaluated
     - wrote sample programs for execution
