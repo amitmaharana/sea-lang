@@ -58,8 +58,5 @@ public class IntermediateConstants {
 	public static final String END_STRING_ARRAY = "END_STRING_ARRAY";
 	public static final String FROM_ARRAY = "FROM_ARRAY";
 	public static final String ARRAY_LENGTH = "ARRAY_LENGTH";
-	public static final String EXPRESSION = "EXPRESSION";
-	public static final String CONDITION = "CONDITION";
-	public static final String STRING = "STRING";
-	public static final String ARRAY = "ARRAY";
+	public static final String ASSIGN_TO_ARRAY = "ASSIGN_TO_ARRAY";
 }

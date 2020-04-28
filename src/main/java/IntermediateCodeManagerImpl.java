@@ -24,26 +24,14 @@ public class IntermediateCodeManagerImpl extends SEALangBaseListener {
 	}
 
 	@Override
-	public void exitAssign_block(SEALangParser.Assign_blockContext ctx) {
-		if (ctx.expression() != null) {
-			mIntermediateArray
-					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
-		} else if (ctx.string_expression() != null) {
-			mIntermediateArray
-					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
-		} else if (ctx.condition() != null) {
-			mIntermediateArray
-					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
-		} else if (ctx.ternary_block() != null) {
-			mIntermediateArray
-					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
-		} else if (ctx.array() != null) {
-			mIntermediateArray
-					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
-		} else if (ctx.array_properties() != null) {
-			mIntermediateArray
-					.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
-		}
+	public void exitAssignBlock(SEALangParser.AssignBlockContext ctx) {
+		mIntermediateArray.add(IntermediateConstants.ASSIGN + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
+	}
+
+	@Override
+	public void exitAssignArrayBlock(SEALangParser.AssignArrayBlockContext ctx) {
+		mIntermediateArray.add(IntermediateConstants.SET_VAR + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
+		mIntermediateArray.add(IntermediateConstants.ASSIGN_TO_ARRAY + IntermediateConstants.SEPARATOR + ctx.VAR().getText());
 	}
 
 	@Override

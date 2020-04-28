@@ -75,6 +75,9 @@ public class SeaExecutor {
 			case IntermediateConstants.ASSIGN:
 				assignToVariable(data);
 				break;
+			case IntermediateConstants.ASSIGN_TO_ARRAY:
+				assignToArray(data);
+				break;
 			case IntermediateConstants.SET_INT_VAL:
 				mIntegerStack.push(Integer.parseInt(data[1]));
 				break;
@@ -287,6 +290,25 @@ public class SeaExecutor {
 			mBooleanArrayMap.put(variableName, mBooleanArrayStack.pop());
 		} else if (mStringArrayMap.containsKey(variableName)) {
 			mStringArrayMap.put(variableName, mStringArrayStack.pop());
+		} else {
+			throw new VariableNotDeclaredException(variableName);
+		}
+	}
+
+	private void assignToArray(String[] data) throws VariableNotDeclaredException {
+		String variableName = data[1];
+		if (mIntegerArrayMap.containsKey(variableName)) {
+			Integer array[] = mIntegerArrayStack.pop();
+			array[mIntegerStack.pop()] = mIntegerStack.pop();
+			mIntegerArrayMap.put(variableName, array);
+		} else if (mBooleanArrayMap.containsKey(variableName)) {
+			Boolean array[] = mBooleanArrayStack.pop();
+			array[mIntegerStack.pop()] = mBooleanStack.pop();
+			mBooleanArrayMap.put(variableName, array);
+		} else if (mStringArrayMap.containsKey(variableName)) {
+			String array[] = mStringArrayStack.pop();
+			array[mIntegerStack.pop()] = mStringStack.pop();
+			mStringArrayMap.put(variableName, array);
 		} else {
 			throw new VariableNotDeclaredException(variableName);
 		}

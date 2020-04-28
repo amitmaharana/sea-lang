@@ -119,10 +119,12 @@ ternary_true_block : (expression | condition);
 ternary_false_block : (expression | condition);
 
 /** assign_block: User can use this to assign expressions or strings to a variable.*/
-assign_block : VAR ASSIGN (condition | expression | ternary_block | string_expression | array | array_properties) SEMICOLON ;
+assign_block :
+    VAR ASSIGN (condition | expression | ternary_block | string_expression | array | array_properties) SEMICOLON #assignBlock
+    | VAR OSB expression CSB ASSIGN (condition | expression | ternary_block | string_expression | array_properties) SEMICOLON #assignArrayBlock;
 
 /** show: User can use this to display a variable.*/
-show : 'show' (VAR| expression | condition | string_expression| array) SEMICOLON;
+show : 'show' (VAR | expression | condition | string_expression| array) SEMICOLON;
 
 INTEGER : 'Integer';
 BOOL : 'Boolean';
