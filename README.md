@@ -88,7 +88,7 @@ s.substring(2)
 s.substring(1, 4)
 s.length()
 ```
-<sup><sup>split doesnt recognize variables</sup></sup>
+<sup><sup>split doesnt recognize variables: s.split(c) is not supported</sup></sup>
 
 #### Array Properties
 ```
