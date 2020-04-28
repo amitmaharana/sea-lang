@@ -50,8 +50,8 @@ placeholder
 Int a;
 Bool b;
 String c;
-Int[] f;
-Bool[] f;
+Int[] d;
+Bool[] e;
 String[] f;
 ```
 
@@ -92,11 +92,7 @@ s.length()
 
 #### Array Properties
 ```
-s.concat("abc")
-s.split("-")
-s.substring(2)
-s.substring(1, 4)
-s.length()
+d.length
 ```
 
 #### If - Else
@@ -153,5 +149,5 @@ for b -- in (10, 1) {
 show a;
 show 2 * (3 - 1) ;
 show d[a];
-show "abc".concats("def");
+show "abc".concat("def");
 ```
