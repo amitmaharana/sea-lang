@@ -1,5 +1,13 @@
 package util;
 
+/**
+ * This file will contain the variable type constants
+ * 
+ * @author Team 1
+ * @version 1.0
+ * @since 2020-04-07
+ */
+
 public class Type {
 	public static final String INT = "Int";
 	public static final String BOOLEAN = "Bool";

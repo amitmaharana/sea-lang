@@ -1,3 +1,11 @@
+/**
+* Runtime environment based on intermediate code
+*
+* @author  Team 1
+* @version 1.0
+* @since   2020-04-07 
+*/
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -67,6 +75,9 @@ public class SeaExecutor {
 			case IntermediateConstants.ASSIGN:
 				assignToVariable(data);
 				break;
+			case IntermediateConstants.ASSIGN_TO_ARRAY:
+				assignToArray(data);
+				break;
 			case IntermediateConstants.SET_INT_VAL:
 				mIntegerStack.push(Integer.parseInt(data[1]));
 				break;
@@ -85,9 +96,7 @@ public class SeaExecutor {
 			case IntermediateConstants.END_STRING_ARRAY:
 				addStringArrayToStack();
 				break;
-			case IntermediateConstants.FROM_INT_ARRAY:
-			case IntermediateConstants.FROM_BOOL_ARRAY:
-			case IntermediateConstants.FROM_STRING_ARRAY:
+			case IntermediateConstants.FROM_ARRAY:
 				getValueFromArray();
 				break;
 			case IntermediateConstants.ARRAY_LENGTH:
@@ -281,6 +290,27 @@ public class SeaExecutor {
 			mBooleanArrayMap.put(variableName, mBooleanArrayStack.pop());
 		} else if (mStringArrayMap.containsKey(variableName)) {
 			mStringArrayMap.put(variableName, mStringArrayStack.pop());
+		} else {
+			throw new VariableNotDeclaredException(variableName);
+		}
+	}
+
+	private void assignToArray(String[] data) throws VariableNotDeclaredException {
+		String variableName = data[1];
+		if (mIntegerArrayMap.containsKey(variableName)) {
+			Integer array[] = mIntegerArrayStack.pop();
+			int value = mIntegerStack.pop();
+			int index = mIntegerStack.pop();
+			array[index] = value;
+			mIntegerArrayMap.put(variableName, array);
+		} else if (mBooleanArrayMap.containsKey(variableName)) {
+			Boolean array[] = mBooleanArrayStack.pop();
+			array[mIntegerStack.pop()] = mBooleanStack.pop();
+			mBooleanArrayMap.put(variableName, array);
+		} else if (mStringArrayMap.containsKey(variableName)) {
+			String array[] = mStringArrayStack.pop();
+			array[mIntegerStack.pop()] = mStringStack.pop();
+			mStringArrayMap.put(variableName, array);
 		} else {
 			throw new VariableNotDeclaredException(variableName);
 		}
@@ -574,8 +604,20 @@ public class SeaExecutor {
 		}
 	}
 
-	private void showValue(String value) {
-		System.out.println(value);
+	private void showValue(String dataType) {
+		if (dataType.equals(IntermediateConstants.INTEGER)) {
+			System.out.println(mIntegerStack.pop());
+		} else if (dataType.equals(IntermediateConstants.BOOLEAN)) {
+			System.out.println(mBooleanStack.pop());
+		} else if (dataType.equals(IntermediateConstants.STRING)) {
+			System.out.println(mStringStack.pop());
+		} else if (dataType.equals(IntermediateConstants.INTEGER_ARRAY)) {
+			System.out.println(Arrays.toString(mIntegerArrayStack.pop()));
+		} else if (dataType.equals(IntermediateConstants.BOOLEAN_ARRAY)) {
+			System.out.println(Arrays.toString(mBooleanArrayStack.pop()));
+		} else if (dataType.equals(IntermediateConstants.STRING_ARRAY)) {
+			System.out.println(Arrays.toString(mStringArrayStack.pop()));
+		}
 	}
 
 	private boolean checkIfAlreadyDefined(String variableName) {

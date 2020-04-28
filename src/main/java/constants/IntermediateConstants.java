@@ -3,7 +3,12 @@ package constants;
 /**
  * This file will contain the constants used by IntermediateCodeManagerImpl and
  * the executor
+ * 
+ * @author Team 1
+ * @version 1.0
+ * @since 2020-04-07
  */
+
 public class IntermediateConstants {
 
 	public static final String DECLARATION = "DECLARATION";
@@ -44,15 +49,20 @@ public class IntermediateConstants {
 	public static final String INT_TO_STRING = "INT_TO_STRING";
 	public static final String SPLIT = "SPLIT";
 	public static final String SUBSTRING = "SUBSTRING";
-    public static final String SUBSTRING_DOUBLE = "SUBSTRING_DOUBLE";
+	public static final String SUBSTRING_DOUBLE = "SUBSTRING_DOUBLE";
 	public static final String START_INT_ARRAY = "START_INT_ARRAY";
 	public static final String END_INT_ARRAY = "END_INT_ARRAY";
 	public static final String START_BOOL_ARRAY = "START_BOOL_ARRAY";
 	public static final String END_BOOL_ARRAY = "END_BOOL_ARRAY";
 	public static final String START_STRING_ARRAY = "START_STRING_ARRAY";
 	public static final String END_STRING_ARRAY = "END_STRING_ARRAY";
-	public static final String FROM_INT_ARRAY = "FROM_INT_ARRAY";
-	public static final String FROM_BOOL_ARRAY = "FROM_BOOL_ARRAY";
-	public static final String FROM_STRING_ARRAY = "FROM_STRING_ARRAY";
+	public static final String FROM_ARRAY = "FROM_ARRAY";
 	public static final String ARRAY_LENGTH = "ARRAY_LENGTH";
+	public static final String ASSIGN_TO_ARRAY = "ASSIGN_TO_ARRAY";
+	public static final String STRING = "STRING";
+	public static final String INTEGER = "INTEGER";
+	public static final String BOOLEAN = "BOOLEAN";
+	public static final String INTEGER_ARRAY = "INTEGER_ARRAY";
+	public static final String BOOLEAN_ARRAY = "BOOLEAN_ARRAY";
+	public static final String STRING_ARRAY = "STRING_ARRAY";
 }

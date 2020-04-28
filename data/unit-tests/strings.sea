@@ -10,7 +10,7 @@ Int len;
 len = a.length();
 show len;
 
-len = "sea language".length;
+len = "sea language".length();
 show len;
 
 len = "happy".length();

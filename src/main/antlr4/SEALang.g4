@@ -27,7 +27,7 @@ expression: OPB expression CPB #parExpression
                | left = expression op = MINUS right = expression #minusExpression
                | INT #intExpression
                | VAR #variableExpression
-               | VAR OSB (INT | VAR) CSB #intArrayExpression;
+               | VAR OSB expression CSB #intArrayExpression;
 
 /*condition: User can use NOT, nested conditions, comparators, and chaining of multiple conditions*/
 condition: OPB condition CPB#parCondition
@@ -37,7 +37,7 @@ condition: OPB condition CPB#parCondition
                | left = string_expression op = EQUALS right = string_expression #equalsStringCondition
                | BOOLEAN #boolCondition
                | VAR #variableCondition
-               | VAR OSB (INT | VAR) CSB #boolArrayCondition;
+               | VAR OSB expression CSB #boolArrayCondition;
 
 comparator : EQUAL | NOT_EQUAL | LESSER_THAN | GREATER_THAN | LESSER_THAN_EQUAL | GREATER_THAN_EQUAL ;
 multi_condition : AND | OR;
@@ -93,7 +93,7 @@ range_inc_to : (INT | VAR | expression);
 range_dec_to : (INT | VAR | expression);
 
 /* String operations */
-string_operations:  left = string_expression DOT CONCAT OPB right = string_expression CPB #concatOperation
+string_expression:  left = string_expression DOT CONCAT OPB right = string_expression CPB #concatOperation
     | string_expression DOT LENGTH OPB CPB #lengthOperation
     | string_expression DOT SPLIT OPB STRING CPB #splitOperation
     | string_expression DOT SUBSTRING OPB expression CPB #substringOperation
@@ -101,7 +101,8 @@ string_operations:  left = string_expression DOT CONCAT OPB right = string_expre
     | INTEGER DOT TOSTRING OPB expression CPB  #integerToStringOperation
     | BOOL DOT TOSTRING OPB condition CPB #booleanToStringOperation
     | STRING #stringOperation
-    | VAR OSB (INT | VAR) CSB #stringArrayOperation;
+    | VAR #varOperation
+    | VAR OSB expression CSB #stringArrayOperation;
 
 /* Arrays */
 array : int_array | bool_array | string_array;
@@ -118,11 +119,12 @@ ternary_true_block : (expression | condition);
 ternary_false_block : (expression | condition);
 
 /** assign_block: User can use this to assign expressions or strings to a variable.*/
-assign_block : VAR ASSIGN (condition | expression | ternary_block | string_operations | array | array_properties) SEMICOLON ;
-string_expression: (VAR | STRING);
+assign_block :
+    VAR ASSIGN (condition | expression | ternary_block | string_expression | array | array_properties) SEMICOLON #assignBlock
+    | VAR OSB expression CSB ASSIGN (condition | expression | ternary_block | string_expression | array_properties) SEMICOLON #assignArrayBlock;
 
 /** show: User can use this to display a variable.*/
-show : 'show' (VAR | INT | BOOLEAN | STRING) SEMICOLON;
+show : 'show' (VAR | expression | condition | string_expression| int_array| bool_array| string_array) SEMICOLON;
 
 INTEGER : 'Integer';
 BOOL : 'Boolean';

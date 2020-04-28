@@ -1,8 +1,5 @@
-String a;
-a = "a";
-
-Int c;
-c =  a.length;
-show c;
-c =  "abc".length;
-show c;
+Int[] d;
+d = [1,2,3,4,5];
+show d;
+d[2]=5;
+show d;

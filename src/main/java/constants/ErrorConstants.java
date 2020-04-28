@@ -1,5 +1,13 @@
 package constants;
 
+/**
+ * This file will contain the error constants
+ * 
+ * @author Team 1
+ * @version 1.0
+ * @since 2020-04-07
+ */
+
 public class ErrorConstants {
 	public static final String NO_SUCH_VARIABLE = "No such variable declared";
 	public static final String GREATER_THAN_OP = "Not able to perform Greater than operation";
@@ -22,5 +30,5 @@ public class ErrorConstants {
 	public static final String TO_STRING = "Not able to perform to string operation";
 	public static final String SPLIT = "Not able to perform split string operation";
 	public static final String SUBSTRING = "Not able to perform substring operation";
-    public static final String NO_ARRAY = "No such array exists";
+	public static final String NO_ARRAY = "No such array exists";
 }

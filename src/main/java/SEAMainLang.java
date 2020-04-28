@@ -1,3 +1,11 @@
+/**
+* Application entry point
+*
+* @author  Team 1
+* @version 1.0
+* @since   2020-04-07 
+*/
+
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
