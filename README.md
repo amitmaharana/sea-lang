@@ -1,5 +1,13 @@
 # SEA Programming Language
 
+![alt text](https://raw.githubusercontent.com/amitmaharana/amitmaharana.github.io/master/images/sample_sealang.png)
+
+### Contributors
+* Amit Maharana
+* Eric Wegener
+* Shubham Bhardwaj
+* Shwetank Bhardwaj
+
 ### Build System
 * Compiler - Windows
 * Runtime - Windows
@@ -12,7 +20,7 @@
 * Download JDK from [here](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 * Download Apache Maven from [here](https://maven.apache.org/download.cgi)
 * Add path variables to environment as shown [here](https://mkyong.com/maven/how-to-install-maven-in-windows/)
-* Clone this repository and go to project directory 
+* Clone this repository and go to the project directory 
 ```
 git clone https://github.com/amitmaharana/SER502-Spring2020-Team1.git
 cd SER502-Spring2020-Team1
@@ -31,9 +39,6 @@ java -jar target/SEALang.jar data/filename.sea
 ```
 
 ### Demo Video
-
-### Contributors
-* Amit Maharana
-* Eric Wegener
-* Shubham Bhardwaj
-* Shwetank Bhardwaj
+```
+placeholder
+```

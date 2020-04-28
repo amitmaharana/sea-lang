@@ -1,5 +1,13 @@
 package util;
 
+/**
+ * This file will contain utility functions to validate operations
+ * 
+ * @author Team 1
+ * @version 1.0
+ * @since 2020-04-07
+ */
+
 public class ValidatorUtil {
 
 	public static boolean isArithmeticOperationPossible(int size) {
