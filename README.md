@@ -43,7 +43,7 @@ java -jar target/SEALang.jar data/filename.sea
 placeholder
 ```
 
-### Synatax
+### Syntax
 
 #### Declaration
 ```
