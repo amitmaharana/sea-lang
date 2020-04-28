@@ -88,6 +88,7 @@ s.substring(2)
 s.substring(1, 4)
 s.length()
 ```
+<sup><sup>split doesnt recognize variables</sup></sup>
 
 #### Array Properties
 ```
@@ -100,7 +101,7 @@ s.length()
 
 #### If - Else
 ```
-If (a > b) {
+if (a > b) {
   show a;
 } else {
   show b;
