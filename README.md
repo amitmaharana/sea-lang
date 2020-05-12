@@ -1,6 +1,6 @@
 # SEA Programming Language
 
-![alt text](https://raw.githubusercontent.com/amitmaharana/amitmaharana.github.io/master/images/sample_sealang.png)
+![alt text](https://raw.githubusercontent.com/amitmaharana/amitmaharana.github.io/master/images/sample_sea.png)
 
 ### Contributors
 * Amit Maharana
