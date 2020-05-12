@@ -22,8 +22,8 @@
 * Add path variables to environment as shown [here](https://mkyong.com/maven/how-to-install-maven-in-windows/)
 * Clone this repository and go to the project directory 
 ```
-git clone https://github.com/amitmaharana/SER502-Spring2020-Team1.git
-cd SER502-Spring2020-Team1
+git clone https://github.com/amitmaharana/sea-lang.git
+cd sea-lang
 ```
 
 ### Instructions to Build and Run
