@@ -41,6 +41,9 @@ java -jar target/SEALang.jar data/filename.sea
 ### Demo Video
 [YouTube Link](https://www.youtube.com/watch?v=CPQTNG_H11o)
 
+### Presentation
+[Link](https://github.com/amitmaharana/sea-lang/blob/master/doc/Presentation.pdf)
+
 ### Syntax
 
 #### Declaration
