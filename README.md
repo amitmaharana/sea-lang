@@ -1,6 +1,6 @@
 # SEA Programming Language
 
-![alt text](https://raw.githubusercontent.com/amitmaharana/amitmaharana.github.io/master/images/sample_sealang.png)
+![alt text](https://raw.githubusercontent.com/amitmaharana/amitmaharana.github.io/master/images/sample_sea.png)
 
 ### Contributors
 * Amit Maharana
@@ -22,8 +22,8 @@
 * Add path variables to environment as shown [here](https://mkyong.com/maven/how-to-install-maven-in-windows/)
 * Clone this repository and go to the project directory 
 ```
-git clone https://github.com/amitmaharana/SER502-Spring2020-Team1.git
-cd SER502-Spring2020-Team1
+git clone https://github.com/amitmaharana/sea-lang.git
+cd sea-lang
 ```
 
 ### Instructions to Build and Run
@@ -40,6 +40,9 @@ java -jar target/SEALang.jar data/filename.sea
 
 ### Demo Video
 [YouTube Link](https://www.youtube.com/watch?v=CPQTNG_H11o)
+
+### Presentation
+[Link](https://github.com/amitmaharana/sea-lang/blob/master/doc/Presentation.pdf)
 
 ### Syntax
 
